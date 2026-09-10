@@ -1,168 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SampoornCare - Admin & Management Portal</title>
-    <link href="https://googleapis.com" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #f1f5f9; color: #1e293b; display: flex; min-height: 100vh; }
-        
-        /* Sidebar Menu */
-        .sidebar { width: 260px; background-color: #0f172a; color: #ffffff; padding: 25px 20px; flex-shrink: 0; }
-        .sidebar h2 { font-size: 20px; font-weight: 700; margin-bottom: 30px; text-align: center; color: #38bdf8; }
-        .sidebar-menu { list-style: none; }
-        .sidebar-menu li { margin-bottom: 8px; }
-        .sidebar-menu a { display: block; padding: 12px 15px; color: #94a3b8; text-decoration: none; border-radius: 8px; font-weight: 500; transition: 0.2s; }
-        .sidebar-menu a:hover, .sidebar-menu a.active { background-color: #1e293b; color: #ffffff; border-left: 4px solid #3b82f6; }
-        
-        /* Main Layout Content */
-        .main-content { flex: 1; padding: 30px 40px; overflow-y: auto; }
-        .header-action { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .user-profile { display: flex; align-items: center; gap: 12px; }
-        .user-avatar { width: 45px; height: 45px; border-radius: 50%; background: #cbd5e1; border: 2px solid #3b82f6; display: flex; align-items: center; justify-content: center; font-weight: bold; overflow: hidden; }
-        .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* Statistics Counter Blocks */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 35px; }
-        .stat-card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border-top: 4px solid #3b82f6; }
-        .stat-card.dm { border-top-color: #10b981; }
-        .stat-card.bm { border-top-color: #f59e0b; }
-        .stat-card.fo { border-top-color: #8b5cf6; }
-        .stat-card h3 { font-size: 14px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
-        .stat-card p { font-size: 28px; font-weight: 700; margin-top: 8px; color: #0f172a; }
-
-        /* Configuration Sections */
-        .portal-section { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .section-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; color: #0f172a; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        
-        /* Grid and Flex Layout Forms */
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 20px; }
-        .form-group { display: flex; flex-direction: column; gap: 8px; }
-        .form-group label { font-size: 14px; font-weight: 500; color: #475569; }
-        .form-group input, .form-group select { padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; background: #f8fafc; }
-        .form-group input:focus, .form-group select:focus { border-color: #3b82f6; background: #fff; }
-        
-        .btn-submit { background-color: #3b82f6; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; align-self: flex-end; }
-        .btn-submit:hover { background-color: #2563eb; }
-
-        /* Management Lists Data Tables */
-        .data-table-container { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { background-color: #f8fafc; padding: 14px; font-size: 14px; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; }
-        td { padding: 14px; font-size: 14px; border-bottom: 1px solid #e2e8f0; vertical-align: middle; }
-        
-        /* Badges Action Buttons */
-        .badge { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; display: inline-block; }
-        .badge.pending { background-color: #fef3c7; color: #d97706; }
-        .badge.approved { background-color: #d1fae5; color: #059669; }
-        
-        .action-btns { display: flex; gap: 8px; }
-        .btn-action { padding: 6px 12px; border: none; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; }
-        .btn-approve { background-color: #10b981; color: white; }
-        .btn-reject { background-color: #ef4444; color: white; }
-    </style>
+    <title>UP Districts & Blocks - Healthcare Network</title>
+    <link rel="stylesheet" href="districts.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body>
 
-    <!-- Functional Administrative Sidebar Panel -->
-    <div class="sidebar">
-        <h2>SampoornCare Portal</h2>
-        <ul class="sidebar-menu">
-            <li><a href="#" class="active">📊 Dashboard</a></li>
-            <li><a href="#">👥 Employee Registry (FO/BM/DM)</a></li>
-            <li><a href="#">📍 UP 75 Jila & Blocks</a></li>
-            <li><a href="#">💰 Withdrawal System</a></li>
-            <li><a href="#">📑 Approval Queue</a></li>
-            <li><a href="#">⚙️ Portal Settings</a></li>
-        </ul>
-    </div>
+    <!-- मुख्य हेडिंग -->
+    <section class="district-section">
+        <h1><i class="fa-solid fa-map-location-dot"></i> उत्तर प्रदेश के सभी 75 जिले और ब्लॉक</h1>
+        <p class="subtitle">हमारे हेल्थ नेटवर्क से जुड़े उत्तर प्रदेश के सभी जिलों और उनके अंतर्गत आने वाले विकास खंडों (Blocks) की सूची।</p>
 
-    <!-- Interface Main Container Content -->
-    <div class="main-content">
-        
-        
-        <div class="header-action">
-            <h2>Management Overview Dashboard</h2>
-            <div class="user-profile">
-                <div class="user-avatar">Admin</div>
-                <div>
-                    <h4 style="font-size: 14px;">Super Admin Account</h4>
-                    <p style="font-size: 12px; color: #64748b;">Role: Administrator</p>
+        <!-- डिस्ट्रिक्ट ग्रिड कंटेनर -->
+        <div class="district-grid">
+
+            <!-- 1. लखनऊ जिला (Lucknow) -->
+            <div class="district-card">
+                <div class="district-image">
+                    <!-- आप यहाँ संबंधित जिले की प्रसिद्ध जगह या अस्पताल की फोटो लगा सकते हैं -->
+                    <img src="https://unsplash.com" alt="Lucknow">
+                    <div class="district-badge">01 / 75</div>
+                </div>
+                <div class="district-info">
+                    <h3>लखनऊ (Lucknow)</h3>
+                    <p class="block-count"><i class="fa-solid fa-cubes"></i> कुल ब्लॉक: 8</p>
+                    <div class="block-list">
+                        <span>मलिहाबाद</span> <span>बक्शी का तालाब</span> <span>काकोरी</span> 
+                        <span>चिनहट</span> <span>मोहनलालगंज</span> <span>गोसाईगंज</span> 
+                        <span>सरोजनी नगर</span> <span>काकोरी</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Metric Counter Blocks Section -->
-        <div class="stats-grid">
-            <div class="stat-card dm"><h3>Total District Managers (DM)</h3><p>75</p></div>
-            <div class="stat-card bm"><h3>Total Block Managers (BM)</h3><p>826</p></div>
-            <div class="stat-card fo"><h3>Active Field Officers (FO)</h3><p>3,420</p></div>
-            <div class="stat-card"><h3>Pending Withdrawals</h3><p>18 Requests</p></div>
-        </div>
-
-        <!-- Add Personnel Registration System with Photo Option -->
-        <div class="portal-section">
-            <div class="section-title">Add New Team Member (DM / BM / FO)</div>
-            <form onsubmit="event.preventDefault();">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Select Profile Role</label>
-                        <select required>
-                            <option value="">-- Choose Designation Role --</option>
-                            <option value="DM">District Manager (DM)</option>
-                            <option value="BM">Block Manager (BM)</option>
-                            <option value="FO">Field Officer (FO)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" placeholder="Enter full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Select UP District (75 Jila Available)</label>
-                        <select required>
-                            <option value="">-- Select Active District --</option>
-                            <option value="Gurugram">Gurugram (HO)</option>
-                            <option value="Lucknow">Lucknow</option>
-                            <option value="Kanpur">Kanpur</option>
-                            <option value="Varanasi">Varanasi</option>
-                            <option value="Prayagraj">Prayagraj</option>
-                            <option value="Bareilly">Bareilly</option>
-                            <!-- All other 75 UP districts populate here dynamically -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Assign Active Block</label>
-                        <input type="text" placeholder="Enter specific localized block area" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Upload Officer Passport Photo</label>
-                        <input type="file" accept="image/*" required>
-                    </div>
-                    <div class="form-group" style="justify-content: flex-end;">
-                        <button type="submit" class="btn-submit">Register Member Profile</button>
+            <!-- 2. कानपुर नगर (Kanpur Nagar) -->
+            <div class="district-card">
+                <div class="district-image">
+                    <img src="https://unsplash.com" alt="Kanpur">
+                    <div class="district-badge">02 / 75</div>
+                </div>
+                <div class="district-info">
+                    <h3>कानपुर नगर (Kanpur Nagar)</h3>
+                    <p class="block-count"><i class="fa-solid fa-cubes"></i> कुल ब्लॉक: 10</p>
+                    <div class="block-list">
+                        <span>कल्याणपुर</span> <span>बिधनू</span> <span>सरसौल</span> 
+                        <span>चौबेपुर</span> <span>शिवराजपुर</span> <span>बिल्हौर</span> 
+                        <span>करसांदा</span> <span>घाटमपुर</span> <span>पातरा</span>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
 
-        <!-- Live Withdrawal Verification & Approval Tracker Grid Table -->
-        <div class="portal-section">
-            <div class="section-title">Field Settlement & Withdrawal Applications Approval Desk</div>
-            <div class="data-table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Officer Photo</th>
-                            <th>Officer Details</th>
-                            <th>Designation Profile</th>
-                            <th>Region Location (Jila / Block)</th>
-                            <th>Requested Settlement Amount</th>
-                            <th>Status Badge</th>
-                            <th>Management Desk Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
+            <!-- 3. प्रयागराज (Prayagraj) -->
+            <div class="district-card">
+                <div class="district-image">
+                    <img src="https://unsplash.com" alt="Prayagraj">
+                    <div class="district-badge">03 / 75</div>
+                </div>
+                <div class="district-info">
+                    <h3>प्रयागराज (Prayagraj)</h3>
+                    <p class="block-count"><i class="fa-solid fa-cubes"></i> कुल ब्लॉक: 23</p>
+                    <div class="block-list">
+                        <span>बहादुरपुर</span> <span>फूलपुर</span> <span>हंडिया</span> 
+                        <span>करछना</span> <span>मेजा</span> <span>कोरावं</span> 
+                        <span>मऊआइमा</span> <span>सोरांव</span> <span>जसराक</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. वाराणसी (Varanasi) -->
+            <div class="district-card">
+                <div class="district-image">
+                    <img src="https://unsplash.com" alt="Varanasi">
+                    <div class="district-badge">04 / 75</div>
+                </div>
+                <div class="district-info">
+                    <h3>वाराणसी (Varanasi)</h3>
+                    <p class="block-count"><i class="fa-solid fa-cubes"></i> कुल ब्लॉक: 8</p>
+                    <div class="block-list">
+                        <span>काशी विद्यापीठ</span> <span>पिंडरा</span> <span>चोलापुर</span> 
+                        <span>चिरईगांव</span> <span>बड़ागांव</span> <span>हरहुआ</span> 
+                        <span>आराजीलाइन</span> <span>सेवापुरी</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. आगरा (Agra) -->
+            <div class="district-card">
+                <div class="district-image">
+                    <img src="https://unsplash.com" alt="Agra">
+                    <div class="district-badge">05 / 75</div>
+                </div>
+                <div class="district-info">
+                    <h3>आगरा (Agra)</h3>
+                    <p class="block-count"><i class="fa-solid fa-cubes"></i> कुल ब्लॉक: 15</p>
+                    <div class="block-list">
+                        <span>अछनेरा</span> <span>एतमादपुर</span> <span>फतेहाबाद</span> 
+                        <span>फतेहपुर सीकरी</span> <span>जगनेर</span> <span>खेरागढ़</span> 
+                        <span>पिनाहट</span> <span>शमसाबाद</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- बाकी जिलों (6 से 75) के लिए इसी 'district-card' डिव को कॉपी करके नीचे पेस्ट करते जाएं -->
+
+        </div>
+    </section>
+
+</body>
+</html>
