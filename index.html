@@ -3,58 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sewanya Health | Admin & Officer Portal</title>
+    <title>Sewanya Care | Administration & Management Portal</title>
+    <!-- Google Font 'Inter' for Modern Corporate Look -->
+    <link href="https://googleapis.com" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://jsdelivr.net" rel="stylesheet">
+    <!-- FontAwesome for Rich Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background-color: #f4f6f9; color: #333; padding-bottom: 50px; }
-        .main-header { background: linear-gradient(135deg, #0b3c5d 0%, #0d6efd 100%); color: white; padding: 20px 0; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .card-custom { background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: none; margin-bottom: 25px; padding: 25px; }
-        .card-title-custom { font-size: 18px; font-weight: 700; color: #0b3c5d; border-bottom: 2px solid #eef2f5; padding-bottom: 10px; margin-bottom: 20px; }
-        .balance-display { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; padding: 20px; border-radius: 10px; text-align: center; font-weight: bold; }
-        .status-badge { font-size: 12px; padding: 5px 10px; border-radius: 20px; font-weight: 600; }
-        .btn-custom { font-weight: 600; border-radius: 8px; padding: 10px 20px; transition: 0.2s; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #f8fafc; color: #1e293b; padding-bottom: 40px; }
+        
+        /* Premium Header */
+        .main-header { 
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); 
+            color: white; 
+            padding: 25px 0; 
+            margin-bottom: 35px; 
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.1); 
+            border-bottom: 4px solid #3b82f6;
+        }
+
+        /* Modernized Cards */
+        .card-custom { 
+            background: white; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); 
+            border: 1px solid #e2e8f0; 
+            margin-bottom: 30px; 
+            padding: 30px; 
+        }
+        
+        .card-title-custom { 
+            font-size: 19px; 
+            font-weight: 700; 
+            color: #1e3a8a; 
+            border-bottom: 2px solid #f1f5f9; 
+            padding-bottom: 12px; 
+            margin-bottom: 24px; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Form Inputs Makeover */
+        .form-label { font-weight: 600; color: #475569; font-size: 14px; margin-bottom: 8px; }
+        .form-control, .form-select { 
+            border-radius: 10px; 
+            padding: 12px 16px; 
+            border: 1px solid #cbd5e1; 
+            font-size: 15px; 
+            transition: all 0.2s ease-in-out;
+            background-color: #f8fafc;
+        }
+        .form-control:focus, .form-select:focus { 
+            background-color: white;
+            border-color: #3b82f6; 
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12); 
+        }
+        
+        /* Financial Wallet Professional Design */
+        .balance-display { 
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%); 
+            color: white; 
+            padding: 24px; 
+            border-radius: 14px; 
+            text-align: center; 
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+        }
+
+        /* Premium Buttons */
+        .btn-custom-primary { 
+            background-color: #1e3a8a; 
+            color: white; 
+            font-weight: 600; 
+            border-radius: 10px; 
+            padding: 12px 24px; 
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-custom-primary:hover { background-color: #1d4ed8; transform: translateY(-1px); }
+        
+        .btn-custom-success { 
+            background-color: #10b981; 
+            color: white; 
+            font-weight: 600; 
+            border-radius: 10px; 
+            padding: 12px 24px; 
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-custom-success:hover { background-color: #059669; transform: translateY(-1px); }
+
+        .status-badge { font-size: 13px; padding: 6px 14px; border-radius: 30px; font-weight: 600; }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation Header -->
+    <!-- 1. Top Bar / Header Component -->
     <header class="main-header">
-        <div class="container d-flex justify-content-between align-items-center">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
             <div>
-                <h2 class="fw-bold m-0">Sewanya Care</h2>
+                <h2 class="fw-bold m-0 tracking-tight"><i class="fa-solid fa-heart-pulse text-danger me-2"></i>Sewanya Care</h2>
                 <small class="text-white-50">UP District, Block & Field Officer Administration Management</small>
             </div>
-            <span class="badge bg-light text-dark px-3 py-2 fw-bold fs-6">Admin Mode: Active</span>
+            <span class="badge bg-primary px-3 py-2 fw-bold fs-6 shadow-sm"><i class="fa-solid fa-user-shield me-1"></i> Admin Mode: Active</span>
         </div>
     </header>
 
     <div class="container">
         <div class="row">
             
-            <!-- LEFT COLUMN: Registration & Wallet (Withdrawal) -->
-            <div class="col-lg-5">
+            <!-- LEFT COLUMN: Forms -->
+            <div class="col-lg-6">
                 
-                <!-- 1. Officer Registration Form -->
+                <!-- 2. Officer Registration Panel -->
                 <div class="card-custom">
-                    <div class="card-title-custom">📝 Naya Officer Register Karein</div>
+                    <div class="card-title-custom">
+                        <i class="fa-solid fa-user-plus text-primary"></i> Naya Officer Register Karein
+                    </div>
                     <form id="regForm">
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Poora Naam</label>
-                            <input type="text" id="officerName" class="form-control" placeholder="Naam likhein" required>
+                        <div class="mb-4">
+                            <label class="form-label">Poora Naam (As per Aadhaar)</label>
+                            <input type="text" id="officerName" class="form-control" placeholder="Ramesh Yadav" required>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <label class="form-label fw-semibold">Role Chunein</label>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Role Chunein</label>
                                 <select id="officerRole" class="form-select" required>
                                     <option value="DM">DM (District Mgr)</option>
-                                    <option value="BM">BM (Block Mgr)</option>
+                                    <option value="BM" selected>BM (Block Mgr)</option>
                                     <option value="FO">FO (Field Officer)</option>
                                 </select>
                             </div>
-                            <div class="col-6">
-                                <label class="form-label fw-semibold">Zila (District)</label>
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Zila (District)</label>
                                 <select id="officerDist" class="form-select" required>
                                     <option value="Lucknow">Lucknow</option>
                                     <option value="Kanpur">Kanpur</option>
@@ -63,115 +147,64 @@
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-custom w-100">Add Officer & ID Generate Karein</button>
+                        <button type="submit" class="btn btn-custom-primary w-100 mt-2">
+                            <i class="fa-solid fa-address-card me-2"></i>Add Officer & ID Generate Karein
+                        </button>
                     </form>
                 </div>
 
-                <!-- 2. Wallet & Payout Withdrawal Panel -->
+                <!-- 3. Wallet and Payout Payout Request Panel -->
                 <div class="card-custom">
-                    <div class="card-title-custom">💰 Wallet & Withdrawal Request</div>
-                    <div class="balance-display mb-3">
-                        <span class="d-block small text-white-50">Available Balance</span>
-                        <h2 class="m-0 fw-bold">₹ 24,500.00</h2>
+                    <div class="card-title-custom">
+                        <i class="fa-solid fa-wallet text-success"></i> Wallet & Withdrawal Request
+                    </div>
+                    <div class="balance-display mb-4">
+                        <span class="d-block small text-white-50 text-uppercase tracking-wider">Available Balance</span>
+                        <h2 class="m-0 fw-bold fs-1">₹ 24,500.00</h2>
                     </div>
                     <form id="withdrawForm">
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Nikalne Wali Rashi (Amount)</label>
+                        <div class="mb-4">
+                            <label class="form-label">Nikalne Wali Rashi (Amount)</label>
                             <div class="input-group">
-                                <span class="input-group-text">₹</span>
-                                <input type="number" class="form-control" placeholder="0.00" min="500" max="24500" required>
+                                <span class="input-group-text bg-light fw-bold border-end-0">₹</span>
+                                <input type="number" id="withdrawAmount" class="form-control border-start-0" placeholder="0.00" min="500" max="24500" required>
                             </div>
-                            <small class="text-muted">Minimum withdrawal: ₹500</small>
+                            <div class="form-text text-muted">Minimum withdrawal limit is ₹500</div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Bank / UPI Details</label>
-                            <input type="text" class="form-control" placeholder="UPI ID ya Bank A/C details daalein" required>
+                        <div class="mb-4">
+                            <label class="form-label">Bank Details / UPI Information</label>
+                            <input type="text" class="form-control" placeholder="UPI ID (e.g., sewanya@ybl) ya Account Details" required>
                         </div>
-                        <button type="submit" class="btn btn-success btn-custom w-100">Withdrawal Request Bhejein</button>
+                        <button type="submit" class="btn btn-custom-success w-100">
+                            <i class="fa-solid fa-paper-plane me-2"></i>Withdrawal Request Bhejein
+                        </button>
                     </form>
                 </div>
 
             </div>
 
-            <!-- RIGHT COLUMN: Admin Approval Desk -->
-            <div class="col-lg-7">
-                <div class="card-custom">
-                    <div class="card-title-custom">🔒 ID Verification & Approval Desk</div>
-                    <p class="text-muted small">Naye registered officers ki unique ID ko active karne ke liye yahan se verify karke Approve karein.</p>
+            <!-- RIGHT COLUMN: Interactive Registration Live Logs -->
+            <div class="col-lg-6">
+                <div class="card-custom h-100">
+                    <div class="card-title-custom">
+                        <i class="fa-solid fa-passport text-warning"></i> Active Verification Desk
+                    </div>
+                    <p class="text-muted small mb-4">Yahan aap naye registered officers ki unique identity card details verify kar sakte hain.</p>
                     
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
+                        <table class="table table-hover align-middle border-0">
                             <thead class="table-light">
-                                <tr>
+                                <tr class="small text-uppercase text-secondary">
                                     <th>Officer Details</th>
-                                    <th>Unique ID</th>
-                                    <th>Zila</th>
+                                    <th>Unique ID Code</th>
                                     <th>Status</th>
                                     <th class="text-end">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="officerTableBody">
-                                <!-- Default Sample Data for Testing -->
-                                <tr id="row-1">
+                                <tr id="row-1" class="border-bottom">
                                     <td>
                                         <h6 class="m-0 fw-bold">Amit Tripathi</h6>
-                                        <small class="text-muted">Role: DM</small>
+                                        <small class="text-muted">DM | Lucknow</small>
                                     </td>
-                                    <td><code class="fw-bold text-dark">SEW-DM-LUC-8842</code></td>
-                                    <td>Lucknow</td>
-                                    <td><span id="badge-1" class="status-badge bg-warning text-dark">Pending</span></td>
-                                    <td class="text-end">
-                                        <button id="btn-1" class="btn btn-sm btn-outline-success fw-bold" onclick="approveOfficer(1)">Approve</button>
-                                    </td>
-                                </tr>
-                                <tr id="row-2">
-                                    <td>
-                                        <h6 class="m-0 fw-bold">Rajesh Kumar</h6>
-                                        <small class="text-muted">Role: FO</small>
-                                    </td>
-                                    <td><code class="fw-bold text-dark">SEW-FO-KAN-1934</code></td>
-                                    <td>Kanpur</td>
-                                    <td><span id="badge-2" class="status-badge bg-warning text-dark">Pending</span></td>
-                                    <td class="text-end">
-                                        <button id="btn-2" class="btn btn-sm btn-outline-success fw-bold" onclick="approveOfficer(2)">Approve</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Dynamic System Script -->
-    <script>
-        let officerCount = 2; // Default listings counting
-
-        // 1. Handling Registration and Adding to Approval Desk
-        document.getElementById("regForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            officerCount++;
-
-            const name = document.getElementById("officerName").value;
-            const role = document.getElementById("officerRole").value;
-            const dist = document.getElementById("officerDist").value;
-            const distShort = dist.substring(0,3).toUpperCase();
-            const randomNum = Math.floor(1000 + Math.random() * 9000);
-            
-            // Unique ID Pattern
-            const uniqueID = `SEW-${role}-${distShort}-${randomNum}`;
-
-            // Add new row to the table
-            const tbody = document.getElementById("officerTableBody");
-            const newRow = document.createElement("tr");
-            newRow.id = `row-${officerCount}`;
-            newRow.innerHTML = `
-                <td>
-                    <h6 class="m-0 fw-bold">${name}</h6>
-                    <small class="text-muted">Role: ${role}</small>
-                </td>
-                <td><code class="fw-bold text-dark">${uniqueID}</code></td>
-                <td>${dist}</td>
-                <td><span id="badge-${officerCount}" class="status-badge bg-warning text-dark">Pending</span></td>
+                                    <td><code class="fw-bold text-danger">SEW-DM-LUC-8842</code></td>
