@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sewanya Healthcare</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+header{background:linear-gradient(135deg,#08734f,#15a36f);color:white;padding:20px}
+.wrap{max-width:1050px;margin:auto}.brand{font-size:28px;font-weight:800}.sub{margin-top:5px}
+nav{display:flex;gap:8px;overflow:auto;margin-top:18px}nav button{border:0;border-radius:10px;padding:10px 15px;font-weight:700;color:#08734f}
+main{padding:18px}.hero,.card{background:white;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 5px 22px #0000000d}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+h1,h2,h3{margin-top:0}label{display:block;font-weight:700;margin:9px 0 6px}
+input,select{width:100%;padding:12px;border:1px solid #d6dce5;border-radius:10px;font-size:15px}
+.action{border:0;border-radius:10px;padding:12px 17px;background:#087a55;color:white;font-weight:800;margin-top:12px;cursor:pointer}
+.status{margin-top:12px;background:#f1f4f7;border-radius:10px;padding:11px;min-height:22px}.hidden{display:none}.small{font-size:13px;color:#667085}
+footer{text-align:center;padding:25px;color:#667085}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="brand">🏥 Sewanya Healthcare</div>
+<div class="sub">Healthcare • Member Registration • Withdrawal</div>
+<nav><button onclick="show('home')">Home</button><button onclick="show('member')">Member</button><button onclick="show('withdraw')">Withdrawal</button></nav>
+</div></header>
+
+<main class="wrap">
+<section id="home" class="hero">
+<h1>Welcome to Sewanya Healthcare</h1>
+<p>Member registration और withdrawal request portal.</p>
+<div class="grid">
+<div class="card"><h3>👤 Member Registration</h3><p>नाम, मोबाइल, जिला और Block save करें।</p><button class="action" onclick="show('member')">Open Member</button></div>
+<div class="card"><h3>💰 Withdrawal</h3><p>Withdrawal request submit करें।</p><button class="action" onclick="show('withdraw')">Open Withdrawal</button></div>
+</div>
+</section>
+
+<section id="member" class="card hidden">
+<h2>👤 Member Registration</h2>
+<div class="grid">
+<div><label>नाम</label><input id="name" placeholder="पूरा नाम"></div>
+<div><label>मोबाइल</label><input id="mobile" maxlength="10" inputmode="numeric" placeholder="10 digit mobile"></div>
+<div><label>जिला</label><select id="district"><option value="">जिला चुनें</option></select></div>
+<div><label>Block</label><select id="block"><option value="">पहले जिला चुनें</option></select></div>
+</div>
+<button class="action" onclick="saveMember()">Member Save करें</button>
+<div id="ms" class="status"></div>
+</section>
+
+<section id="withdraw" class="card hidden">
+<h2>💰 Withdrawal Request</h2>
+<div class="grid">
+<div><label>Member ID</label><input id="member_id" type="number" placeholder="Member ID"></div>
+<div><label>Amount ₹</label><input id="amount" type="number" min="1" placeholder="Amount"></div>
+<div><label>Payment Method</label><select id="method"><option>UPI</option><option>Bank</option></select></div>
+<div><label>UPI / Account Details</label><input id="account" placeholder="UPI ID या account details"></div>
+</div>
+<button class="action" onclick="saveWithdrawal()">Withdrawal Submit करें</button>
+<div id="ws" class="status"></div>
+</section>
+
+<section id="card" class="section" style="padding:28px 16px;max-width:1100px;margin:auto;">
+  <div style="background:#fff;border-radius:20px;padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.08)">
+    <h2 style="margin-top:0">🪪 Sewanya Health Card</h2>
+    <p style="color:#667085">Member registration ke baad yahin se digital Health Card generate karein.</p>
+
+    <div id="healthCardPreview" style="display:none;margin:18px 0;">
+      <div id="sewanyaCard" style="max-width:720px;margin:auto;border:1px solid #d9e2ec;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#ffffff,#eef8ff);font-family:Arial,sans-serif;">
+        <div style="padding:18px 22px;background:#087ea4;color:white;display:flex;justify-content:space-between;gap:15px;align-items:center;">
+          <div>
+            <div style="font-size:12px;letter-spacing:1.5px;opacity:.9">SEWANYA HEALTHCARE</div>
+            <div style="font-size:25px;font-weight:800;margin-top:3px">HEALTH CARD</div>
+          </div>
+          <div style="font-size:32px">❤</div>
+        </div>
+        <div style="padding:22px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div><small style="color:#667085">Member Name</small><div id="cardName" style="font-weight:700;font-size:19px;margin-top:3px"></div></div>
+            <div><small style="color:#667085">Member ID</small><div id="cardId" style="font-weight:700;margin-top:3px"></div></div>
+            <div><small style="color:#667085">Mobile</small><div id="cardMobile" style="font-weight:600;margin-top:3px"></div></div>
+            <div><small style="color:#667085">District</small><div id="cardDistrict" style="font-weight:600;margin-top:3px"></div></div>
+            <div><small style="color:#667085">Block</small><div id="cardBlock" style="font-weight:600;margin-top:3px"></div></div>
+            <div><small style="color:#667085">Issue Date</small><div id="cardDate" style="font-weight:600;margin-top:3px"></div></div>
+          </div>
+          <div style="margin-top:20px;padding-top:13px;border-top:1px dashed #b8c7d9;font-size:12px;color:#667085">
+            This is a digital membership/health card of Sewanya Healthcare. Validity and benefits are subject to the applicable Sewanya Healthcare terms.
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:15px;">
+        <button type="button" onclick="printSewanyaCard()" style="padding:12px 18px;border:0;border-radius:10px;background:#087ea4;color:#fff;font-weight:700;cursor:pointer">🖨️ Print / Save PDF</button>
+        <button type="button" onclick="downloadSewanyaCard()" style="padding:12px 18px;border:1px solid #087ea4;border-radius:10px;background:#fff;color:#087ea4;font-weight:700;cursor:pointer">⬇️ Download Card</button>
+      </div>
+    </div>
+
+    <div id="cardEmpty" style="padding:18px;border-radius:12px;background:#f6f8fa;color:#667085">
+      Pehle Member Registration save karein. Save hone ke baad Health Card yahin generate hoga.
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>Sewanya Healthcare</footer>
+
+<script>
+/* अपनी नई Supabase Publishable Key यहाँ डालें */
+const SUPABASE_URL="https://qvyoipmtbirdevcmzrvg.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="PASTE_NEW_PUBLISHABLE_KEY_HERE";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+
+const blocks={
+"Shahjahanpur":["Bhawal Khera","Banda","Jalalabad","Khutar","Powayan","Sadar","Tilhar"],
+"Lucknow":["Bakshi Ka Talab","Chinhat","Gosainganj","Kakori","Malihabad","Mohanlalganj","Sarojini Nagar"],
+"Kanpur Nagar":["Bidhnu","Bilhaur","Chaubepur","Ghatampur","Kakwan","Kalyanpur","Patara","Shivrajpur"],
+"Bareilly":["Aalampur Jafarabad","Bhadpura","Bhojipura","Bithiri Chainpur","Faridpur","Fatehganj West","Kyara","Majhgawan","Mirganj","Nawabganj","Ram Nagar","Shergarh"],
+"Agra":["Achhnera","Akola","Bichpuri","Etmadpur","Fatehabad","Jagner","Jaitpur Kalan","Kheragarh","Pinahat","Saiyan","Shamsabad"],
+"Aligarh":["Atrauli","Chandaus","Dhanipur","Gonda","Iglas","Jawan Sikandarpur","Khair","Lodha","Tappal"],
+"Amroha":["Amroha","Dhanaura","Gajraula","Gangeshwari","Hasanpur","Joya"],
+"Azamgarh":["Atraulia","Azmatgarh","Bilariyaganj","Haraiya","Jahanaganj","Koilsa","Lalganj","Mehnagar","Pawai","Rani Ki Sarai","Saraimir","Tahbarpur","Tarwa"],
+"Badaun":["Ambiapur","Asafpur","Dahgawan","Dataganj","Islamnagar","Jagat","Mion","Qadar Chowk","Sahaswan","Ujhani","Usawan"],
+"Baghpat":["Baghpat","Baraut","Binauli","Chhaprauli","Khekra","Pilana"],
+"Bahraich":["Balha","Chitaura","Huzoorpur","Kaisarganj","Mahasi","Mihipurwa","Payagpur","Risia","Shivpur","Tejwapur","Visheshwarganj"],
+"Ballia":["Bairia","Belhari","Beruarbari","Chilkahar","Dubhar","Garwar","Maniar","Nagra","Navanagar","Pandah","Rasra","Reoti","Siar","Sohaon"],
+"Balrampur":["Balrampur","Gainsari","Pachpedwa","Rehra Bazar","Tulsipur","Utraula"],
+"Banda":["Baberu","Badokhar Khurd","Bisanda","Jaspura","Kamasin","Mahua","Naraini","Tindwari"],
+"Barabanki":["Bani Kodar","Banki","Dewa","Dariyabad","Fatehpur","Harakh","Masauli","Nindura","Puredalai","Ramnagar","Sirauli Gauspur","Siddhaur","Suratganj","Trivediganj"],
+"Basti":["Bahadurpur","Bankati","Basti","Dubaulia","Gaur","Harraiya","Kaptanganj","Paras Rampur","Ram Nagar","Saltaua Gopal Pur","Sau Ghat","Vikram Jot"],
+"Bulandshahr":["Anupshahr","Arniya","Bulandshahr","Danpur","Debai","Gulaothi","Jahangirabad","Khurja","Lakhaoti","Pahasu","Sikandrabad","Shikarpur","Unchagaon"],
+"Etah":["Aliganj","Awagarh","Etah","Jaithara","Jalesar","Marehra","Nidhauli Kalan","Shitalpur"],
+"Etawah":["Barhpura","Basrehar","Bharthana","Chakarnagar","Jaswantnagar","Mahewa","Saifai","Takha"],
+"Farrukhabad":["Amritpur","Barhpur","Kaimganj","Mohammadabad","Nawabganj","Rajepur"],
+"Fatehpur":["Asothar","Bahua","Bhitaura","Dhata","Haswa","Hathgam","Kalyanpur","Malwan","Teliyani","Vijayipur"],
+"Firozabad":["Eka","Firozabad","Jasrana","Madanpur","Narkhi","Shikohabad","Tundla"],
+"Ghaziabad":["Bhojpur","Loni","Muradnagar","Rajapur"],
+"Ghazipur":["Bhadaura","Birno","Deokali","Ghazipur","Jakhania","Karanda","Kasimabad","Manihari","Mardah","Mohammadabad","Reotipur","Sadat","Zamania"],
+"Gonda":["Babhanjot","Belhari","Chhapia","Colonelganj","Haldharmau","Itiyathok","Jhanjhari","Katra Bazar","Mankapur","Nawabganj","Paraspur","Tarabganj","Wazirganj"],
+"Gorakhpur":["Bansgaon","Belghat","Bhathat","Brahmpur","Campierganj","Chauri Chaura","Gagaha","Gola","Jangal Kaudia","Khorabar","Pali","Pipraich","Sahjanwa","Uruwa"],
+"Hardoi":["Ahirori","Bawan","Behendar","Bilgram","Hariyawan","Kachhauna","Kothawan","Madhoganj","Pihani","Sandi","Sandila","Shahabad","Sursa","Tadiyawan","Todarpur"],
+"Hathras":["Hathras","Hasayan","Mursan","Sadabad","Sasni","Sikandra Rao"],
+"Jalaun":["Dakore","Jalaun","Kadaura","Konch","Kuthaund","Madhogarh","Nadigaon","Rampura"],
+"Jaunpur":["Badlapur","Baksha","Barasathi","Dharmapur","Dobhi","Jalalpur","Kerakat","Khuthan","Machhlishahr","Mariahu","Mungra Badshahpur","Ram Nagar","Shahganj","Sikrara","Suithakala"],
+"Jhansi":["Babina","Bamaur","Bangra","Baragaon","Chirgaon","Gursarai","Moth","Mauranipur"],
+"Kannauj":["Chhibramau","Gurusahai Ganj","Haseran","Jalalabad","Kannauj","Saurikh","Talgram","Umarda"],
+"Kasganj":["Amapur","Ganj Dundwara","Kasganj","Patiyali","Sahawar","Sidhpura"],
+"Kaushambi":["Chail","Kara","Manjhanpur","Mooratganj","Nevada","Sirathu"],
+"Kushinagar":["Dudhi","Fazilnagar","Hata","Kaptanganj","Kasya","Khadda","Padrauna","Ramkola","Seorahi","Sukrauli","Tamkuhi"],
+"Lakhimpur Kheri":["Behjam","Bijuwa","Dhaurehra","Gola Gokaran Nath","Isanagar","Kumbhi","Lakhimpur","Mitauli","Mohammadi","Nighasan","Nakaha","Palia","Phoolbehar","Ramia Behar"],
+"Lalitpur":["Birdha","Jakhaura","Madawara","Talbehat","Bar"],
+"Mainpuri":["Barnahal","Bewar","Ghiror","Jagir","Kishni","Kurawali","Mainpuri","Sultanganj"],
+"Mathura":["Baldev","Chhata","Farah","Goverdhan","Mathura","Nandgaon","Naujheel"],
+"Mau":["Badraon","Doharighat","Fatehpur Mandao","Ghosi","Kopaganj","Muhammadabad Gohna","Pardaha","Ranipur","Ratanpura"],
+"Meerut":["Daurala","Hastinapur","Jani","Kharkhoda","Machra","Mawana","Meerut","Parikshitgarh","Rajpura","Rohta","Sardhana"],
+"Mirzapur":["Chhanvey","Halia","Jamaluapur","Kon","Lalganj","Majhwan","Narainpur","Pahari","Rajgarh","Shikhar"],
+"Moradabad":["Bilari","Bhagatpur Tanda","Chhajlet","Dilari","Munda Pandey","Moradabad","Thakurdwara"],
+"Muzaffarnagar":["Baghra","Budhana","Charthawal","Jansath","Khatauli","Morna","Purkazi","Shahpur","Sadar"],
+"Pilibhit":["Amariya","Bilsanda","Bisalpur","Lalaurikhera","Marori","Puranpur"],
+"Pratapgarh":["Bihar","Gaura","Kalakankar","Kunda","Lakshmanpur","Lalganj","Mandhata","Mangraura","Patti","Pratapgarh Sadar","Rampur Sangramgarh","Sandwa Chandrika","Sangipur","Shivgarh"],
+"Raebareli":["Amawan","Bachhrawan","Dalmau","Deenshah Gaura","Harchandpur","Jagatpur","Kheron","Lalganj","Mahrajganj","Rahi","Rohania","Salon","Sataon","Shivgarh","Unchahar"],
+"Rampur":["Bilaspur","Chamraua","Milak","Saidnagar","Shahabad","Swar"],
+"Saharanpur":["Behat","Deoband","Gangoh","Muzaffarabad","Nakur","Puwarka","Rampur Maniharan","Sadauli Qadeem"],
+"Sambhal":["Asmauli","Baniyather","Bahjoi","Chandausi","Gunnaur","Junawai","Pawasa","Rajpura","Sambhal"],
+"Shamli":["Kairana","Kandhla","Shamli","Thanabhawan","Un"],
+"Shrawasti":["Gilaula","Hariharpur Rani","Ikauna","Jamunaha","Sirsiya"],
+"Siddharthnagar":["Bansi","Birdpur","Domariyaganj","Itwa","Khesraha","Lotan","Naugarh","Shohratgarh","Uska Bazar"],
+"Sitapur":["Behta","Biswan","Gondlamau","Hargaon","Kasmanda","Khairabad","Laharpur","Mahmudabad","Maholi","Misrikh","Pahala","Parsendi","Pisyawan","Rampur Mathura","Reusa","Sakran","Sidhauli"],
+"Sonbhadra":["Babhani","Chopan","Dudhi","Ghorawal","Kone","Myorpur","Nagwa","Robertsganj"],
+"Sultanpur":["Akhandnagar","Baldirai","Bhadaiyan","Dhanpatganj","Dubeypur","Jaisinghpur","Kadipur","Kurebhar","Lambhua","Motigarpur"],
+"Unnao":["Asoha","Auras","Bangarmau","Bichhiya","Bighapur","Fatehpur Chaurasi","Ganj Muradabad","Hasanganj","Hilauli","Miyanganj","Nawabganj","Purwa","Safipur","Sumerpur"],
+"Varanasi":["Arajiline","Chiraigaon","Harhua","Kashi Vidyapeeth","Pindra","Sewapuri"]
+};
+
+const district=document.getElementById("district"),block=document.getElementById("block");
+Object.keys(blocks).sort().forEach(x=>district.add(new Option(x,x)));
+district.onchange=()=>{block.innerHTML='<option value="">Block चुनें</option>';(blocks[district.value]||[]).forEach(x=>block.add(new Option(x,x)));};
+
+function show(id){["home","member","withdraw"].forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==id));window.scrollTo(0,0)}
+async function saveMember(){
+ const s=document.getElementById("ms"),n=document.getElementById("name").value.trim(),m=document.getElementById("mobile").value.trim();
+ if(SUPABASE_PUBLISHABLE_KEY.includes("PASTE_")){s.textContent="⚠️ पहले नई Supabase Publishable Key डालें।";return}
+ if(!n||!/^[0-9]{10}$/.test(m)||!district.value||!block.value){s.textContent="नाम, सही 10 digit मोबाइल, जिला और Block भरें।";return}
+ const {data,error}=await db.from("members").insert([{name:n,mobile:m,district:district.value,block:block.value}]).select().single();
+ if(error){s.textContent="❌ "+error.message;return}
+ document.getElementById("member_id").value=data.id;s.textContent="✅ Member save हो गया। Member ID: "+data.id;
+}
+async function saveWithdrawal(){
+ const s=document.getElementById("ws"),id=Number(document.getElementById("member_id").value),amount=Number(document.getElementById("amount").value),method=document.getElementById("method").value,account=document.getElementById("account").value.trim();
+ if(SUPABASE_PUBLISHABLE_KEY.includes("PASTE_")){s.textContent="⚠️ पहले नई Supabase Publishable Key डालें।";return}
+ if(!id||amount<=0||!account){s.textContent="Member ID, amount और payment details भरें।";return}
+ const {data,error}=await db.from("withdrawals").insert([{member_id:id,amount,method,account_details:account,status:"pending"}]).select().single();
+ if(error){s.textContent="❌ "+error.message;return}
+ s.textContent="✅ Withdrawal request submit हो गई। Status: Pending. ID: "+data.id;
+}
+</script>
+
+<script>
+(function(){
+  function val(ids){
+    for(const id of ids){
+      const el=document.getElementById(id);
+      if(el && el.value && el.value.trim()) return el.value.trim();
+    }
+    return "";
+  }
+  function makeId(){
+    return "SWH-" + Date.now().toString(36).toUpperCase() + "-" +
+      Math.random().toString(36).slice(2,7).toUpperCase();
+  }
+  window.generateSewanyaHealthCard=function(member){
+    member=member||{};
+    const name=member.name||val(["memberName","name","fullName","member_name"]);
+    const mobile=member.mobile||val(["memberMobile","mobile","phone"]);
+    const district=member.district||val(["memberDistrict","district"]);
+    const block=member.block||val(["memberBlock","block"]);
+    const id=member.id ? ("SWH-"+member.id) : (member.member_id||makeId());
+    document.getElementById("cardName").textContent=name||"Sewanya Member";
+    document.getElementById("cardId").textContent=id;
+    document.getElementById("cardMobile").textContent=mobile||"—";
+    document.getElementById("cardDistrict").textContent=district||"—";
+    document.getElementById("cardBlock").textContent=block||"—";
+    document.getElementById("cardDate").textContent=new Date().toLocaleDateString("en-IN");
+    document.getElementById("cardEmpty").style.display="none";
+    document.getElementById("healthCardPreview").style.display="block";
+    document.getElementById("card").scrollIntoView({behavior:"smooth",block:"start"});
+    window.__sewanyaCard={name,mobile,district,block,id,date:new Date().toLocaleDateString("en-IN")};
+    return window.__sewanyaCard;
+  };
+
+  window.printSewanyaCard=function(){
+    const card=document.getElementById("sewanyaCard");
+    if(!card) return;
+    const w=window.open("","_blank","width=850,height=650");
+    w.document.write("<html><head><title>Sewanya Health Card</title><style>body{font-family:Arial;margin:30px} @media print{body{margin:0}}</style></head><body>"+card.outerHTML+"
+<script>
+document.addEventListener("click",function(e){
+  const b=e.target.closest("button");
+  if(!b || !/save|register|submit|member/i.test(b.textContent||"")) return;
+  setTimeout(function(){
+    const ok=[...document.querySelectorAll("body *")].some(x=>/saved successfully|member saved|successfully saved|data saved/i.test((x.textContent||"").trim()));
+    if(ok) window.generateSewanyaHealthCard();
+  },900);
+});
+</script>
+
+</body></html>");
+    w.document.close(); w.focus(); setTimeout(()=>w.print(),300);
+  };
+
+  window.downloadSewanyaCard=function(){
+    const card=document.getElementById("sewanyaCard");
+    if(!card) return;
+    const blob=new Blob(["<!doctype html><html><head><meta charset='utf-8'><title>Sewanya Health Card</title></head><body style='margin:30px'>"+card.outerHTML+"</body></html>"],{type:"text/html"});
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);
+    a.download="sewanya-health-card.html";
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  };
+
+  // Make a button available from the registration area if a form exists.
+  function addCardButton(){
+    const candidates=[...document.querySelectorAll("button")];
+    const save=candidates.find(b=>/save|register|submit|member/i.test(b.textContent||""));
+    if(save && !document.getElementById("generateCardBtn")){
+      const b=document.createElement("button");
+      b.id="generateCardBtn"; b.type="button";
+      b.textContent="🪪 Generate Health Card";
+      b.style.cssText="margin:8px 0;padding:12px 18px;border:0;border-radius:10px;background:#087ea4;color:#fff;font-weight:700;cursor:pointer";
+      b.onclick=()=>window.generateSewanyaHealthCard();
+      save.parentNode.insertBefore(b,save.nextSibling);
+    }
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",addCardButton);
+  else addCardButton();
+
+  // Auto-generate after a successful Supabase insert if the page exposes the returned row.
+  window.addEventListener("sewanya-member-saved",function(e){
+    window.generateSewanyaHealthCard(e.detail||{});
+  });
+})();
+</script>
+
+</body>
+</html>
