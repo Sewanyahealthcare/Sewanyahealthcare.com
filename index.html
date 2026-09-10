@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sewanya Health | Admin & Officer Portal</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: #f4f6f9; color: #333; padding-bottom: 50px; }
+        .main-header { background: linear-gradient(135deg, #0b3c5d 0%, #0d6efd 100%); color: white; padding: 20px 0; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .card-custom { background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: none; margin-bottom: 25px; padding: 25px; }
+        .card-title-custom { font-size: 18px; font-weight: 700; color: #0b3c5d; border-bottom: 2px solid #eef2f5; padding-bottom: 10px; margin-bottom: 20px; }
+        .balance-display { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; padding: 20px; border-radius: 10px; text-align: center; font-weight: bold; }
+        .status-badge { font-size: 12px; padding: 5px 10px; border-radius: 20px; font-weight: 600; }
+        .btn-custom { font-weight: 600; border-radius: 8px; padding: 10px 20px; transition: 0.2s; }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Header -->
+    <header class="main-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="fw-bold m-0">Sewanya Care</h2>
+                <small class="text-white-50">UP District, Block & Field Officer Administration Management</small>
+            </div>
+            <span class="badge bg-light text-dark px-3 py-2 fw-bold fs-6">Admin Mode: Active</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            
+            <!-- LEFT COLUMN: Registration & Wallet (Withdrawal) -->
+            <div class="col-lg-5">
+                
+                <!-- 1. Officer Registration Form -->
+                <div class="card-custom">
+                    <div class="card-title-custom">📝 Naya Officer Register Karein</div>
+                    <form id="regForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Poora Naam</label>
+                            <input type="text" id="officerName" class="form-control" placeholder="Naam likhein" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label fw-semibold">Role Chunein</label>
+                                <select id="officerRole" class="form-select" required>
+                                    <option value="DM">DM (District Mgr)</option>
+                                    <option value="BM">BM (Block Mgr)</option>
+                                    <option value="FO">FO (Field Officer)</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-semibold">Zila (District)</label>
+                                <select id="officerDist" class="form-select" required>
+                                    <option value="Lucknow">Lucknow</option>
+                                    <option value="Kanpur">Kanpur</option>
+                                    <option value="Varanasi">Varanasi</option>
+                                    <option value="Prayagraj">Prayagraj</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-custom w-100">Add Officer & ID Generate Karein</button>
+                    </form>
+                </div>
+
+                <!-- 2. Wallet & Payout Withdrawal Panel -->
+                <div class="card-custom">
+                    <div class="card-title-custom">💰 Wallet & Withdrawal Request</div>
+                    <div class="balance-display mb-3">
+                        <span class="d-block small text-white-50">Available Balance</span>
+                        <h2 class="m-0 fw-bold">₹ 24,500.00</h2>
+                    </div>
+                    <form id="withdrawForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Nikalne Wali Rashi (Amount)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">₹</span>
+                                <input type="number" class="form-control" placeholder="0.00" min="500" max="24500" required>
+                            </div>
+                            <small class="text-muted">Minimum withdrawal: ₹500</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Bank / UPI Details</label>
+                            <input type="text" class="form-control" placeholder="UPI ID ya Bank A/C details daalein" required>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-custom w-100">Withdrawal Request Bhejein</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: Admin Approval Desk -->
+            <div class="col-lg-7">
+                <div class="card-custom">
+                    <div class="card-title-custom">🔒 ID Verification & Approval Desk</div>
+                    <p class="text-muted small">Naye registered officers ki unique ID ko active karne ke liye yahan se verify karke Approve karein.</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Officer Details</th>
+                                    <th>Unique ID</th>
+                                    <th>Zila</th>
+                                    <th>Status</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="officerTableBody">
+                                <!-- Default Sample Data for Testing -->
+                                <tr id="row-1">
+                                    <td>
+                                        <h6 class="m-0 fw-bold">Amit Tripathi</h6>
+                                        <small class="text-muted">Role: DM</small>
+                                    </td>
+                                    <td><code class="fw-bold text-dark">SEW-DM-LUC-8842</code></td>
+                                    <td>Lucknow</td>
+                                    <td><span id="badge-1" class="status-badge bg-warning text-dark">Pending</span></td>
+                                    <td class="text-end">
+                                        <button id="btn-1" class="btn btn-sm btn-outline-success fw-bold" onclick="approveOfficer(1)">Approve</button>
+                                    </td>
+                                </tr>
+                                <tr id="row-2">
+                                    <td>
+                                        <h6 class="m-0 fw-bold">Rajesh Kumar</h6>
+                                        <small class="text-muted">Role: FO</small>
+                                    </td>
+                                    <td><code class="fw-bold text-dark">SEW-FO-KAN-1934</code></td>
+                                    <td>Kanpur</td>
+                                    <td><span id="badge-2" class="status-badge bg-warning text-dark">Pending</span></td>
+                                    <td class="text-end">
+                                        <button id="btn-2" class="btn btn-sm btn-outline-success fw-bold" onclick="approveOfficer(2)">Approve</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Dynamic System Script -->
+    <script>
+        let officerCount = 2; // Default listings counting
+
+        // 1. Handling Registration and Adding to Approval Desk
+        document.getElementById("regForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            officerCount++;
+
+            const name = document.getElementById("officerName").value;
+            const role = document.getElementById("officerRole").value;
+            const dist = document.getElementById("officerDist").value;
+            const distShort = dist.substring(0,3).toUpperCase();
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            
+            // Unique ID Pattern
+            const uniqueID = `SEW-${role}-${distShort}-${randomNum}`;
+
+            // Add new row to the table
+            const tbody = document.getElementById("officerTableBody");
+            const newRow = document.createElement("tr");
+            newRow.id = `row-${officerCount}`;
+            newRow.innerHTML = `
+                <td>
+                    <h6 class="m-0 fw-bold">${name}</h6>
+                    <small class="text-muted">Role: ${role}</small>
+                </td>
+                <td><code class="fw-bold text-dark">${uniqueID}</code></td>
+                <td>${dist}</td>
+                <td><span id="badge-${officerCount}" class="status-badge bg-warning text-dark">Pending</span></td>
