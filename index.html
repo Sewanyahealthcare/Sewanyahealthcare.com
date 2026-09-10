@@ -3,208 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sewanya Care | Administration & Management Portal</title>
-    <!-- Google Font 'Inter' for Modern Corporate Look -->
+    <title>Sewanya Care | Nationwide Trusted Healthcare Network</title>
+    <!-- Google Fonts & Frameworks -->
     <link href="https://googleapis.com" rel="stylesheet">
-    <!-- Bootstrap 5 CSS -->
     <link href="https://jsdelivr.net" rel="stylesheet">
-    <!-- FontAwesome for Rich Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: #f8fafc; color: #1e293b; padding-bottom: 40px; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: #f8fafc; color: #0f172a; }
         
-        /* Premium Header */
-        .main-header { 
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); 
-            color: white; 
-            padding: 25px 0; 
-            margin-bottom: 35px; 
-            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.1); 
-            border-bottom: 4px solid #3b82f6;
-        }
-
-        /* Modernized Cards */
-        .card-custom { 
-            background: white; 
-            border-radius: 16px; 
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); 
-            border: 1px solid #e2e8f0; 
-            margin-bottom: 30px; 
-            padding: 30px; 
-        }
+        /* SampoornCare Theme Colors */
+        :root { --primary-blue: #0b3c5d; --accent-blue: #0d6efd; --success-green: #10b981; }
         
-        .card-title-custom { 
-            font-size: 19px; 
-            font-weight: 700; 
-            color: #1e3a8a; 
-            border-bottom: 2px solid #f1f5f9; 
-            padding-bottom: 12px; 
-            margin-bottom: 24px; 
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .top-bar { background-color: var(--primary-blue); color: white; font-size: 14px; padding: 6px 0; }
+        .app-navbar { background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top:0; z-index:1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .hero-banner { background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); padding: 80px 0; border-bottom: 1px solid #e2e8f0; }
         
-        /* Form Inputs Makeover */
-        .form-label { font-weight: 600; color: #475569; font-size: 14px; margin-bottom: 8px; }
-        .form-control, .form-select { 
-            border-radius: 10px; 
-            padding: 12px 16px; 
-            border: 1px solid #cbd5e1; 
-            font-size: 15px; 
-            transition: all 0.2s ease-in-out;
-            background-color: #f8fafc;
-        }
-        .form-control:focus, .form-select:focus { 
-            background-color: white;
-            border-color: #3b82f6; 
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12); 
-        }
+        /* Component Cards */
+        .card-panel { background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); margin-bottom: 24px; transition: 0.3s; }
+        .card-panel:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.05); }
         
-        /* Financial Wallet Professional Design */
-        .balance-display { 
-            background: linear-gradient(135deg, #059669 0%, #10b981 100%); 
-            color: white; 
-            padding: 24px; 
-            border-radius: 14px; 
-            text-align: center; 
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
-        }
-
-        /* Premium Buttons */
-        .btn-custom-primary { 
-            background-color: #1e3a8a; 
-            color: white; 
-            font-weight: 600; 
-            border-radius: 10px; 
-            padding: 12px 24px; 
-            border: none;
-            transition: all 0.2s;
-        }
-        .btn-custom-primary:hover { background-color: #1d4ed8; transform: translateY(-1px); }
+        /* Dynamic Views Setup */
+        .panel-view { display: none; }
+        .panel-view.active-view { display: block; }
         
-        .btn-custom-success { 
-            background-color: #10b981; 
-            color: white; 
-            font-weight: 600; 
-            border-radius: 10px; 
-            padding: 12px 24px; 
-            border: none;
-            transition: all 0.2s;
-        }
-        .btn-custom-success:hover { background-color: #059669; transform: translateY(-1px); }
-
-        .status-badge { font-size: 13px; padding: 6px 14px; border-radius: 30px; font-weight: 600; }
+        /* Dropdown custom styling */
+        .dropdown-item:hover { background-color: #f1f5f9; color: var(--accent-blue); }
+        
+        /* Health Card Design styling */
+        .health-card-preview { background: linear-gradient(135deg, #0b3c5d 0%, #0d6efd 100%); color: white; border-radius: 16px; padding: 25px; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(11,60,93,0.25); position: relative; overflow: hidden; }
+        .wallet-card { background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: white; padding: 20px; border-radius: 12px; }
+        .chat-box { background: #f1f5f9; border-radius: 12px; height: 180px; overflow-y: auto; padding: 15px; margin-bottom: 12px; }
+        
+        /* Footer Styling */
+        footer { background-color: #0f172a; color: #94a3b8; padding: 60px 0 30px; font-size: 15px; }
+        footer h5 { color: white; font-weight: 700; margin-bottom: 20px; }
+        footer a { color: #94a3b8; text-decoration: none; transition: 0.2s; }
+        footer a:hover { color: white; }
     </style>
 </head>
 <body>
 
-    <!-- 1. Top Bar / Header Component -->
-    <header class="main-header">
-        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <!-- 1. TOP SECURED BLUE STRIP BAR -->
+    <div class="top-bar">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <div><i class="fa-solid fa-envelope me-2"></i>support@sewanyahealthcare.com</div>
             <div>
-                <h2 class="fw-bold m-0 tracking-tight"><i class="fa-solid fa-heart-pulse text-danger me-2"></i>Sewanya Care</h2>
-                <small class="text-white-50">UP District, Block & Field Officer Administration Management</small>
+                <a href="#" class="text-white me-3"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="text-white me-3"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="text-white"><i class="fa-brands fa-linkedin"></i></a>
             </div>
-            <span class="badge bg-primary px-3 py-2 fw-bold fs-6 shadow-sm"><i class="fa-solid fa-user-shield me-1"></i> Admin Mode: Active</span>
         </div>
-    </header>
+    </div>
 
-    <div class="container">
-        <div class="row">
-            
-            <!-- LEFT COLUMN: Forms -->
-            <div class="col-lg-6">
-                
-                <!-- 2. Officer Registration Panel -->
-                <div class="card-custom">
-                    <div class="card-title-custom">
-                        <i class="fa-solid fa-user-plus text-primary"></i> Naya Officer Register Karein
-                    </div>
-                    <form id="regForm">
-                        <div class="mb-4">
-                            <label class="form-label">Poora Naam (As per Aadhaar)</label>
-                            <input type="text" id="officerName" class="form-control" placeholder="Ramesh Yadav" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <label class="form-label">Role Chunein</label>
-                                <select id="officerRole" class="form-select" required>
-                                    <option value="DM">DM (District Mgr)</option>
-                                    <option value="BM" selected>BM (Block Mgr)</option>
-                                    <option value="FO">FO (Field Officer)</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <label class="form-label">Zila (District)</label>
-                                <select id="officerDist" class="form-select" required>
-                                    <option value="Lucknow">Lucknow</option>
-                                    <option value="Kanpur">Kanpur</option>
-                                    <option value="Varanasi">Varanasi</option>
-                                    <option value="Prayagraj">Prayagraj</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-custom-primary w-100 mt-2">
-                            <i class="fa-solid fa-address-card me-2"></i>Add Officer & ID Generate Karein
-                        </button>
-                    </form>
-                </div>
-
-                <!-- 3. Wallet and Payout Payout Request Panel -->
-                <div class="card-custom">
-                    <div class="card-title-custom">
-                        <i class="fa-solid fa-wallet text-success"></i> Wallet & Withdrawal Request
-                    </div>
-                    <div class="balance-display mb-4">
-                        <span class="d-block small text-white-50 text-uppercase tracking-wider">Available Balance</span>
-                        <h2 class="m-0 fw-bold fs-1">₹ 24,500.00</h2>
-                    </div>
-                    <form id="withdrawForm">
-                        <div class="mb-4">
-                            <label class="form-label">Nikalne Wali Rashi (Amount)</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light fw-bold border-end-0">₹</span>
-                                <input type="number" id="withdrawAmount" class="form-control border-start-0" placeholder="0.00" min="500" max="24500" required>
-                            </div>
-                            <div class="form-text text-muted">Minimum withdrawal limit is ₹500</div>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label">Bank Details / UPI Information</label>
-                            <input type="text" class="form-control" placeholder="UPI ID (e.g., sewanya@ybl) ya Account Details" required>
-                        </div>
-                        <button type="submit" class="btn btn-custom-success w-100">
-                            <i class="fa-solid fa-paper-plane me-2"></i>Withdrawal Request Bhejein
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-
-            <!-- RIGHT COLUMN: Interactive Registration Live Logs -->
-            <div class="col-lg-6">
-                <div class="card-custom h-100">
-                    <div class="card-title-custom">
-                        <i class="fa-solid fa-passport text-warning"></i> Active Verification Desk
-                    </div>
-                    <p class="text-muted small mb-4">Yahan aap naye registered officers ki unique identity card details verify kar sakte hain.</p>
+    <!-- 2. NAVIGATION BAR WITH EXTENSIVE DROPDOWNS -->
+    <nav class="navbar navbar-expand-lg app-navbar py-3">
+        <div class="container">
+            <span class="navbar-brand fw-bold text-primary fs-3 m-0" style="cursor:pointer;" onclick="switchView('homeView')">
+                <i class="fa-solid fa-heart-pulse text-danger me-2"></i>Sewanya Care
+            </span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+                <ul class="navbar-nav align-items-center gap-2">
+                    <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#" onclick="switchView('homeView')">Home</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#" onclick="switchView('homeView')">About Us</a></li>
                     
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle border-0">
-                            <thead class="table-light">
-                                <tr class="small text-uppercase text-secondary">
-                                    <th>Officer Details</th>
-                                    <th>Unique ID Code</th>
-                                    <th>Status</th>
-                                    <th class="text-end">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="officerTableBody">
-                                <tr id="row-1" class="border-bottom">
-                                    <td>
-                                        <h6 class="m-0 fw-bold">Amit Tripathi</h6>
-                                        <small class="text-muted">DM | Lucknow</small>
-                                    </td>
-                                    <td><code class="fw-bold text-danger">SEW-DM-LUC-8842</code></td>
+                    <!-- SAMPOORNCARE LOGIN PATTERN DROPDOWN -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fw-semibold text-dark" href="#" id="loginDrop" role="button" data-bs-toggle="dropdown">
+                            Login
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                            <li><a class="dropdown-menu-item dropdown-item py-2 fw-medium" href="#" onclick="openLoginGateway('CUSTOMER')"><i class="fa-solid fa-user text-primary me-2"></i>CUSTOMER LOGIN</a></li>
+                            <li><a class="dropdown-menu-item dropdown-item py-2 fw-medium" href="#" onclick="openLoginGateway('FO')"><i class="fa-solid fa-user-gear text-success me-2"></i>FIELD OFFICER</a></li>
+                            <li><a class="dropdown-menu-item dropdown-item py-2 fw-medium" href="#" onclick="openLoginGateway('BM')"><i class="fa-solid fa-user-shield text-warning me-2"></i>BLOCK MANAGER</a></li>
+                            <li><a class="dropdown-menu-item dropdown-item py-2 fw-medium" href="#" onclick="openLoginGateway('DM')"><i class="fa-solid fa-user-tie text-info me-2"></i>DISTRICT MANAGER</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item"><a class="nav-link fw-semibold text-dark" href="#">Membership Plans</a></li>
+                    <li class="nav-item me-3"><a class="nav-link fw-semibold text-dark" href="#">Contact Us</a></li>
+                    <li class="nav-item"><button class="btn btn-primary fw-bold px-4 rounded-pill shadow-sm" onclick="switchView('loginPortalView')">Join Now</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- VIEW A: THE ACCURATE BRAND HOMEPAGE LAYOUT -->
+    <div id="homeView" class="panel-view active-view">
+        <!-- Hero Header -->
+        <section class="hero-banner">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-7">
+                        <h1 class="display-4 fw-bold mb-4" style="color: var(--primary-blue);">GET UP TO <span class="text-primary">50% DISCOUNT</span><br>On Hospitals</h1>
+                        <p class="lead text-secondary mb-4">We are building a nationwide trusted network that combines care, savings, and service reliability under one brand. Access quality services affordably.</p>
+                        <button class="btn btn-primary btn-lg fw-bold px-4 py-3 rounded-pill shadow" onclick="switchView('loginPortalView')">Get Your Health Card Now</button>
+                    </div>
+                    <div class="col-md-5 text-center mt-5 mt-md-0">
+                        <img src="https://unsplash.com" alt="Hospital Network" class="img-fluid rounded-4 shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Integrated Core Services Section -->
+        <div class="container my-5 py-4">
+            <div class="text-center mb-5">
+                <span class="text-uppercase text-primary fw-bold tracking-wider">What We Provide</span>
+                <h2 class="fw-bold fs-1 mt-2">Our Network Services</h2>
+            </div>
+            <div class="row g-4 text-center">
+                <div class="col-md-3">
+                    <div class="card-panel h-100">
+                        <div class="fs-1 mb-3 text-primary"><i class="fa-solid fa-hospital"></i></div>
+                        <h5 class="fw-bold">Healthcare & Hospitals</h5>
+                        <p class="text-muted small">Discount benefits on OPD, bed charges, surgeries and hospital services.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-panel h-100">
+                        <div class="fs-1 mb-3 text-success"><i class="fa-solid fa-flask-vial"></i></div>
+                        <h5 class="fw-bold">Diagnostic Laboratories</h5>
+                        <p class="text-muted small">Affordable health checkups and lab tests through partnered centers.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-panel h-100">
+                        <div class="fs-1 mb-3 text-danger"><i class="fa-solid fa-pills"></i></div>
+                        <h5 class="fw-bold">Medical Stores</h5>
+                        <p class="text-muted small">Members receive special discounts on medicines and pharmacy purchases.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-panel h-100">
+                        <div class="fs-1 mb-3 text-warning"><i class="fa-solid fa-wheat-sheet"></i></div>
+                        <h5 class="fw-bold">Agriculture Support</h5>
+                        <p class="text-muted small">Discount benefits on agricultural medicines and farming supplies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW B: TARGET INTEGRATED ROUTER HUB LOGIN PORTAL -->
+    <div id="loginPortalView" class="panel-view container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
