@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SampoornaCare Style Healthcare Portal</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><div class="brand-mark">✚</div><div><b>Sampoorna<span>Care</span></b><small>Har Jarurat, One Card Solution.</small></div></div>
+  <button class="menu" onclick="toggleNav()"><i class="fa-solid fa-bars"></i></button>
+</header>
+
+<nav id="nav">
+  <a class="active" href="#home">Home</a>
+  <a href="#services">Services</a>
+  <a href="#roles">DM / BM / FO</a>
+  <a href="#districts">All UP</a>
+  <a href="#withdrawal">Withdrawal</a>
+  <a href="#support">Support</a>
+</nav>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-copy">
+    <span class="pill">YOUR HEALTH. OUR PRIORITY.</span>
+    <h1>हर जरूरत, <span>One Card Solution.</span></h1>
+    <p>Healthcare, hospital discounts, district & block management, field officer operations और account/withdrawal management के लिए एक unified portal.</p>
+    <div class="actions">
+      <a class="btn primary" href="#dashboard">Open Dashboard</a>
+      <a class="btn light" href="#roles">View Roles</a>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="hospital">✚ HOSPITAL</div>
+    <div class="family">👨‍👩‍👧</div>
+    <div class="medical">⚕️</div>
+    <div class="offer">GET UP TO <b>50%</b><small>On Hospitals*</small></div>
+  </div>
+</section>
+
+<section class="trust">
+  <div><b>50%</b><span>UP TO DISCOUNT</span></div>
+  <div><b>100+</b><span>HEALTH SERVICES</span></div>
+  <div><b>75</b><span>UP DISTRICTS</span></div>
+  <div><b>24×7</b><span>SUPPORT</span></div>
+</section>
+
+<section id="services">
+  <div class="section-head"><span>OUR SERVICES</span><h2>एक जगह पर पूरी healthcare management</h2><p>Member से लेकर district, block और field operations तक सभी जरूरी modules.</p></div>
+  <div class="cards">
+    <article><i class="fa-solid fa-hospital"></i><h3>Hospital Network</h3><p>Hospital, clinic और diagnostic partners को manage करें.</p></article>
+    <article><i class="fa-solid fa-id-card"></i><h3>Health Card</h3><p>Members, cards, eligibility और benefits का management.</p></article>
+    <article><i class="fa-solid fa-user-doctor"></i><h3>Doctor Services</h3><p>Doctors, appointments और healthcare service records.</p></article>
+    <article><i class="fa-solid fa-file-invoice-dollar"></i><h3>Accounts</h3><p>Commission, wallet, transactions और withdrawal requests.</p></article>
+    <article><i class="fa-solid fa-location-dot"></i><h3>District & Block</h3><p>All UP → District → Block hierarchy के साथ operations.</p></article>
+    <article><i class="fa-solid fa-person-walking"></i><h3>Field Officer</h3><p>FO assignments, visits, leads और collection tracking.</p></article>
+  </div>
+</section>
+
+<section id="roles" class="role-section">
+  <div class="section-head"><span>MANAGEMENT PORTAL</span><h2>DM, BM और FO के लिए अलग workspace</h2></div>
+  <div class="role-grid">
+    <div class="role dm"><b>DM</b><h3>District Manager</h3><p>District targets, BM control, reports, members और approvals.</p><button onclick="openDashboard('DM')">DM Dashboard</button></div>
+    <div class="role bm"><b>BM</b><h3>Block Manager</h3><p>Block-wise members, FO team, leads और daily activity.</p><button onclick="openDashboard('BM')">BM Dashboard</button></div>
+    <div class="role fo"><b>FO</b><h3>Field Officer</h3><p>Field visits, new members, collections और incentive tracking.</p><button onclick="openDashboard('FO')">FO Dashboard</button></div>
+  </div>
+</section>
+
+<section id="districts">
+  <div class="section-head"><span>ALL UP</span><h2>उत्तर प्रदेश का पूरा structure</h2><p>Dashboard में district और block चुनकर records filter किए जा सकते हैं.</p></div>
+  <div class="up-box">
+    <div class="select-row">
+      <select id="district" onchange="updateBlocks()"></select>
+      <select id="block"></select>
+      <button class="btn primary" onclick="showSelection()">Open Block</button>
+    </div>
+    <div id="selection" class="selection">District चुनें और block dashboard खोलें.</div>
+  </div>
+</section>
+
+<section id="dashboard" class="dashboard">
+  <div class="section-head"><span>LIVE DEMO DASHBOARD</span><h2>Operations Center</h2></div>
+  <div class="dash-top">
+    <div><small>Logged in as</small><strong id="roleName">DM</strong></div>
+    <div><small>Location</small><strong>Uttar Pradesh</strong></div>
+    <div><small>Wallet</small><strong>₹24,850</strong></div>
+    <button class="btn primary" onclick="document.getElementById('withdrawal').scrollIntoView()">Withdraw</button>
+  </div>
+  <div class="stat-grid">
+    <div><span>Members</span><b>12,480</b><small>+8.4%</small></div>
+    <div><span>Active Cards</span><b>10,942</b><small>+5.1%</small></div>
+    <div><span>Today's Leads</span><b>286</b><small>+12.6%</small></div>
+    <div><span>Pending Approval</span><b>42</b><small>Needs action</small></div>
+  </div>
+  <div class="table-wrap">
+    <h3>Recent Transactions</h3>
+    <table><thead><tr><th>ID</th><th>Name</th><th>Role</th><th>Amount</th><th>Status</th></tr></thead>
+    <tbody id="transactions"></tbody></table>
+  </div>
+</section>
+
+<section id="withdrawal" class="withdraw">
+  <div class="section-head"><span>ACCOUNT / WITHDRAWAL</span><h2>Withdrawal Management</h2><p>यह demo UI है। Real payment/withdrawal के लिए secure backend, KYC और payment gateway आवश्यक होंगे.</p></div>
+  <div class="withdraw-grid">
+    <div class="balance"><small>Available Balance</small><b>₹24,850</b><p>Minimum withdrawal: ₹500</p><div class="progress"><i></i></div></div>
+    <form onsubmit="requestWithdrawal(event)">
+      <label>Amount <input id="amount" type="number" min="500" placeholder="₹ Amount" required></label>
+      <label>Withdrawal Method
+        <select id="method"><option>Bank Account</option><option>UPI</option></select>
+      </label>
+      <label>Account / UPI ID <input id="account" placeholder="xxxxxx / name@upi" required></label>
+      <button class="btn primary" type="submit">Submit Withdrawal Request</button>
+      <div id="withdrawMsg" class="message"></div>
+    </form>
+  </div>
+</section>
+
+<section id="support" class="support">
+  <div><span>SUPPORT</span><h2>किसी भी समय सहायता पाएं</h2><p>DM, BM, FO और member queries के लिए support center.</p></div>
+  <a class="btn primary" href="tel:18001234567"><i class="fa-solid fa-phone"></i> 1800-123-4567</a>
+</section>
+</main>
+
+<footer><b>SampoornaCare Portal</b><p>Healthcare management demo • DM / BM / FO • All UP • Withdrawal UI</p><small>© 2026 All Rights Reserved.</small></footer>
+<script src="script.js"></script>
+</body>
+</html>
