@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sewanya Health | One Card Solution</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#0867d8;--blue2:#0d4fa8;--green:#20a94b;--bg:#171c20;
+  --card:#0f1113;--text:#eef4ff;--muted:#8d9aaa;--line:#293038;
+}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+a{text-decoration:none;color:inherit}
+.topbar{height:76px;background:#11161a;display:flex;align-items:center;justify-content:space-between;padding:0 7%;border-bottom:1px solid #20272d}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#18a9bd,#0871dd);display:grid;place-items:center;font-size:25px;font-weight:bold}
+.brand h1{font-size:20px;color:#24a84d}
+.brand h1 span{color:#fff}
+.brand small{display:block;font-size:8px;color:#e8a52d;letter-spacing:.2px}
+.nav{display:flex;gap:4px}
+.nav a{padding:11px 14px;font-size:13px;color:#fff;border-radius:5px}
+.nav a:hover{background:#0b63c9}
+.menu{display:none;font-size:27px;cursor:pointer}
+.hero{background:linear-gradient(110deg,#20272c,#171c20);padding:70px 7% 62px}
+.hero-wrap{max-width:1180px;margin:auto;display:grid;grid-template-columns:1.05fr .95fr;gap:45px;align-items:center}
+.kicker{font-size:12px;color:#8cb9ff;letter-spacing:1px;margin-bottom:14px}
+.hero h2{font-size:48px;line-height:1.08;margin-bottom:18px}
+.hero h2 .green{color:#20a94b}
+.hero p{color:#9ca9b7;max-width:600px;margin-bottom:26px;font-size:16px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 20px;border-radius:5px;border:1px solid #0874ed;background:#0874ed;color:#fff;font-weight:bold;font-size:14px}
+.btn.secondary{background:#111;border-color:#333}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.promo{min-height:290px;border-radius:18px;background:linear-gradient(135deg,#1d3d57,#76b7df 45%,#162d20);padding:32px;position:relative;overflow:hidden;box-shadow:0 20px 50px #0005}
+.promo:after{content:"";position:absolute;right:-60px;top:-50px;width:210px;height:210px;background:#fff2;transform:rotate(45deg)}
+.promo small{font-size:14px}.discount{font-size:45px;font-weight:bold;color:#a9c9ff;line-height:1}
+.promo strong{display:inline-block;background:#21a94d;padding:5px 9px;border-radius:3px;font-size:12px;margin-top:7px}
+.hospital{margin-top:25px;font-size:24px;font-weight:bold}
+.stats{background:#0d55a9;display:grid;grid-template-columns:repeat(4,1fr);text-align:center}
+.stat{padding:35px 10px;border-right:1px solid #ffffff15}
+.stat b{font-size:21px;display:block}.stat span{font-size:9px;letter-spacing:.4px}
+section{padding:70px 7%}
+.section-head{text-align:center;max-width:800px;margin:0 auto 35px}
+.section-head .label{font-size:11px;color:#8cb9ff;letter-spacing:1px}
+.section-head h3{font-size:30px;color:#b9cdf9;margin:8px 0}
+.section-head p{color:var(--muted);font-size:14px}
+.grid{max-width:1180px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:25px;min-height:155px;transition:.2s}
+.card:hover{border-color:#287be0;transform:translateY(-3px)}
+.icon{font-size:24px;color:#63a2ff;margin-bottom:10px}
+.card h4{font-size:17px;margin-bottom:7px;color:#c7d9ff}
+.card p{font-size:12px;color:#8b98a7}
+.portal{background:#1c242a}
+.portal .grid{grid-template-columns:repeat(3,1fr)}
+.role{min-height:180px;border-top:4px solid #357fe0}
+.role:nth-child(2){border-top-color:#16a24a}
+.role:nth-child(3){border-top-color:#c88919}
+.role h4{font-size:27px;color:#d3e1ff}.role p{font-size:14px;margin:6px 0 18px}
+.role ul{list-style:none;color:#9ca9b7;font-size:12px}
+.role li{margin:6px 0}.role li:before{content:"✓";color:#37bb66;margin-right:8px}
+.contact{background:#101519}
+.contact-box{max-width:900px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.contact-card{background:#0d1012;border:1px solid var(--line);padding:25px;border-radius:10px}
+.contact-card h4{margin-bottom:12px;color:#c8d9ff}
+.contact-card p{color:#9ba7b4;margin:8px 0;font-size:14px}
+footer{padding:28px 7%;background:#0b0e10;text-align:center;color:#778391;font-size:12px}
+.float{position:fixed;right:18px;bottom:18px;background:#20a94b;color:white;padding:13px 18px;border-radius:30px;font-weight:bold;box-shadow:0 8px 25px #0007;z-index:5}
+@media(max-width:800px){
+ .topbar{height:auto;min-height:68px;padding:12px 5%;position:relative}
+ .nav{display:none;position:absolute;left:0;right:0;top:68px;background:#0756a9;flex-direction:column;padding:10px 5%;z-index:10}
+ .nav.open{display:flex}.nav a{padding:10px}.menu{display:block}
+ .hero{padding:48px 5%}.hero-wrap{grid-template-columns:1fr;gap:30px}.hero h2{font-size:37px}
+ .promo{min-height:245px}.stats{grid-template-columns:repeat(2,1fr)}.stat{padding:25px 5px}
+ section{padding:55px 5%}.grid,.portal .grid{grid-template-columns:1fr}
+ .contact-box{grid-template-columns:1fr}.section-head h3{font-size:25px}
+}
+</style>
+
+<!-- Sewanya Healthcare - Supabase Connection -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "https://qvyoipmtbirdevcmzrvg.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_CMB3gFRtQIgjaDBitQI8hQ_YaSf19Ay";
+  const sewanyaSupabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+  // Test the connection when the page opens.
+  async function testSupabaseConnection() {
+    const { data, error } = await sewanyaSupabase
+      .from("members")
+      .select("id")
+      .limit(1);
+
+    if (error) {
+      console.error("Sewanya Healthcare / Supabase error:", error.message);
+    } else {
+      console.log("Sewanya Healthcare: Supabase connected successfully.");
+    }
+  }
+
+  // Example database helpers
+  async function loadMembers() {
+    const { data, error } = await sewanyaSupabase
+      .from("members")
+      .select("*")
+      .limit(100);
+    if (error) throw error;
+    return data || [];
+  }
+
+  async function submitWithdrawal(amount, method, accountDetails) {
+    const { data, error } = await sewanyaSupabase
+      .from("withdrawals")
+      .insert([{ amount, method, account_details: accountDetails }])
+      .select();
+    if (error) throw error;
+    return data;
+  }
+
+  window.addEventListener("DOMContentLoaded", testSupabaseConnection);
+</script>
+
+</head>
+<body>
+
+<header class="topbar">
+  <a href="#home" class="brand">
+    <div class="logo">+</div>
+    <div><h1><span>Sewanya</span>Health</h1><small>Har Zarurat, One Card Solution.</small></div>
+  </a>
+  <nav class="nav" id="nav">
+    <a href="#home">Home</a><a href="#services">Services</a>
+    <a href="#portal">DM / BM / FO</a><a href="#up">All UP</a>
+    <a href="#support">Withdrawal</a><a href="#support">Support</a>
+  </nav>
+  <div class="menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="hero-wrap">
+<div>
+<div class="kicker">YOUR HEALTH, OUR PRIORITY.</div>
+<h2>हर जरूरत, <span class="green">One Card Solution.</span></h2>
+<p>Healthcare, hospital discounts, district & block management, field officer operations और account/withdrawal management के लिए एक unified portal.</p>
+<div class="btns">
+<a class="btn" href="#portal">Open Dashboard</a>
+<a class="btn secondary" href="#services">View Services</a>
+</div>
+</div>
+<div class="promo">
+<small>GET UP TO</small>
+<div class="discount">50%</div>
+<strong>On Hospitals*</strong>
+<div class="hospital">⚕ + HOSPITAL</div>
+<div style="font-size:50px;margin-top:25px">🩺</div>
+</div>
+</div>
+</section>
+
+<div class="stats">
+<div class="stat"><b>50%</b><span>UP TO DISCOUNT</span></div>
+<div class="stat"><b>100+</b><span>HEALTH SERVICES</span></div>
+<div class="stat"><b>75</b><span>UP DISTRICTS</span></div>
+<div class="stat"><b>24×7</b><span>SUPPORT</span></div>
+</div>
+
+<section id="services">
+<div class="section-head">
+<div class="label">OUR SERVICES</div>
+<h3>एक जगह पर पूरी healthcare management</h3>
+<p>Member से लेकर district, block और field operations तक सभी जरूरी modules.</p>
+</div>
+<div class="grid">
+<div class="card"><div class="icon">🏥</div><h4>Hospital Network</h4><p>Hospital, clinic और diagnostic partners का management करें.</p></div>
+<div class="card"><div class="icon">▣</div><h4>Health Card</h4><p>Members, cards, eligibility और benefits का management.</p></div>
+<div class="card"><div class="icon">♙</div><h4>Doctor Services</h4><p>Doctors, appointments और healthcare service records.</p></div>
+<div class="card"><div class="icon">▤</div><h4>Accounts</h4><p>Commission, wallet, transactions और withdrawal requests.</p></div>
+<div class="card"><div class="icon">📍</div><h4>District & Block</h4><p>All UP → District → Block hierarchy के साथ operations.</p></div>
+<div class="card"><div class="icon">♟</div><h4>Field Officer</h4><p>FO assignments, visits, leads और collection tracking.</p></div>
+</div>
+</section>
+
+<section class="portal" id="portal">
+<div class="section-head">
+<div class="label">MANAGEMENT PORTAL</div>
+<h3>DM, BM और FO के लिए अलग workspace</h3>
+<p>हर role के लिए जरूरी dashboard और management tools.</p>
+</div>
+<div class="grid">
+<div class="card role"><h4>DM</h4><p>District Manager</p><ul><li>District overview</li><li>Block management</li><li>Reports & performance</li></ul><br><a class="btn" href="#" onclick="alert('DM Dashboard opening...');return false">Open DM</a></div>
+<div class="card role"><h4>BM</h4><p>Block Manager</p><ul><li>Member management</li><li>Field team</li><li>Daily reports</li></ul><br><a class="btn" href="#" onclick="alert('BM Dashboard opening...');return false">Open BM</a></div>
+<div class="card role"><h4>FO</h4><p>Field Officer</p><ul><li>Lead tracking</li><li>Visits & collection</li><li>Member registration</li></ul><br><a class="btn" href="#" onclick="alert('FO Dashboard opening...');return false">Open FO</a></div>
+</div>
+</section>
+
+<section id="up">
+<div class="section-head">
+<div class="label">ALL UP</div>
+<h3>उत्तर प्रदेश में district-wise management</h3>
+<p>District और block level operations को एक ही portal से manage करने के लिए बनाया गया platform.</p>
+</div>
+<div class="grid">
+<div class="card"><h4>District Management</h4><p>District-level teams, reports और performance tracking.</p></div>
+<div class="card"><h4>Block Management</h4><p>Block managers और field activities का आसान management.</p></div>
+<div class="card"><h4>Member Support</h4><p>Health card और service related support के लिए central system.</p></div>
+</div>
+</section>
+
+<section class="contact" id="support">
+<div class="section-head">
+<div class="label">SUPPORT</div>
+<h3>हम आपकी मदद के लिए तैयार हैं</h3>
+<p>Service, card, account या dashboard से संबंधित सहायता के लिए संपर्क करें.</p>
+</div>
+<div class="contact-box">
+<div class="contact-card"><h4>Customer Support</h4><p>📞 Phone: +91 XXXXX XXXXX</p><p>✉ Email: support@sewanyahealth.com</p><p>🕐 Support: 24×7</p></div>
+<div class="contact-card"><h4>Withdrawal & Accounts</h4><p>Wallet balance, commission और withdrawal request की जानकारी यहाँ manage करें.</p><a class="btn" href="#" onclick="alert('Withdrawal module opening...');return false">Open Withdrawal</a></div>
+</div>
+</section>
+</main>
+
+<a class="float" href="https://wa.me/" target="_blank">💬 WhatsApp</a>
+<footer>© 2026 Sewanya Health. All Rights Reserved.</footer>
+
+<script>
+document.querySelectorAll('.nav a').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('nav').classList.remove('open'));
+});
+</script>
+</body>
+</html>
