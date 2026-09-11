@@ -83,6 +83,7 @@ body{
   border-radius:4px;
   font-weight:bold;
   margin-right:10px;
+  cursor:pointer;
 }
 
 .menu-btn{
@@ -91,6 +92,7 @@ body{
   background:#2294da;
   border:0;
   border-radius:4px;
+  cursor:pointer;
 }
 
 .menu-btn span{
@@ -234,6 +236,7 @@ body{
   padding:11px 17px;
   border-radius:4px;
   font-weight:bold;
+  cursor:pointer;
 }
 
 /* CONTACT */
@@ -303,12 +306,14 @@ footer{
   border:0;
   background:white;
   font-size:32px;
+  cursor:pointer;
 }
 
 .menu-title{
   padding:15px 22px 8px;
   font-size:12px;
   color:#555;
+  font-weight:bold;
 }
 
 .menu-item{
@@ -319,6 +324,7 @@ footer{
   background:white;
   text-align:left;
   font-size:15px;
+  cursor:pointer;
 }
 
 .menu-item:hover{
@@ -326,6 +332,7 @@ footer{
   color:white;
 }
 
+/* NESTED SUBMENU */
 .submenu{
   display:none;
   background:#f4f4f4;
@@ -338,6 +345,11 @@ footer{
   background:#f4f4f4;
   padding:13px 43px;
   text-align:left;
+  cursor:pointer;
+}
+
+.submenu button:hover{
+  background:#e2e2e2;
 }
 
 .submenu.show{
@@ -373,6 +385,7 @@ footer{
   border:0;
   background:none;
   font-size:30px;
+  cursor:pointer;
 }
 
 .modal-box h2{
@@ -417,6 +430,7 @@ footer{
   background:transparent;
   color:white;
   text-align:left;
+  cursor:pointer;
 }
 
 .sidebar button:hover,
@@ -481,73 +495,54 @@ footer{
   margin:15px 0;
 }
 
+/* LOCATION SELECTION CARDS */
+.location-card {
+  background: #f8fbfe;
+  border: 1px solid #bce1f7;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.btn-approve {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-approve:hover { background: #218838; }
+
+.badge-pending { background: #ffc107; color: #000; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+.badge-approved { background: #28a745; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+
 /* MOBILE */
 @media(max-width:750px){
 
-  .topbar{
-    font-size:9px;
-  }
-
-  .header{
-    padding:0 12px;
-    height:75px;
-  }
-
-  .join{
-    display:none;
-  }
-
-  .logo-text{
-    font-size:18px;
-  }
-
-  .hero{
-    min-height:520px;
-  }
-
-  .hero-content{
-    padding:65px 22px;
-  }
-
-  .hero h1{
-    font-size:37px;
-  }
-
-  .ribbon{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .cards,
-  .contact{
-    grid-template-columns:1fr;
-  }
-
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .portal-layout{
-    grid-template-columns:1fr;
-  }
-
-  .sidebar{
-    min-height:auto;
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .dashboard{
-    padding:18px;
-  }
-
-  footer{
-    display:block;
-  }
-
-  footer span{
-    display:block;
-    margin-top:8px;
-  }
+  .topbar{ font-size:9px; }
+  .header{ padding:0 12px; height:75px; }
+  .join{ display:none; }
+  .logo-text{ font-size:18px; }
+  .hero{ min-height:520px; }
+  .hero-content{ padding:65px 22px; }
+  .hero h1{ font-size:37px; }
+  .ribbon{ grid-template-columns:repeat(2,1fr); }
+  .cards, .contact{ grid-template-columns:1fr; }
+  .stats{ grid-template-columns:1fr 1fr; }
+  .portal-layout{ grid-template-columns:1fr; }
+  .sidebar{ min-height:auto; display:grid; grid-template-columns:repeat(2,1fr); }
+  .dashboard{ padding:18px; }
+  footer{ display:block; }
+  footer span{ display:block; margin-top:8px; }
 }
 </style>
 </head>
@@ -610,8 +605,7 @@ healthcare support aur professional field network —
 sab ek hi platform par.
 </p>
 
-<button class="blue-btn"
-onclick="openModal('register')">
+<button class="blue-btn" onclick="openModal('register')">
 JOIN NOW +
 </button>
 
@@ -624,29 +618,10 @@ JOIN NOW +
 
 <div class="ribbon">
 
-<div>
-<b>✓</b>
-UP TO 50%<br>
-DISCOUNT
-</div>
-
-<div>
-<b>▦</b>
-WIDE RANGE OF<br>
-TREATMENTS
-</div>
-
-<div>
-<b>♡</b>
-PATIENT SAFETY<br>
-OUR PRIORITY
-</div>
-
-<div>
-<b>♟</b>
-CARING FOR YOU<br>
-& YOUR FAMILY
-</div>
+<div><b>✓</b> UP TO 50%<br>DISCOUNT</div>
+<div><b>▦</b> WIDE RANGE OF<br>TREATMENTS</div>
+<div><b>♡</b> PATIENT SAFETY<br>OUR PRIORITY</div>
+<div><b>♟</b> CARING FOR YOU<br>& YOUR FAMILY</div>
 
 </div>
 
@@ -664,31 +639,17 @@ field operations aur management services ko
 ek hi platform par manage kiya ja sakta hai.
 </p>
 
-<img class="about-img"
-src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85">
+<img class="about-img" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85">
 
 <h2 style="text-align:left;font-size:25px">
 Why Choose Sewanya Healthcare?
 </h2>
 
 <div class="cards">
-
-<div class="card">
-✓ Verified Service Network
-</div>
-
-<div class="card">
-✓ Transparent Membership Structure
-</div>
-
-<div class="card">
-✓ Digital Health Card
-</div>
-
-<div class="card">
-✓ Customer & Family Support
-</div>
-
+<div class="card">✓ Verified Service Network</div>
+<div class="card">✓ Transparent Membership Structure</div>
+<div class="card">✓ Digital Health Card</div>
+<div class="card">✓ Customer & Family Support</div>
 </div>
 
 </section>
@@ -696,73 +657,35 @@ Why Choose Sewanya Healthcare?
 
 <!-- PLANS -->
 
-<section class="section"
-style="background:#f5fafd;max-width:none">
+<section class="section" style="background:#f5fafd;max-width:none">
 
 <h2>Membership Plans</h2>
 
 <p class="description">
-Affordable healthcare membership aur
-professional network options.
+Affordable healthcare membership aur professional network options.
 </p>
 
-<div class="cards"
-style="max-width:1100px;margin:30px auto">
+<div class="cards" style="max-width:1100px;margin:30px auto">
 
 <div class="card">
-
 <div class="icon">🪪</div>
-
 <h3>Customer</h3>
-
-<p>
-Customer registration, health card,
-profile aur personal services.
-</p>
-
-<button class="blue-btn"
-onclick="openModal('register')">
-REGISTER
-</button>
-
+<p>Customer registration, health card, profile aur personal services.</p>
+<button class="blue-btn" onclick="openModal('register')">REGISTER</button>
 </div>
 
-
 <div class="card">
-
 <div class="icon">👨‍💼</div>
-
 <h3>Field Officer</h3>
-
-<p>
-Field work, customers aur assigned
-members manage karein.
-</p>
-
-<button class="blue-btn"
-onclick="openModal('fo')">
-FO JOIN
-</button>
-
+<p>Field work, customers aur assigned members manage karein.</p>
+<button class="blue-btn" onclick="openModal('fo')">FO JOIN</button>
 </div>
 
-
 <div class="card">
-
 <div class="icon">🏢</div>
-
 <h3>Management</h3>
-
-<p>
-Block Manager aur District Manager
-management portal.
-</p>
-
-<button class="blue-btn"
-onclick="openModal('login')">
-PORTAL LOGIN
-</button>
-
+<p>Block Manager aur District Manager management portal.</p>
+<button class="blue-btn" onclick="openModal('login')">PORTAL LOGIN</button>
 </div>
 
 </div>
@@ -783,44 +706,21 @@ Membership ya network ke liye enquiry bhejiye.
 <div class="contact">
 
 <div class="contact-box">
-
 <h3>Customer Support</h3>
-
 <br>
-
-<p>📞 Phone / WhatsApp:
-<b>+91 XXXXX XXXXX</b></p>
-
+<p>📞 Phone / WhatsApp: <b>+91 XXXXX XXXXX</b></p>
 <br>
-
-<p>✉ Email:
-<b>support@sewanyahealthcare.com</b></p>
-
+<p>✉ Email: <b>support@sewanyahealthcare.com</b></p>
 <br>
-
 <p>📍 Uttar Pradesh, India</p>
-
 </div>
 
-
 <div class="contact-box">
-
 <h3>Send Enquiry</h3>
-
-<input id="ename"
-placeholder="Your Name">
-
-<input id="ephone"
-placeholder="Mobile Number">
-
-<textarea id="emessage"
-placeholder="How can we help?"></textarea>
-
-<button class="blue-btn"
-onclick="sendEnquiry()">
-SEND ENQUIRY
-</button>
-
+<input id="ename" placeholder="Your Name">
+<input id="ephone" placeholder="Mobile Number">
+<textarea id="emessage" placeholder="How can we help?"></textarea>
+<button class="blue-btn" onclick="sendEnquiry()">SEND ENQUIRY</button>
 </div>
 
 </div>
@@ -829,126 +729,55 @@ SEND ENQUIRY
 
 
 <footer>
-
 <b>Sewanya Healthcare</b>
-
-<span>
-Healthcare Management Portal • Customer • FO • BM • DM
-</span>
-
+<span>Healthcare Management Portal • Customer • FO • BM • DM</span>
 </footer>
 
 </div>
 
 
-<!-- ================= MENU ================= -->
+<!-- ================= MENU (NESTED INSIDE) ================= -->
 
 <div class="overlay" id="overlay">
 
 <div class="menu">
 
 <div class="menu-head">
-
 <div class="logo">
-
 <div class="logo-circle">✚</div>
-
-<div class="logo-text">
-Sewanya<span>Health</span>
+<div class="logo-text">Sewanya<span>Health</span></div>
+</div>
+<button class="close" onclick="closeMenu()">×</button>
 </div>
 
+<div class="menu-title">NAVIGATION</div>
+
+<button class="menu-item" onclick="closeMenu()">HOME</button>
+<button class="menu-item" onclick="closeMenu()">ABOUT US</button>
+<button class="menu-item" onclick="closeMenu()">MEMBERSHIP PLANS</button>
+<button class="menu-item" onclick="closeMenu()">CONTACT</button>
+
+<div class="menu-title">NESTED PORTALS</div>
+
+<!-- Collapsible Submenu 1 -->
+<button class="menu-item" onclick="toggleSubmenu('loginSub')">
+🔐 MANAGEMENT LOGIN <span style="float:right">⌄</span>
+</button>
+<div class="submenu" id="loginSub">
+  <button onclick="openModal('dmLogin')">DISTRICT MANAGER (DM)</button>
+  <button onclick="openModal('bmLogin')">BLOCK MANAGER (BM)</button>
+  <button onclick="openModal('foLogin')">FIELD OFFICER (FO)</button>
+  <button onclick="openModal('customerLogin')">CUSTOMER LOGIN</button>
 </div>
 
-<button class="close"
-onclick="closeMenu()">
-×
+<!-- Collapsible Submenu 2 -->
+<button class="menu-item" onclick="toggleSubmenu('regSub')">
+📝 ASSOCIATE REGISTRATION <span style="float:right">⌄</span>
 </button>
-
+<div class="submenu" id="regSub">
+  <button onclick="openModal('register')">CUSTOMER REGISTER</button>
+  <button onclick="openModal('fo')">FO / ASSOCIATE REGISTRATION</button>
 </div>
-
-
-<div class="menu-title">
-MAIN
-</div>
-
-<button class="menu-item"
-onclick="closeMenu()">
-HOME
-</button>
-
-<button class="menu-item"
-onclick="closeMenu()">
-ABOUT US
-</button>
-
-<button class="menu-item"
-onclick="closeMenu()">
-MEMBERSHIP PLANS
-</button>
-
-<button class="menu-item"
-onclick="closeMenu()">
-CONTACT
-</button>
-
-
-<div class="menu-title">
-LOGIN
-</div>
-
-<button class="menu-item"
-onclick="toggleLogin()">
-LOGIN
-<span style="float:right">⌄</span>
-</button>
-
-
-<div class="submenu"
-id="loginSub">
-
-<button onclick="openModal('customerLogin')">
-CUSTOMER LOGIN
-</button>
-
-<button onclick="openModal('foLogin')">
-FIELD OFFICER
-</button>
-
-<button onclick="openModal('bmLogin')">
-BLOCK MANAGER
-</button>
-
-<button onclick="openModal('dmLogin')">
-DISTRICT MANAGER
-</button>
-
-</div>
-
-
-<div class="menu-title">
-CUSTOMER
-</div>
-
-<button class="menu-item"
-onclick="openModal('register')">
-CUSTOMER REGISTER
-</button>
-
-
-<button class="menu-item"
-onclick="openModal('customerLogin')">
-CUSTOMER LOGIN
-</button>
-
-
-<div class="menu-title">
-NETWORK
-</div>
-
-<button class="menu-item"
-onclick="openModal('fo')">
-ASSOCIATE / FO REGISTRATION
-</button>
 
 </div>
 
@@ -958,18 +787,10 @@ ASSOCIATE / FO REGISTRATION
 <!-- ================= MODAL ================= -->
 
 <div class="modal" id="modal">
-
 <div class="modal-box">
-
-<button class="modal-close"
-onclick="closeModal()">
-×
-</button>
-
+<button class="modal-close" onclick="closeModal()">×</button>
 <div id="modalContent"></div>
-
 </div>
-
 </div>
 
 
@@ -978,47 +799,23 @@ onclick="closeModal()">
 <div id="portal">
 
 <header class="portal-head">
-
 <div class="logo">
-
-<div class="logo-circle">✚</div>
-
-<div>
-
-<div class="logo-text">
-Sewanya<span>Health</span>
-</div>
-
-<small id="roleText"></small>
-
-</div>
-
+  <div class="logo-circle">✚</div>
+  <div>
+    <div class="logo-text">Sewanya<span>Health</span></div>
+    <small id="roleText"></small>
+  </div>
 </div>
 
 <div>
-
 <b id="userID"></b>
-
-<button class="blue-btn"
-onclick="logout()">
-Logout
-</button>
-
+<button class="blue-btn" onclick="logout()">Logout</button>
 </div>
-
 </header>
 
-
 <div class="portal-layout">
-
-<aside class="sidebar"
-id="sidebar">
-</aside>
-
-<main class="dashboard"
-id="dashboard">
-</main>
-
+<aside class="sidebar" id="sidebar"></aside>
+<main class="dashboard" id="dashboard"></main>
 </div>
 
 </div>
@@ -1026,787 +823,449 @@ id="dashboard">
 
 <script>
 
-/* ================= DATA ACCESS LEVEL =================
+/* ================= UP LOCATION DATABASE ================= */
+const upData = {
+  "Shahjahanpur": {
+    "Bhawal Khera": ["Gram Panchayat A1", "Gram Panchayat A2", "Gram Panchayat A3"],
+    "Kanth": ["Gram Panchayat B1", "Gram Panchayat B2"],
+    "Dadraul": ["Gram Panchayat C1", "Gram Panchayat C2"],
+    "Tilhar": ["Gram Panchayat D1", "Gram Panchayat D2"]
+  },
+  "Bareilly": {
+    "Nawabganj": ["Panchayat N1", "Panchayat N2"],
+    "Faridpur": ["Panchayat F1", "Panchayat F2"],
+    "Bithri Chainpur": ["Panchayat B1", "Panchayat B2"]
+  },
+  "Lucknow": {
+    "Bakshi Ka Talab": ["Panchayat L1", "Panchayat L2"],
+    "Sarojini Nagar": ["Panchayat L3", "Panchayat L4"],
+    "Chinhat": ["Panchayat L5", "Panchayat L6"]
+  },
+  "Kanpur Nagar": {
+    "Kalyanpur": ["Panchayat K1", "Panchayat K2"],
+    "Bilhaur": ["Panchayat K3", "Panchayat K4"]
+  },
+  "Varanasi": {
+    "Kashi Vidyapeeth": ["Panchayat V1", "Panchayat V2"],
+    "Pindra": ["Panchayat V3", "Panchayat V4"]
+  }
+};
 
-CUSTOMER = ONLY OWN DATA
-
-FO = OWN DATA + ASSIGNED CUSTOMER DATA
-
-BM = OWN DATA + FO DATA + CUSTOMER DATA
-       OF ASSIGNED BLOCK
-
-DM = DISTRICT LEVEL DATA
-
-*/
+/* ================= FO APPROVAL LIST ================= */
+let foList = [
+  { id: "FO-SHAH-101", name: "Ramesh Kumar", district: "Shahjahanpur", block: "Bhawal Khera", status: "Pending" },
+  { id: "FO-BAR-102", name: "Suresh Sharma", district: "Bareilly", block: "Nawabganj", status: "Pending" },
+  { id: "FO-LKO-103", name: "Amit Verma", district: "Lucknow", block: "Chinhat", status: "Approved" }
+];
 
 const roles={
-
-customer:{
- name:"CUSTOMER",
- id:"CUS-001",
- level:0
-},
-
-FO:{
- name:"FIELD OFFICER",
- id:"FO-SHAH-001",
- level:1
-},
-
-BM:{
- name:"BLOCK MANAGER",
- id:"BM-SHAH-001",
- level:2
-},
-
-DM:{
- name:"DISTRICT MANAGER",
- id:"DM-SHAH-001",
- level:3
-}
-
+  customer:{ name:"CUSTOMER", id:"CUS-001", level:0 },
+  FO:{ name:"FIELD OFFICER", id:"FO-SHAH-001", level:1 },
+  BM:{ name:"BLOCK MANAGER", id:"BM-SHAH-001", level:2 },
+  DM:{ name:"DISTRICT MANAGER", id:"DM-SHAH-001", level:3 }
 };
 
 let currentRole=null;
 
+/* MENU FUNCTIONS */
+function openMenu(){ document.getElementById("overlay").style.display="block"; }
+function closeMenu(){ document.getElementById("overlay").style.display="none"; }
+function toggleSubmenu(id){ document.getElementById(id).classList.toggle("show"); }
 
-/* MENU */
-
-function openMenu(){
-
-document.getElementById("overlay")
-.style.display="block";
-
-}
-
-function closeMenu(){
-
-document.getElementById("overlay")
-.style.display="none";
-
-}
-
-function toggleLogin(){
-
-document.getElementById("loginSub")
-.classList.toggle("show");
-
-}
-
-
-/* MODAL */
-
-function closeModal(){
-
-document.getElementById("modal")
-.style.display="none";
-
-}
+/* MODAL FUNCTIONS */
+function closeModal(){ document.getElementById("modal").style.display="none"; }
 
 function openModal(type){
+  let c=document.getElementById("modalContent");
 
-let c=document.getElementById("modalContent");
+  if(type==="register"){
+    c.innerHTML=`
+      <h2>Customer Registration</h2>
+      <label>Full Name</label>
+      <input id="rname" placeholder="Full Name">
+      <label>Mobile</label>
+      <input id="rphone" maxlength="10" placeholder="10 Digit Mobile">
+      <label>District</label>
+      <select id="rdistrict">
+        <option>Shahjahanpur</option>
+        <option>Bareilly</option>
+        <option>Lucknow</option>
+        <option>Kanpur Nagar</option>
+      </select>
+      <label>Block / Area</label>
+      <input id="rblock" placeholder="Block / Area">
+      <button class="blue-btn" onclick="registerCustomer()">REGISTER CUSTOMER</button>
+    `;
+  }
+  else if(type==="fo"){
+    c.innerHTML=`
+      <h2>Associate / FO Registration</h2>
+      <input id="aname" placeholder="Full Name">
+      <input id="aphone" maxlength="10" placeholder="Mobile Number">
+      <select id="adistrict">
+        <option value="">-- District Select Karein --</option>
+        <option value="Shahjahanpur">Shahjahanpur</option>
+        <option value="Bareilly">Bareilly</option>
+        <option value="Lucknow">Lucknow</option>
+      </select>
+      <input id="ablock" placeholder="Block Name">
+      <button class="blue-btn" onclick="associateRegister()">SUBMIT FOR BM APPROVAL</button>
+    `;
+  }
+  else{
+    let role="DM";
+    if(type==="customerLogin") role="customer";
+    if(type==="foLogin") role="FO";
+    if(type==="bmLogin") role="BM";
+    if(type==="dmLogin") role="DM";
 
-if(type==="register"){
-
-c.innerHTML=`
-
-<h2>Customer Registration</h2>
-
-<label>Full Name</label>
-<input id="rname" placeholder="Full Name">
-
-<label>Mobile</label>
-<input id="rphone"
-maxlength="10"
-placeholder="10 Digit Mobile">
-
-<label>District</label>
-<select id="rdistrict">
-<option>Shahjahanpur</option>
-<option>Bareilly</option>
-<option>Lucknow</option>
-<option>Other</option>
-</select>
-
-<label>Block / Area</label>
-<input id="rblock"
-placeholder="Block / Area">
-
-<button class="blue-btn"
-onclick="registerCustomer()">
-REGISTER CUSTOMER
-</button>
-
-`;
-
+    c.innerHTML=`
+      <h2>${roles[role].name} LOGIN</h2>
+      <label>Login ID</label>
+      <input id="loginID" value="${roles[role].id}">
+      <label>Password</label>
+      <input id="password" type="password" value="1234">
+      <button class="blue-btn" onclick="login('${role}')" style="width:100%">LOGIN</button>
+    `;
+  }
+  document.getElementById("modal").style.display="flex";
 }
-
-else if(type==="fo"){
-
-c.innerHTML=`
-
-<h2>Associate / FO Registration</h2>
-
-<input id="aname"
-placeholder="Full Name">
-
-<input id="aphone"
-maxlength="10"
-placeholder="Mobile Number">
-
-<select id="arole">
-
-<option value="FO">
-Field Officer (FO)
-</option>
-
-<option value="BM">
-Block Manager (BM)
-</option>
-
-</select>
-
-<input id="adistrict"
-value="Shahjahanpur">
-
-<input id="ablock"
-placeholder="Block / Area">
-
-<button class="blue-btn"
-onclick="associateRegister()">
-SUBMIT REQUEST
-</button>
-
-`;
-
-}
-
-else{
-
-let role="DM";
-
-if(type==="customerLogin")
-role="customer";
-
-if(type==="foLogin")
-role="FO";
-
-if(type==="bmLogin")
-role="BM";
-
-if(type==="dmLogin")
-role="DM";
-
-c.innerHTML=`
-
-<h2>${roles[role].name} LOGIN</h2>
-
-<label>Login ID</label>
-
-<input id="loginID"
-value="${roles[role].id}">
-
-<label>Password</label>
-
-<input id="password"
-type="password"
-placeholder="Password">
-
-<button class="blue-btn"
-onclick="login('${role}')"
-style="width:100%">
-LOGIN
-</button>
-
-`;
-
-}
-
-document.getElementById("modal")
-.style.display="flex";
-
-}
-
-
-/* CUSTOMER REGISTER */
 
 function registerCustomer(){
-
-let name=document.getElementById("rname").value;
-let phone=document.getElementById("rphone").value;
-
-if(!name || phone.length!==10){
-
-alert("Name aur 10 digit mobile number bhariye.");
-
-return;
-
+  let name=document.getElementById("rname").value;
+  let phone=document.getElementById("rphone").value;
+  if(!name || phone.length!==10){ alert("Name aur 10 digit mobile number bhariye."); return; }
+  closeModal();
+  alert("Customer registration submitted successfully.");
 }
-
-closeModal();
-
-alert("Customer registration submitted successfully.");
-
-}
-
-
-/* ASSOCIATE */
 
 function associateRegister(){
+  let name=document.getElementById("aname").value;
+  let phone=document.getElementById("aphone").value;
+  let district=document.getElementById("adistrict").value;
+  let block=document.getElementById("ablock").value;
 
-let name=document.getElementById("aname").value;
-let phone=document.getElementById("aphone").value;
-
-if(!name || phone.length!==10){
-
-alert("Name aur mobile number bhariye.");
-
-return;
-
+  if(!name || phone.length!==10 || !district || !block){
+    alert("Saari jankari bhariye."); return;
+  }
+  
+  let newId = "FO-" + Math.floor(1000 + Math.random() * 9000);
+  foList.push({ id: newId, name: name, district: district, block: block, status: "Pending" });
+  closeModal();
+  alert("FO Request BM Approval ke liye bhej di gayi hai. Generated ID: " + newId);
 }
-
-closeModal();
-
-alert("Associate request submitted successfully.");
-
-}
-
 
 /* LOGIN */
-
 function login(role){
-
-currentRole=role;
-
-document.getElementById("public")
-.style.display="none";
-
-document.getElementById("portal")
-.style.display="block";
-
-document.getElementById("roleText")
-.textContent=roles[role].name;
-
-document.getElementById("userID")
-.textContent=
-document.getElementById("loginID").value
-||roles[role].id;
-
-closeModal();
-
-createSidebar();
-
-showPage("dashboard");
-
+  currentRole=role;
+  document.getElementById("public").style.display="none";
+  document.getElementById("portal").style.display="block";
+  document.getElementById("roleText").textContent=roles[role].name;
+  document.getElementById("userID").textContent=document.getElementById("loginID").value||roles[role].id;
+  closeModal();
+  createSidebar();
+  showPage("dashboard");
 }
-
 
 /* SIDEBAR */
-
 function createSidebar(){
-
-let menu=[
-
-["dashboard","🏠 Dashboard"],
-
-["id","🪪 My ID"],
-
-["members","👥 Members"],
-
-["wallet","💳 Wallet"],
-
-["withdrawal","💸 Withdrawal"],
-
-["messages","💬 Messages"],
-
-["reports","📊 Reports"]
-
-];
-
-let html="";
-
-menu.forEach(x=>{
-
-html+=`
-
-<button onclick="showPage('${x[0]}',this)">
-${x[1]}
-</button>
-
-`;
-
-});
-
-document.getElementById("sidebar")
-.innerHTML=html;
-
+  let menu=[
+    ["dashboard","🏠 Dashboard"],
+    ["id","🪪 My ID"],
+    ["members","👥 Members"],
+    ["wallet","💳 Wallet"],
+    ["withdrawal","💸 Withdrawal"],
+    ["messages","💬 Messages"],
+    ["reports","📊 Reports"]
+  ];
+  let html="";
+  menu.forEach(x=>{
+    html+=`<button onclick="showPage('${x[0]}',this)">${x[1]}</button>`;
+  });
+  document.getElementById("sidebar").innerHTML=html;
 }
 
-
-/* PAGE */
-
+/* PAGE DISPLAY */
 function showPage(page,button){
+  if(button){
+    document.querySelectorAll(".sidebar button").forEach(b=>b.classList.remove("active"));
+    button.classList.add("active");
+  }
 
-if(button){
+  let d=document.getElementById("dashboard");
 
-document.querySelectorAll(".sidebar button")
-.forEach(b=>b.classList.remove("active"));
+  /* DASHBOARD PAGE */
+  if(page==="dashboard"){
+    let data;
+    if(currentRole==="DM"){ data=["18,420","146","32","124"]; }
+    else if(currentRole==="BM"){ data=["1,284","9","7","27"]; }
+    else if(currentRole==="FO"){ data=["184","—","2","8"]; }
+    else{ data=["1","—","—","1"]; }
 
-button.classList.add("active");
+    let locationHTML = "";
 
+    // 1. DM LEVEL: SIRF DISTRICT SHOW HO
+    if(currentRole === "DM") {
+      locationHTML = `
+        <div class="location-card">
+          <h3>📍 DM Area Filter (UP Districts)</h3>
+          <div class="location-grid">
+            <div>
+              <label>District Chune:</label>
+              <select id="dmDistSelect">
+                <option value="">-- All UP Districts --</option>
+                ${Object.keys(upData).map(dist => `<option value="${dist}">${dist}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // 2. BM LEVEL: DISTRICT AUR BLOCK DONO SHOW HO + FO APPROVALS
+    else if(currentRole === "BM") {
+      locationHTML = `
+        <div class="location-card">
+          <h3>📍 BM Area Filter (District & Block)</h3>
+          <div class="location-grid">
+            <div>
+              <label>District Chune:</label>
+              <select id="bmDistSelect" onchange="updateBMBlocks()">
+                <option value="">-- District Select Karein --</option>
+                ${Object.keys(upData).map(dist => `<option value="${dist}">${dist}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label>Block Chune:</label>
+              <select id="bmBlockSelect">
+                <option value="">-- Pehle District Chune --</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- FO APPROVAL PANEL FOR BM -->
+        <div class="panel" style="border-top:4px solid #28a745;">
+          <h3>⏳ Pending FO Approvals (BM Approval Panel)</h3>
+          <p style="font-size:12px;color:#666;margin-bottom:10px;">Yahan BM naye Field Officers ko approve kar sakta hai.</p>
+          <table class="table">
+            <tr>
+              <th>FO ID</th>
+              <th>Name</th>
+              <th>District</th>
+              <th>Block</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+            ${foList.map(fo => `
+              <tr>
+                <td><b>${fo.id}</b></td>
+                <td>${fo.name}</td>
+                <td>${fo.district}</td>
+                <td>${fo.block}</td>
+                <td><span class="${fo.status==='Approved'?'badge-approved':'badge-pending'}">${fo.status}</span></td>
+                <td>
+                  ${fo.status==='Pending' ? `<button class="btn-approve" onclick="approveFO('${fo.id}')">Approve FO</button>` : '✓ Approved'}
+                </td>
+              </tr>
+            `).join('')}
+          </table>
+        </div>
+      `;
+    }
+
+    // 3. FO LEVEL: DISTRICT + BLOCK + GRAM PANCHAYAT SHOW HO
+    else if(currentRole === "FO") {
+      locationHTML = `
+        <div class="location-card">
+          <h3>📍 FO Location Selection (Panchayat Level)</h3>
+          <div class="location-grid">
+            <div>
+              <label>District Chune:</label>
+              <select id="foDistSelect" onchange="updateFOBlocks()">
+                <option value="">-- District Select Karein --</option>
+                ${Object.keys(upData).map(dist => `<option value="${dist}">${dist}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label>Block Chune:</label>
+              <select id="foBlockSelect" onchange="updateFOPanchayats()">
+                <option value="">-- Pehle District Chune --</option>
+              </select>
+            </div>
+            <div>
+              <label>Gram Panchayat Chune:</label>
+              <select id="foPanchayatSelect">
+                <option value="">-- Pehle Block Chune --</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    d.innerHTML=`
+      <h1>${roles[currentRole].name} Dashboard</h1>
+      <div class="notice">
+        <b>Data Access Role:</b> ${roles[currentRole].name} Authorized Area.
+      </div>
+
+      ${locationHTML}
+
+      <div class="stats">
+        <div class="stat"><small>Members</small><strong>${data[0]}</strong></div>
+        <div class="stat"><small>Field Team</small><strong>${data[1]}</strong></div>
+        <div class="stat"><small>Pending Requests</small><strong>${data[2]}</strong></div>
+        <div class="stat"><small>Today Operations</small><strong>${data[3]}</strong></div>
+      </div>
+
+      <div class="panel">
+        <h3>Recent Activity</h3>
+        <br>
+        <table class="table">
+          <tr><th>ID</th><th>Operation</th><th>Visibility</th><th>Status</th></tr>
+          <tr><td>FO-104</td><td>Member Registration</td><td>Authorized Users</td><td>Approved</td></tr>
+          <tr><td>WD-2081</td><td>Withdrawal Request</td><td>Management</td><td>Pending</td></tr>
+        </table>
+      </div>
+    `;
+  }
+
+  else if(page==="id"){
+    d.innerHTML=`
+      <h1>🪪 My ID</h1>
+      <div class="panel">
+        <h2 style="color:#1787c8">SEWANYA HEALTH</h2>
+        <br><h2>${roles[currentRole].id}</h2>
+        <h3>${roles[currentRole].name}</h3>
+        <br><p>Assigned Area: Uttar Pradesh</p>
+        <br><button class="blue-btn" onclick="window.print()">🖨 Print / Save ID</button>
+      </div>
+    `;
+  }
+
+  else if(page==="members"){
+    d.innerHTML=`
+      <h1>👥 Members</h1>
+      <div class="panel">
+        <table class="table">
+          <tr><th>ID</th><th>Name</th><th>Type</th><th>Status</th></tr>
+          <tr><td>CUS-001</td><td>Customer</td><td>Health Member</td><td>Active</td></tr>
+          <tr><td>FO-104</td><td>Field Officer</td><td>FO</td><td>Active</td></tr>
+          <tr><td>BM-001</td><td>Block Manager</td><td>BM</td><td>Active</td></tr>
+        </table>
+      </div>
+    `;
+  }
+
+  else if(page==="wallet"){
+    d.innerHTML=`
+      <h1>💳 Wallet</h1>
+      <div class="panel">
+        <h3>Available Balance</h3>
+        <br><h1 style="color:#1787c8">₹ ${currentRole==="DM"?"2,45,000":currentRole==="BM"?"48,500":currentRole==="FO"?"12,850":"1,250"}</h1>
+      </div>
+    `;
+  }
+
+  else if(page==="withdrawal"){
+    d.innerHTML=`
+      <h1>💸 Withdrawal</h1>
+      <div class="panel">
+        <input id="withdrawAmount" type="number" placeholder="Amount ₹">
+        <button class="blue-btn" onclick="withdraw()">SUBMIT WITHDRAWAL</button>
+      </div>
+    `;
+  }
+
+  else if(page==="messages"){
+    d.innerHTML=`
+      <h1>💬 Messages</h1>
+      <div class="panel">
+        <textarea placeholder="Message likhiye..."></textarea>
+        <button class="blue-btn" onclick="alert('Message sent successfully')">SEND MESSAGE</button>
+      </div>
+    `;
+  }
+
+  else if(page==="reports"){
+    d.innerHTML=`
+      <h1>📊 Reports</h1>
+      <div class="panel">
+        <h3>${roles[currentRole].name} Report</h3>
+        <button class="blue-btn" onclick="alert('Report generated')">GENERATE REPORT</button>
+      </div>
+    `;
+  }
 }
 
-let d=document.getElementById("dashboard");
-
-
-/* DASHBOARD */
-
-if(page==="dashboard"){
-
-let data;
-
-if(currentRole==="DM"){
-
-data=["18,420","146","32","124"];
-
+/* BM FO APPROVAL FUNCTION */
+function approveFO(foId){
+  let fo = foList.find(item => item.id === foId);
+  if(fo){
+    fo.status = "Approved";
+    alert(fo.name + " (" + fo.id + ") ko BM dwara Approve kar diya gaya hai!");
+    showPage("dashboard");
+  }
 }
 
-else if(currentRole==="BM"){
-
-data=["1,284","9","7","27"];
-
+/* DYNAMIC LOCATION CASCADE FUNCTIONS */
+function updateBMBlocks() {
+  let dist = document.getElementById("bmDistSelect").value;
+  let blockSelect = document.getElementById("bmBlockSelect");
+  blockSelect.innerHTML = '<option value="">-- Block Select Karein --</option>';
+  if(dist && upData[dist]) {
+    Object.keys(upData[dist]).forEach(block => {
+      blockSelect.innerHTML += `<option value="${block}">${block}</option>`;
+    });
+  }
 }
 
-else if(currentRole==="FO"){
-
-data=["184","—","2","8"];
-
+function updateFOBlocks() {
+  let dist = document.getElementById("foDistSelect").value;
+  let blockSelect = document.getElementById("foBlockSelect");
+  let panchayatSelect = document.getElementById("foPanchayatSelect");
+  blockSelect.innerHTML = '<option value="">-- Block Select Karein --</option>';
+  panchayatSelect.innerHTML = '<option value="">-- Pehle Block Chune --</option>';
+  
+  if(dist && upData[dist]) {
+    Object.keys(upData[dist]).forEach(block => {
+      blockSelect.innerHTML += `<option value="${block}">${block}</option>`;
+    });
+  }
 }
 
-else{
+function updateFOPanchayats() {
+  let dist = document.getElementById("foDistSelect").value;
+  let block = document.getElementById("foBlockSelect").value;
+  let panchayatSelect = document.getElementById("foPanchayatSelect");
+  panchayatSelect.innerHTML = '<option value="">-- Gram Panchayat Select Karein --</option>';
 
-data=["1","—","—","1"];
-
+  if(dist && block && upData[dist][block]) {
+    upData[dist][block].forEach(panchayat => {
+      panchayatSelect.innerHTML += `<option value="${panchayat}">${panchayat}</option>`;
+    });
+  }
 }
-
-
-let visibility="";
-
-if(currentRole==="DM"){
-
-visibility=
-"DM: District ka authorized data dekh sakta hai.";
-
-}
-
-if(currentRole==="BM"){
-
-visibility=
-"BM: Apna + assigned FO/BM area ka data dekh sakta hai.";
-
-}
-
-if(currentRole==="FO"){
-
-visibility=
-"FO: Apna aur assigned customer data dekh sakta hai.";
-
-}
-
-if(currentRole==="customer"){
-
-visibility=
-"Customer: Sirf apna personal data dekh sakta hai.";
-
-}
-
-
-d.innerHTML=`
-
-<h1>${roles[currentRole].name} Dashboard</h1>
-
-<div class="notice">
-<b>Data Access:</b> ${visibility}
-</div>
-
-<div class="stats">
-
-<div class="stat">
-<small>Members</small>
-<strong>${data[0]}</strong>
-</div>
-
-<div class="stat">
-<small>Field Team</small>
-<strong>${data[1]}</strong>
-</div>
-
-<div class="stat">
-<small>Pending Requests</small>
-<strong>${data[2]}</strong>
-</div>
-
-<div class="stat">
-<small>Today Operations</small>
-<strong>${data[3]}</strong>
-</div>
-
-</div>
-
-
-<div class="panel">
-
-<h3>Recent Activity</h3>
-
-<br>
-
-<table class="table">
-
-<tr>
-<th>ID</th>
-<th>Operation</th>
-<th>Visibility</th>
-<th>Status</th>
-</tr>
-
-<tr>
-<td>FO-104</td>
-<td>Member Registration</td>
-<td>Authorized Users</td>
-<td>Approved</td>
-</tr>
-
-<tr>
-<td>WD-2081</td>
-<td>Withdrawal Request</td>
-<td>Management</td>
-<td>Pending</td>
-</tr>
-
-</table>
-
-</div>
-
-`;
-
-}
-
-
-/* MY ID */
-
-if(page==="id"){
-
-d.innerHTML=`
-
-<h1>🪪 My ID</h1>
-
-<div class="panel">
-
-<h2 style="color:#1787c8">
-SEWANYA HEALTH
-</h2>
-
-<br>
-
-<h2>
-${roles[currentRole].id}
-</h2>
-
-<h3>
-${roles[currentRole].name}
-</h3>
-
-<br>
-
-<p>
-Assigned Area:
-Shahjahanpur / Bhawal Khera
-</p>
-
-<br>
-
-<button class="blue-btn"
-onclick="window.print()">
-🖨 Print / Save ID
-</button>
-
-</div>
-
-`;
-
-}
-
-
-/* MEMBERS */
-
-if(page==="members"){
-
-let access="";
-
-if(currentRole==="customer")
-access="Only your own customer profile";
-
-if(currentRole==="FO")
-access="Your assigned customers";
-
-if(currentRole==="BM")
-access="Your block + assigned FO";
-
-if(currentRole==="DM")
-access="District authorized data";
-
-
-d.innerHTML=`
-
-<h1>👥 Members</h1>
-
-<div class="notice">
-<b>Visible Data:</b> ${access}
-</div>
-
-<div class="panel">
-
-<table class="table">
-
-<tr>
-<th>ID</th>
-<th>Name</th>
-<th>Type</th>
-<th>Status</th>
-</tr>
-
-<tr>
-<td>CUS-001</td>
-<td>Customer</td>
-<td>Health Member</td>
-<td>Active</td>
-</tr>
-
-<tr>
-<td>FO-104</td>
-<td>Field Officer</td>
-<td>FO</td>
-<td>Active</td>
-</tr>
-
-<tr>
-<td>BM-001</td>
-<td>Block Manager</td>
-<td>BM</td>
-<td>Active</td>
-</tr>
-
-</table>
-
-</div>
-
-`;
-
-}
-
-
-/* WALLET */
-
-if(page==="wallet"){
-
-d.innerHTML=`
-
-<h1>💳 Wallet</h1>
-
-<div class="panel">
-
-<h3>Available Balance</h3>
-
-<br>
-
-<h1 style="color:#1787c8">
-₹ ${currentRole==="DM"?"2,45,000":
-currentRole==="BM"?"48,500":
-currentRole==="FO"?"12,850":
-"1,250"}
-</h1>
-
-<br>
-
-<p>
-Wallet data role ke according visible hai.
-</p>
-
-<br>
-
-<button class="blue-btn">
-VIEW TRANSACTIONS
-</button>
-
-</div>
-
-`;
-
-}
-
-
-/* WITHDRAWAL */
-
-if(page==="withdrawal"){
-
-d.innerHTML=`
-
-<h1>💸 Withdrawal</h1>
-
-<div class="panel">
-
-<p>
-Withdrawal request create karein.
-</p>
-
-<br>
-
-<input
-id="withdrawAmount"
-type="number"
-placeholder="Amount ₹">
-
-<button class="blue-btn"
-onclick="withdraw()">
-SUBMIT WITHDRAWAL
-</button>
-
-</div>
-
-`;
-
-}
-
-
-/* MESSAGES */
-
-if(page==="messages"){
-
-d.innerHTML=`
-
-<h1>💬 Messages</h1>
-
-<div class="panel">
-
-<p>
-Role based communication center
-</p>
-
-<br>
-
-<textarea
-placeholder="Message likhiye..."
-></textarea>
-
-<button class="blue-btn"
-onclick="alert('Message sent successfully')">
-SEND MESSAGE
-</button>
-
-</div>
-
-`;
-
-}
-
-
-/* REPORTS */
-
-if(page==="reports"){
-
-d.innerHTML=`
-
-<h1>📊 Reports</h1>
-
-<div class="panel">
-
-<h3>
-${roles[currentRole].name} Report
-</h3>
-
-<br>
-
-<p>
-Authorized reports sirf role ke
-permission ke according visible hain.
-</p>
-
-<br>
-
-<button class="blue-btn"
-onclick="alert('Report generated')">
-GENERATE REPORT
-</button>
-
-</div>
-
-`;
-
-}
-
-}
-
-
-/* WITHDRAW */
 
 function withdraw(){
-
-let amount=
-document.getElementById("withdrawAmount").value;
-
-if(!amount){
-
-alert("Amount enter karein.");
-
-return;
-
+  let amount=document.getElementById("withdrawAmount").value;
+  if(!amount){ alert("Amount enter karein."); return; }
+  alert("Withdrawal request submitted. Status: Pending.");
 }
-
-alert(
-"Withdrawal request submitted. Status: Pending."
-);
-
-}
-
-
-/* ENQUIRY */
 
 function sendEnquiry(){
-
-let name=
-document.getElementById("ename").value;
-
-let phone=
-document.getElementById("ephone").value;
-
-if(!name || !phone){
-
-alert("Name aur mobile number bhariye.");
-
-return;
-
+  let name=document.getElementById("ename").value;
+  let phone=document.getElementById("ephone").value;
+  if(!name || !phone){ alert("Name aur mobile number bhariye."); return; }
+  alert("Enquiry submitted successfully.");
 }
-
-alert("Enquiry submitted successfully.");
-
-}
-
-
-/* LOGOUT */
 
 function logout(){
-
-currentRole=null;
-
-document.getElementById("portal")
-.style.display="none";
-
-document.getElementById("public")
-.style.display="block";
-
-window.scrollTo(0,0);
-
+  currentRole=null;
+  document.getElementById("portal").style.display="none";
+  document.getElementById("public").style.display="block";
+  window.scrollTo(0,0);
 }
 
 </script>
