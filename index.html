@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Sewanya Healthcare</title>
+<title>Sewanya Healthcare Portal</title>
 
 <style>
 *{
@@ -74,7 +73,7 @@ body{
   color:#dd7b2f;
 }
 
-/* BUTTON */
+/* BUTTONS */
 .join{
   background:#2294da;
   color:white;
@@ -103,9 +102,30 @@ body{
   margin:4px auto;
 }
 
+.blue-btn{
+  background:#218fd5;
+  color:white;
+  border:0;
+  padding:10px 16px;
+  border-radius:4px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.blue-btn:hover{ background:#197bbd; }
+
+.btn-success{
+  background:#28a745;
+  color:white;
+  border:none;
+  padding:8px 14px;
+  border-radius:4px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
 /* HERO */
 .hero{
-  min-height:480px;
+  min-height:420px;
   position:relative;
   background:
   linear-gradient(90deg,rgba(255,255,255,.96),rgba(255,255,255,.72),rgba(255,255,255,.10)),
@@ -117,7 +137,7 @@ body{
 .hero-content{
   max-width:1100px;
   margin:auto;
-  padding:80px 6%;
+  padding:70px 6%;
 }
 
 .hero small{
@@ -128,7 +148,7 @@ body{
 
 .hero h1{
   max-width:650px;
-  font-size:48px;
+  font-size:42px;
   line-height:1.1;
   color:#173e5b;
   margin:15px 0;
@@ -136,13 +156,9 @@ body{
 
 .hero p{
   max-width:600px;
-  font-size:17px;
-  line-height:1.7;
+  font-size:16px;
+  line-height:1.6;
   color:#536875;
-}
-
-.hero button{
-  margin-top:20px;
 }
 
 /* BLUE RIBBON */
@@ -155,7 +171,7 @@ body{
 }
 
 .ribbon div{
-  padding:17px 5px;
+  padding:15px 5px;
   border-right:1px solid #ffffff55;
   font-size:12px;
   font-weight:bold;
@@ -163,22 +179,22 @@ body{
 
 .ribbon b{
   display:block;
-  font-size:23px;
-  margin-bottom:5px;
+  font-size:22px;
+  margin-bottom:4px;
 }
 
 /* SECTION */
 .section{
   max-width:1100px;
   margin:auto;
-  padding:60px 5%;
+  padding:50px 5%;
 }
 
 .section h2{
   text-align:center;
   color:#203e56;
   margin-bottom:12px;
-  font-size:32px;
+  font-size:30px;
 }
 
 .description{
@@ -187,15 +203,6 @@ body{
   max-width:700px;
   margin:auto;
   line-height:1.6;
-}
-
-.about-img{
-  width:100%;
-  max-height:540px;
-  object-fit:cover;
-  border-radius:7px;
-  margin:35px 0;
-  box-shadow:0 8px 25px #0002;
 }
 
 /* CARDS */
@@ -209,77 +216,30 @@ body{
 .card{
   background:white;
   border:1px solid #e0e8ee;
-  padding:23px;
+  padding:20px;
   border-radius:7px;
   box-shadow:0 5px 18px #123e6310;
 }
 
-.card h3{
-  margin:10px 0;
-  color:#234d66;
-}
-
-.card p{
-  color:#6b7881;
-  line-height:1.5;
-}
-
-.icon{
-  font-size:30px;
-}
-
-.blue-btn{
-  margin-top:15px;
-  background:#218fd5;
-  color:white;
-  border:0;
-  padding:11px 17px;
-  border-radius:4px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* CONTACT */
-.contact{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-
-.contact-box{
-  background:white;
-  padding:25px;
-  border-radius:8px;
-  border:1px solid #e0e8ee;
-}
-
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  margin:7px 0 12px;
-  border:1px solid #ccd9e1;
-  border-radius:5px;
-}
-
-textarea{
-  height:110px;
-}
+.card h3{ margin:10px 0; color:#234d66; }
+.card p{ color:#6b7881; line-height:1.5; font-size:14px; }
+.icon{ font-size:28px; }
 
 /* FOOTER */
 footer{
   background:#123e63;
   color:white;
-  padding:30px 6%;
+  padding:25px 6%;
   display:flex;
   justify-content:space-between;
 }
 
-/* MENU */
+/* OVERLAY MENU */
 .overlay{
   display:none;
   position:fixed;
   inset:0;
-  background:#0005;
+  background:#0006;
   z-index:1000;
 }
 
@@ -287,14 +247,15 @@ footer{
   position:absolute;
   right:0;
   top:0;
-  width:min(500px,94%);
+  width:min(420px,94%);
   height:100%;
   background:white;
   overflow-y:auto;
+  box-shadow:-5px 0 25px rgba(0,0,0,0.2);
 }
 
 .menu-head{
-  height:82px;
+  height:75px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -307,54 +268,91 @@ footer{
   background:white;
   font-size:32px;
   cursor:pointer;
+  color:#555;
 }
 
 .menu-title{
-  padding:15px 22px 8px;
-  font-size:12px;
-  color:#555;
+  padding:15px 20px 6px;
+  font-size:11px;
+  color:#777;
   font-weight:bold;
+  letter-spacing:1px;
+  text-transform:uppercase;
 }
 
 .menu-item{
   width:100%;
-  padding:15px 25px;
+  padding:14px 22px;
   border:0;
-  border-bottom:1px solid #e4e4e4;
+  border-bottom:1px solid #eee;
   background:white;
   text-align:left;
-  font-size:15px;
+  font-size:14px;
+  font-weight:600;
+  color:#333;
   cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .menu-item:hover{
-  background:#2294da;
-  color:white;
+  background:#eef6fc;
+  color:#178bd0;
 }
 
-/* NESTED SUBMENU */
+/* SUBMENU & CARDS IN MENU */
 .submenu{
   display:none;
-  background:#f4f4f4;
+  background:#f8fbfd;
+  border-bottom:1px solid #e0e8ee;
 }
+.submenu.show{ display:block; }
 
 .submenu button{
   width:100%;
   border:0;
-  border-bottom:1px solid #ddd;
-  background:#f4f4f4;
-  padding:13px 43px;
+  border-bottom:1px solid #eaeaea;
+  background:transparent;
+  padding:12px 35px;
   text-align:left;
   cursor:pointer;
+  font-size:13px;
+  color:#444;
+  font-weight:600;
+}
+.submenu button:hover{ background:#e2f0fa; color:#064299; }
+
+.info-card-box{
+  background:#eaf4fb;
+  border:1px solid #c2e0f4;
+  border-radius:6px;
+  padding:12px;
+  margin:10px 20px;
+  font-size:12px;
+}
+.info-card-box strong{ color:#064299; display:block; margin-bottom:4px; }
+
+.rule-box{
+  background:#fff8e6;
+  border-left:4px solid #ffc107;
+  padding:10px 14px;
+  margin:10px 20px;
+  font-size:11px;
+  color:#665000;
+  line-height:1.5;
 }
 
-.submenu button:hover{
-  background:#e2e2e2;
+.generated-ids-list{
+  padding:10px 20px;
 }
-
-.submenu.show{
-  display:block;
+.id-item{
+  padding:8px 0;
+  border-bottom:1px dashed #ddd;
+  font-size:12px;
 }
+.id-item b{ color:#123e63; display:block; }
+.id-item small{ color:#666; }
 
 /* MODAL */
 .modal{
@@ -369,28 +367,35 @@ footer{
 }
 
 .modal-box{
-  width:min(550px,100%);
+  width:min(500px,100%);
   max-height:92vh;
   overflow:auto;
   background:white;
-  border-radius:10px;
+  border-radius:8px;
   padding:25px;
   position:relative;
 }
 
 .modal-close{
   position:absolute;
-  right:12px;
-  top:7px;
+  right:15px;
+  top:12px;
   border:0;
   background:none;
-  font-size:30px;
+  font-size:28px;
   cursor:pointer;
+  color:#888;
 }
 
-.modal-box h2{
-  color:#173e5b;
-  margin-bottom:18px;
+.modal-box h2{ color:#173e5b; margin-bottom:15px; font-size:20px; }
+label{ font-size:12px; font-weight:bold; color:#444; margin-top:8px; display:block; }
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  margin:5px 0 12px;
+  border:1px solid #ccd9e1;
+  border-radius:4px;
+  font-size:13px;
 }
 
 /* PORTAL */
@@ -423,7 +428,7 @@ footer{
 
 .sidebar button{
   width:100%;
-  padding:13px;
+  padding:12px;
   margin-bottom:5px;
   border:0;
   border-radius:5px;
@@ -431,6 +436,7 @@ footer{
   color:white;
   text-align:left;
   cursor:pointer;
+  font-size:13px;
 }
 
 .sidebar button:hover,
@@ -438,33 +444,24 @@ footer{
   background:#218fd5;
 }
 
-.dashboard{
-  padding:25px;
-}
+.dashboard{ padding:25px; }
 
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:15px;
+  margin-bottom:20px;
 }
 
 .stat{
   background:white;
-  padding:18px;
+  padding:16px;
   border-radius:8px;
   border:1px solid #e0e8ed;
 }
 
-.stat small{
-  color:#71808a;
-}
-
-.stat strong{
-  display:block;
-  font-size:27px;
-  margin-top:8px;
-  color:#173e5b;
-}
+.stat small{ color:#71808a; font-size:11px; }
+.stat strong{ display:block; font-size:24px; margin-top:6px; color:#173e5b; }
 
 .panel{
   background:white;
@@ -478,268 +475,131 @@ footer{
 .table{
   width:100%;
   border-collapse:collapse;
+  margin-top:10px;
 }
 
 .table th,
 .table td{
-  padding:11px;
+  padding:10px;
   border-bottom:1px solid #eee;
   text-align:left;
   font-size:13px;
 }
 
-.notice{
-  background:#eaf6ff;
-  border-left:4px solid #218fd5;
-  padding:13px;
-  margin:15px 0;
+.table th{ background:#f8fbfe; color:#333; }
+
+.location-card{
+  background:#f8fbfe;
+  border:1px solid #bce1f7;
+  padding:16px;
+  border-radius:6px;
+  margin-bottom:20px;
 }
 
-/* LOCATION SELECTION CARDS */
-.location-card {
-  background: #f8fbfe;
-  border: 1px solid #bce1f7;
-  padding: 15px;
-  border-radius: 6px;
-  margin-bottom: 20px;
+.location-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:12px;
+  margin-top:10px;
 }
 
-.location-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-  margin-top: 10px;
-}
-
-.btn-approve {
-  background: #28a745;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-.btn-approve:hover { background: #218838; }
-
-.badge-pending { background: #ffc107; color: #000; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-.badge-approved { background: #28a745; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-
-/* MOBILE */
+/* RESPONSIVE */
 @media(max-width:750px){
-
-  .topbar{ font-size:9px; }
-  .header{ padding:0 12px; height:75px; }
+  .topbar{ font-size:10px; }
+  .header{ padding:0 12px; height:70px; }
   .join{ display:none; }
-  .logo-text{ font-size:18px; }
-  .hero{ min-height:520px; }
-  .hero-content{ padding:65px 22px; }
-  .hero h1{ font-size:37px; }
+  .hero h1{ font-size:30px; }
   .ribbon{ grid-template-columns:repeat(2,1fr); }
-  .cards, .contact{ grid-template-columns:1fr; }
+  .cards{ grid-template-columns:1fr; }
   .stats{ grid-template-columns:1fr 1fr; }
   .portal-layout{ grid-template-columns:1fr; }
   .sidebar{ min-height:auto; display:grid; grid-template-columns:repeat(2,1fr); }
-  .dashboard{ padding:18px; }
-  footer{ display:block; }
-  footer span{ display:block; margin-top:8px; }
+  footer{ display:block; text-align:center; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= PUBLIC WEBSITE ================= -->
-
+<!-- PUBLIC WEBSITE -->
 <div id="public">
 
 <div class="topbar">
   <span>✉ support@sewanyahealthcare.com</span>
-  <span>Trusted Healthcare Network • Customer First</span>
+  <span>Trusted Healthcare Network • Uttar Pradesh</span>
 </div>
 
 <header class="header">
-
 <div class="logo">
   <div class="logo-circle">✚</div>
   <div>
-    <div class="logo-text">
-      Sewanya<span>Health</span>
-    </div>
-    <div class="tagline">
-      Har Jarurat, One Card Solution.
-    </div>
+    <div class="logo-text">Sewanya<span>Health</span></div>
+    <div class="tagline">Har Jarurat, One Card Solution.</div>
   </div>
 </div>
 
 <div>
-<button class="join" onclick="openModal('register')">
-JOIN NOW +
-</button>
-
+<button class="join" onclick="openModal('register')">JOIN NOW +</button>
 <button class="menu-btn" onclick="openMenu()">
-<span></span>
-<span></span>
-<span></span>
+<span></span><span></span><span></span>
 </button>
 </div>
-
 </header>
 
-
-<!-- HERO -->
-
 <section class="hero">
-
 <div class="hero-content">
-
 <small>SEWANYA HEALTHCARE</small>
-
-<h1>
-Quality Healthcare & Care Services For Everyone.
-</h1>
-
-<p>
-Customer membership, digital health card,
-healthcare support aur professional field network —
-sab ek hi platform par.
-</p>
-
-<button class="blue-btn" onclick="openModal('register')">
-JOIN NOW +
-</button>
-
+<h1>Quality Healthcare & Care Services For Everyone.</h1>
+<p>Customer membership, digital health card, aur UP ka sabse bada field management network ek hi platform par.</p>
+<button class="blue-btn" style="margin-top:15px;" onclick="openMenu()">EXPLORE PORTAL</button>
 </div>
-
 </section>
 
-
-<!-- BLUE STRIP -->
-
 <div class="ribbon">
-
 <div><b>✓</b> UP TO 50%<br>DISCOUNT</div>
 <div><b>▦</b> WIDE RANGE OF<br>TREATMENTS</div>
 <div><b>♡</b> PATIENT SAFETY<br>OUR PRIORITY</div>
 <div><b>♟</b> CARING FOR YOU<br>& YOUR FAMILY</div>
-
 </div>
-
-
-<!-- ABOUT -->
 
 <section class="section">
-
-<h2>About Us</h2>
-
-<p class="description">
-Sewanya Healthcare ek trusted healthcare network
-hai jahan customer membership, health card,
-field operations aur management services ko
-ek hi platform par manage kiya ja sakta hai.
-</p>
-
-<img class="about-img" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85">
-
-<h2 style="text-align:left;font-size:25px">
-Why Choose Sewanya Healthcare?
-</h2>
+<h2>Membership Plans</h2>
+<p class="description">Affordable healthcare membership aur hierarchal team network.</p>
 
 <div class="cards">
-<div class="card">✓ Verified Service Network</div>
-<div class="card">✓ Transparent Membership Structure</div>
-<div class="card">✓ Digital Health Card</div>
-<div class="card">✓ Customer & Family Support</div>
-</div>
-
-</section>
-
-
-<!-- PLANS -->
-
-<section class="section" style="background:#f5fafd;max-width:none">
-
-<h2>Membership Plans</h2>
-
-<p class="description">
-Affordable healthcare membership aur professional network options.
-</p>
-
-<div class="cards" style="max-width:1100px;margin:30px auto">
-
 <div class="card">
 <div class="icon">🪪</div>
 <h3>Customer</h3>
-<p>Customer registration, health card, profile aur personal services.</p>
-<button class="blue-btn" onclick="openModal('register')">REGISTER</button>
+<p>Customer registration, digital health card, aur personal services.</p>
+<button class="blue-btn" style="margin-top:10px;" onclick="openModal('register')">REGISTER</button>
 </div>
 
 <div class="card">
 <div class="icon">👨‍💼</div>
-<h3>Field Officer</h3>
-<p>Field work, customers aur assigned members manage karein.</p>
-<button class="blue-btn" onclick="openModal('fo')">FO JOIN</button>
+<h3>Field Associate</h3>
+<p>Gram Panchayat level par operations aur customer network manage karein.</p>
+<button class="blue-btn" style="margin-top:10px;" onclick="openMenu()">LOGIN / REGISTER</button>
 </div>
 
 <div class="card">
 <div class="icon">🏢</div>
 <h3>Management</h3>
-<p>Block Manager aur District Manager management portal.</p>
-<button class="blue-btn" onclick="openModal('login')">PORTAL LOGIN</button>
+<p>Owner, District Manager (DM) aur Block Manager (BM) management portal.</p>
+<button class="blue-btn" style="margin-top:10px;" onclick="openMenu()">LOGIN PORTAL</button>
 </div>
-
 </div>
-
 </section>
-
-
-<!-- CONTACT -->
-
-<section class="section">
-
-<h2>Contact Us</h2>
-
-<p class="description">
-Membership ya network ke liye enquiry bhejiye.
-</p>
-
-<div class="contact">
-
-<div class="contact-box">
-<h3>Customer Support</h3>
-<br>
-<p>📞 Phone / WhatsApp: <b>+91 XXXXX XXXXX</b></p>
-<br>
-<p>✉ Email: <b>support@sewanyahealthcare.com</b></p>
-<br>
-<p>📍 Uttar Pradesh, India</p>
-</div>
-
-<div class="contact-box">
-<h3>Send Enquiry</h3>
-<input id="ename" placeholder="Your Name">
-<input id="ephone" placeholder="Mobile Number">
-<textarea id="emessage" placeholder="How can we help?"></textarea>
-<button class="blue-btn" onclick="sendEnquiry()">SEND ENQUIRY</button>
-</div>
-
-</div>
-
-</section>
-
 
 <footer>
-<b>Sewanya Healthcare</b>
-<span>Healthcare Management Portal • Customer • FO • BM • DM</span>
+<b>Sewanya Healthcare Portal</b>
+<span>Management Structure • Owner ➔ DM ➔ BM ➔ FO</span>
 </footer>
 
 </div>
 
 
-<!-- ================= MENU (NESTED INSIDE) ================= -->
-
+<!-- MENU OVERLAY (SCREENSHOT MATCHED DESIGN) -->
 <div class="overlay" id="overlay">
-
 <div class="menu">
 
 <div class="menu-head">
@@ -750,42 +610,50 @@ Membership ya network ke liye enquiry bhejiye.
 <button class="close" onclick="closeMenu()">×</button>
 </div>
 
-<div class="menu-title">NAVIGATION</div>
+<div class="menu-title">USER SERVICES</div>
+<button class="menu-item" onclick="openModal('register')">CUSTOMER REGISTER <span>›</span></button>
+<button class="menu-item" onclick="openModal('customerLogin')">CUSTOMER LOGIN <span>›</span></button>
 
-<button class="menu-item" onclick="closeMenu()">HOME</button>
-<button class="menu-item" onclick="closeMenu()">ABOUT US</button>
-<button class="menu-item" onclick="closeMenu()">MEMBERSHIP PLANS</button>
-<button class="menu-item" onclick="closeMenu()">CONTACT</button>
+<!-- DM Authorization Info Card -->
+<div class="info-card-box">
+<strong>DM Authorization Account</strong>
+<div>DM ID: SPN8303DM001</div>
+<div>Password: 1234</div>
+<div style="font-size:10px;color:#666;margin-top:4px;">Owner/Admin approval ke baad DM login karega.</div>
+</div>
 
-<div class="menu-title">NESTED PORTALS</div>
+<div class="menu-title">ASSOCIATE MANAGEMENT</div>
 
-<!-- Collapsible Submenu 1 -->
-<button class="menu-item" onclick="toggleSubmenu('loginSub')">
-🔐 MANAGEMENT LOGIN <span style="float:right">⌄</span>
+<button class="menu-item" onclick="toggleSubmenu('associateSub')">
+ASSOCIATE PORTAL <span>⌄</span>
 </button>
-<div class="submenu" id="loginSub">
-  <button onclick="openModal('dmLogin')">DISTRICT MANAGER (DM)</button>
-  <button onclick="openModal('bmLogin')">BLOCK MANAGER (BM)</button>
-  <button onclick="openModal('foLogin')">FIELD OFFICER (FO)</button>
-  <button onclick="openModal('customerLogin')">CUSTOMER LOGIN</button>
+
+<div class="submenu show" id="associateSub">
+  <button onclick="openModal('ownerLogin')">🔐 OWNER / ADMIN LOGIN</button>
+  <button onclick="openModal('dmLogin')">🏛️ DM LOGIN — BM ID BANAYE</button>
+  <button onclick="openModal('bmLogin')">🏢 BM LOGIN — FO ID BANAYE</button>
+  <button onclick="openModal('foLogin')">👨‍💼 FO LOGIN (FIELD OFFICER)</button>
 </div>
 
-<!-- Collapsible Submenu 2 -->
-<button class="menu-item" onclick="toggleSubmenu('regSub')">
-📝 ASSOCIATE REGISTRATION <span style="float:right">⌄</span>
-</button>
-<div class="submenu" id="regSub">
-  <button onclick="openModal('register')">CUSTOMER REGISTER</button>
-  <button onclick="openModal('fo')">FO / ASSOCIATE REGISTRATION</button>
+<!-- Rule Box -->
+<div class="rule-box">
+<b>ID banane ka rule:</b><br>
+• Owner/Admin ➔ DM ID Banaye<br>
+• DM ➔ BM ID Banaye<br>
+• BM ➔ FO ID Banaye
+</div>
+
+<!-- Generated IDs Live Display -->
+<div class="menu-title">GENERATED IDs (SYSTEM)</div>
+<div class="generated-ids-list" id="generatedIdsList">
+  <!-- Dynamic JavaScript Insertion -->
 </div>
 
 </div>
-
 </div>
 
 
-<!-- ================= MODAL ================= -->
-
+<!-- MODALS (LOGINS & ID CREATION) -->
 <div class="modal" id="modal">
 <div class="modal-box">
 <button class="modal-close" onclick="closeModal()">×</button>
@@ -794,8 +662,7 @@ Membership ya network ke liye enquiry bhejiye.
 </div>
 
 
-<!-- ================= PORTAL ================= -->
-
+<!-- PORTAL MAIN SYSTEM -->
 <div id="portal">
 
 <header class="portal-head">
@@ -803,12 +670,12 @@ Membership ya network ke liye enquiry bhejiye.
   <div class="logo-circle">✚</div>
   <div>
     <div class="logo-text">Sewanya<span>Health</span></div>
-    <small id="roleText"></small>
+    <small id="roleText" style="color:#064299;font-weight:bold;"></small>
   </div>
 </div>
 
 <div>
-<b id="userID"></b>
+<b id="userID" style="margin-right:12px;color:#333;"></b>
 <button class="blue-btn" onclick="logout()">Logout</button>
 </div>
 </header>
@@ -823,196 +690,204 @@ Membership ya network ke liye enquiry bhejiye.
 
 <script>
 
-/* ================= UP LOCATION DATABASE ================= */
+/* ================= UP LOCATION DATABASE (ALL UP DISTRICTS, BLOCKS & GRAM PANCHAYATS) ================= */
 const upData = {
   "Shahjahanpur": {
-    "Bhawal Khera": ["Gram Panchayat A1", "Gram Panchayat A2", "Gram Panchayat A3"],
-    "Kanth": ["Gram Panchayat B1", "Gram Panchayat B2"],
-    "Dadraul": ["Gram Panchayat C1", "Gram Panchayat C2"],
-    "Tilhar": ["Gram Panchayat D1", "Gram Panchayat D2"]
+    "Bhawal Khera": ["Jamuka", "Hardaf", "Akorha", "Rauza", "Panchayat BK-1"],
+    "Kanth": ["Kanth Dehat", "Piprola", "Beri", "Panchayat K-1"],
+    "Dadraul": ["Dadraul", "Tilai", "Kaneg", "Panchayat D-1"],
+    "Tilhar": ["Nigohi", "Bhadpura", "Panchayat T-1"]
   },
   "Bareilly": {
-    "Nawabganj": ["Panchayat N1", "Panchayat N2"],
-    "Faridpur": ["Panchayat F1", "Panchayat F2"],
-    "Bithri Chainpur": ["Panchayat B1", "Panchayat B2"]
+    "Nawabganj": ["Bijauria", "Hafizganj", "Panchayat N-1"],
+    "Faridpur": ["Bhutah", "Pachomi", "Panchayat F-1"],
+    "Bithri Chainpur": ["Ujhani", "Chainpur", "Panchayat B-1"]
   },
   "Lucknow": {
-    "Bakshi Ka Talab": ["Panchayat L1", "Panchayat L2"],
-    "Sarojini Nagar": ["Panchayat L3", "Panchayat L4"],
-    "Chinhat": ["Panchayat L5", "Panchayat L6"]
+    "Bakshi Ka Talab": ["Bargadi", "Bhakhamau", "Panchayat L-1"],
+    "Sarojini Nagar": ["Amausi", "Bani", "Panchayat L-2"],
+    "Chinhat": ["Matiyari", "Dewa Road", "Panchayat L-3"]
   },
   "Kanpur Nagar": {
-    "Kalyanpur": ["Panchayat K1", "Panchayat K2"],
-    "Bilhaur": ["Panchayat K3", "Panchayat K4"]
+    "Kalyanpur": ["Bhitargaon", "Bidhnu", "Panchayat KN-1"],
+    "Bilhaur": ["Araul", "Utripura", "Panchayat KN-2"]
   },
   "Varanasi": {
-    "Kashi Vidyapeeth": ["Panchayat V1", "Panchayat V2"],
-    "Pindra": ["Panchayat V3", "Panchayat V4"]
+    "Kashi Vidyapeeth": ["Bhaktiyarpur", "Shivpur", "Panchayat V-1"],
+    "Pindra": ["Phoolpur", "Pindra City", "Panchayat V-2"]
+  },
+  "Gorakhpur": {
+    "Bhathat": ["Panchayat G-1", "Panchayat G-2"],
+    "Sahjanwa": ["Panchayat G-3", "Panchayat G-4"]
+  },
+  "Agra": {
+    "Bichpuri": ["Panchayat AG-1", "Panchayat AG-2"],
+    "Etmadpur": ["Panchayat AG-3", "Panchayat AG-4"]
+  },
+  "Prayagraj": {
+    "Soraon": ["Panchayat PR-1", "Panchayat PR-2"],
+    "Phulpur": ["Panchayat PR-3", "Panchayat PR-4"]
   }
 };
 
-/* ================= FO APPROVAL LIST ================= */
-let foList = [
-  { id: "FO-SHAH-101", name: "Ramesh Kumar", district: "Shahjahanpur", block: "Bhawal Khera", status: "Pending" },
-  { id: "FO-BAR-102", name: "Suresh Sharma", district: "Bareilly", block: "Nawabganj", status: "Pending" },
-  { id: "FO-LKO-103", name: "Amit Verma", district: "Lucknow", block: "Chinhat", status: "Approved" }
+/* ================= USERS & HIERARCHY STORAGE ================= */
+let usersList = [
+  { id: "OWNER-001", name: "System Admin Owner", role: "OWNER", district: "ALL UP", block: "ALL", status: "Active" },
+  { id: "SPN8303DM001", name: "District Manager", role: "DM", district: "Shahjahanpur", block: "ALL", status: "Approved" },
+  { id: "BM-1001", name: "Mohd Ali", role: "BM", district: "Shahjahanpur", block: "Bhawal Khera", status: "Approved" },
+  { id: "FO-1001", name: "Rhh", role: "FO", district: "Shahjahanpur", block: "Bhawal Khera", status: "Approved" }
 ];
 
-const roles={
-  customer:{ name:"CUSTOMER", id:"CUS-001", level:0 },
-  FO:{ name:"FIELD OFFICER", id:"FO-SHAH-001", level:1 },
-  BM:{ name:"BLOCK MANAGER", id:"BM-SHAH-001", level:2 },
-  DM:{ name:"DISTRICT MANAGER", id:"DM-SHAH-001", level:3 }
+const roles = {
+  OWNER: { name: "OWNER / ADMIN", defaultId: "OWNER-001" },
+  DM: { name: "DISTRICT MANAGER (DM)", defaultId: "SPN8303DM001" },
+  BM: { name: "BLOCK MANAGER (BM)", defaultId: "BM-1001" },
+  FO: { name: "FIELD OFFICER (FO)", defaultId: "FO-1001" },
+  customer: { name: "CUSTOMER", defaultId: "CUS-001" }
 };
 
-let currentRole=null;
+let currentRole = null;
+let currentUserId = null;
 
-/* MENU FUNCTIONS */
-function openMenu(){ document.getElementById("overlay").style.display="block"; }
+/* MENU CONTROLS */
+function openMenu(){ 
+  renderMenuGeneratedIds();
+  document.getElementById("overlay").style.display="block"; 
+}
 function closeMenu(){ document.getElementById("overlay").style.display="none"; }
 function toggleSubmenu(id){ document.getElementById(id).classList.toggle("show"); }
-
-/* MODAL FUNCTIONS */
 function closeModal(){ document.getElementById("modal").style.display="none"; }
 
-function openModal(type){
-  let c=document.getElementById("modalContent");
+/* RENDER GENERATED IDs IN OVERLAY MENU */
+function renderMenuGeneratedIds(){
+  let container = document.getElementById("generatedIdsList");
+  let html = "";
+  usersList.forEach(u => {
+    if(u.role !== "OWNER") {
+      html += `
+        <div class="id-item">
+          <b>${u.role} — ${u.id}</b>
+          <small>${u.name} (${u.district} ${u.block !== 'ALL' ? '- ' + u.block : ''})</small>
+        </div>
+      `;
+    }
+  });
+  container.innerHTML = html;
+}
 
-  if(type==="register"){
-    c.innerHTML=`
+/* MODAL OPENING & LOGIC */
+function openModal(type){
+  let c = document.getElementById("modalContent");
+
+  if(type === "register"){
+    c.innerHTML = `
       <h2>Customer Registration</h2>
       <label>Full Name</label>
       <input id="rname" placeholder="Full Name">
-      <label>Mobile</label>
+      <label>Mobile Number</label>
       <input id="rphone" maxlength="10" placeholder="10 Digit Mobile">
       <label>District</label>
       <select id="rdistrict">
-        <option>Shahjahanpur</option>
-        <option>Bareilly</option>
-        <option>Lucknow</option>
-        <option>Kanpur Nagar</option>
+        ${Object.keys(upData).map(d => `<option value="${d}">${d}</option>`).join('')}
       </select>
-      <label>Block / Area</label>
-      <input id="rblock" placeholder="Block / Area">
-      <button class="blue-btn" onclick="registerCustomer()">REGISTER CUSTOMER</button>
+      <button class="blue-btn" style="width:100%;margin-top:10px;" onclick="registerCustomer()">REGISTER NOW</button>
     `;
   }
-  else if(type==="fo"){
-    c.innerHTML=`
-      <h2>Associate / FO Registration</h2>
-      <input id="aname" placeholder="Full Name">
-      <input id="aphone" maxlength="10" placeholder="Mobile Number">
-      <select id="adistrict">
-        <option value="">-- District Select Karein --</option>
-        <option value="Shahjahanpur">Shahjahanpur</option>
-        <option value="Bareilly">Bareilly</option>
-        <option value="Lucknow">Lucknow</option>
-      </select>
-      <input id="ablock" placeholder="Block Name">
-      <button class="blue-btn" onclick="associateRegister()">SUBMIT FOR BM APPROVAL</button>
-    `;
-  }
-  else{
-    let role="DM";
-    if(type==="customerLogin") role="customer";
-    if(type==="foLogin") role="FO";
-    if(type==="bmLogin") role="BM";
-    if(type==="dmLogin") role="DM";
+  else if(type.includes("Login")){
+    let roleKey = "DM";
+    if(type === "ownerLogin") roleKey = "OWNER";
+    if(type === "dmLogin") roleKey = "DM";
+    if(type === "bmLogin") roleKey = "BM";
+    if(type === "foLogin") roleKey = "FO";
+    if(type === "customerLogin") roleKey = "customer";
 
-    c.innerHTML=`
-      <h2>${roles[role].name} LOGIN</h2>
+    let defaultUser = usersList.find(u => u.role === roleKey) || { id: roles[roleKey].defaultId };
+
+    c.innerHTML = `
+      <h2>${roles[roleKey].name} LOGIN</h2>
       <label>Login ID</label>
-      <input id="loginID" value="${roles[role].id}">
+      <input id="loginID" value="${defaultUser.id}">
       <label>Password</label>
       <input id="password" type="password" value="1234">
-      <button class="blue-btn" onclick="login('${role}')" style="width:100%">LOGIN</button>
+      <button class="blue-btn" style="width:100%;margin-top:10px;" onclick="login('${roleKey}')">LOGIN TO PORTAL</button>
     `;
   }
-  document.getElementById("modal").style.display="flex";
+  document.getElementById("modal").style.display = "flex";
 }
 
 function registerCustomer(){
-  let name=document.getElementById("rname").value;
-  let phone=document.getElementById("rphone").value;
-  if(!name || phone.length!==10){ alert("Name aur 10 digit mobile number bhariye."); return; }
+  let name = document.getElementById("rname").value;
+  let phone = document.getElementById("rphone").value;
+  if(!name || phone.length !== 10){ alert("Sahi Name aur 10-digit Mobile Number dalein."); return; }
   closeModal();
-  alert("Customer registration submitted successfully.");
+  alert("Customer Registration Successful!");
 }
 
-function associateRegister(){
-  let name=document.getElementById("aname").value;
-  let phone=document.getElementById("aphone").value;
-  let district=document.getElementById("adistrict").value;
-  let block=document.getElementById("ablock").value;
-
-  if(!name || phone.length!==10 || !district || !block){
-    alert("Saari jankari bhariye."); return;
-  }
-  
-  let newId = "FO-" + Math.floor(1000 + Math.random() * 9000);
-  foList.push({ id: newId, name: name, district: district, block: block, status: "Pending" });
-  closeModal();
-  alert("FO Request BM Approval ke liye bhej di gayi hai. Generated ID: " + newId);
-}
-
-/* LOGIN */
+/* LOGIN PROCESS */
 function login(role){
-  currentRole=role;
-  document.getElementById("public").style.display="none";
-  document.getElementById("portal").style.display="block";
-  document.getElementById("roleText").textContent=roles[role].name;
-  document.getElementById("userID").textContent=document.getElementById("loginID").value||roles[role].id;
+  currentRole = role;
+  currentUserId = document.getElementById("loginID").value || roles[role].defaultId;
+  
   closeModal();
+  closeMenu();
+  
+  document.getElementById("public").style.display = "none";
+  document.getElementById("portal").style.display = "block";
+  document.getElementById("roleText").textContent = roles[role].name;
+  document.getElementById("userID").textContent = "ID: " + currentUserId;
+  
   createSidebar();
   showPage("dashboard");
 }
 
-/* SIDEBAR */
+/* SIDEBAR SETUP */
 function createSidebar(){
-  let menu=[
-    ["dashboard","🏠 Dashboard"],
-    ["id","🪪 My ID"],
-    ["members","👥 Members"],
-    ["wallet","💳 Wallet"],
-    ["withdrawal","💸 Withdrawal"],
-    ["messages","💬 Messages"],
-    ["reports","📊 Reports"]
+  let menu = [
+    ["dashboard", "🏠 Dashboard"],
+    ["create_id", "➕ Create New ID"],
+    ["hierarchy", "👥 Team / Hierarchy"],
+    ["wallet", "💳 Wallet"],
+    ["reports", "📊 Reports"]
   ];
-  let html="";
-  menu.forEach(x=>{
-    html+=`<button onclick="showPage('${x[0]}',this)">${x[1]}</button>`;
+  
+  let html = "";
+  menu.forEach((x, index) => {
+    html += `<button class="${index===0?'active':''}" onclick="showPage('${x[0]}',this)">${x[1]}</button>`;
   });
-  document.getElementById("sidebar").innerHTML=html;
+  document.getElementById("sidebar").innerHTML = html;
 }
 
-/* PAGE DISPLAY */
-function showPage(page,button){
-  if(button){
-    document.querySelectorAll(".sidebar button").forEach(b=>b.classList.remove("active"));
-    button.classList.add("active");
+/* PAGE DISPLAY & DASHBOARD LOGIC */
+function showPage(page, btn){
+  if(btn){
+    document.querySelectorAll(".sidebar button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
   }
 
-  let d=document.getElementById("dashboard");
+  let d = document.getElementById("dashboard");
 
-  /* DASHBOARD PAGE */
-  if(page==="dashboard"){
-    let data;
-    if(currentRole==="DM"){ data=["18,420","146","32","124"]; }
-    else if(currentRole==="BM"){ data=["1,284","9","7","27"]; }
-    else if(currentRole==="FO"){ data=["184","—","2","8"]; }
-    else{ data=["1","—","—","1"]; }
-
+  if(page === "dashboard"){
     let locationHTML = "";
 
-    // 1. DM LEVEL: SIRF DISTRICT SHOW HO
-    if(currentRole === "DM") {
+    // 1. OWNER LEVEL: ALL UP DISTRICTS VIEW & SYSTEM OVERVIEW
+    if(currentRole === "OWNER"){
       locationHTML = `
         <div class="location-card">
-          <h3>📍 DM Area Filter (UP Districts)</h3>
+          <h3>👑 Owner Access: All UP Districts Controls</h3>
+          <p style="font-size:12px;color:#666;">Owner DM, BM aur FO sabhi IDs create aur manage kar sakta hai.</p>
+        </div>
+      `;
+    }
+
+    // 2. DM LEVEL: ALL UP DISTRICTS FILTER
+    else if(currentRole === "DM"){
+      locationHTML = `
+        <div class="location-card">
+          <h3>🏛️ District Manager (DM) Panel — All UP Districts Access</h3>
           <div class="location-grid">
             <div>
-              <label>District Chune:</label>
-              <select id="dmDistSelect">
+              <label>UP District Select Karein:</label>
+              <select id="dmDistrictSelect">
                 <option value="">-- All UP Districts --</option>
                 ${Object.keys(upData).map(dist => `<option value="${dist}">${dist}</option>`).join('')}
               </select>
@@ -1022,79 +897,51 @@ function showPage(page,button){
       `;
     }
 
-    // 2. BM LEVEL: DISTRICT AUR BLOCK DONO SHOW HO + FO APPROVALS
-    else if(currentRole === "BM") {
+    // 3. BM LEVEL: ALL DISTRICTS & ALL BLOCKS FILTER
+    else if(currentRole === "BM"){
       locationHTML = `
         <div class="location-card">
-          <h3>📍 BM Area Filter (District & Block)</h3>
+          <h3>🏢 Block Manager (BM) Panel — District & Block Access</h3>
           <div class="location-grid">
             <div>
-              <label>District Chune:</label>
+              <label>District Select Karein:</label>
               <select id="bmDistSelect" onchange="updateBMBlocks()">
                 <option value="">-- District Select Karein --</option>
                 ${Object.keys(upData).map(dist => `<option value="${dist}">${dist}</option>`).join('')}
               </select>
             </div>
             <div>
-              <label>Block Chune:</label>
+              <label>Block Select Karein:</label>
               <select id="bmBlockSelect">
                 <option value="">-- Pehle District Chune --</option>
               </select>
             </div>
           </div>
         </div>
-
-        <!-- FO APPROVAL PANEL FOR BM -->
-        <div class="panel" style="border-top:4px solid #28a745;">
-          <h3>⏳ Pending FO Approvals (BM Approval Panel)</h3>
-          <p style="font-size:12px;color:#666;margin-bottom:10px;">Yahan BM naye Field Officers ko approve kar sakta hai.</p>
-          <table class="table">
-            <tr>
-              <th>FO ID</th>
-              <th>Name</th>
-              <th>District</th>
-              <th>Block</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-            ${foList.map(fo => `
-              <tr>
-                <td><b>${fo.id}</b></td>
-                <td>${fo.name}</td>
-                <td>${fo.district}</td>
-                <td>${fo.block}</td>
-                <td><span class="${fo.status==='Approved'?'badge-approved':'badge-pending'}">${fo.status}</span></td>
-                <td>
-                  ${fo.status==='Pending' ? `<button class="btn-approve" onclick="approveFO('${fo.id}')">Approve FO</button>` : '✓ Approved'}
-                </td>
-              </tr>
-            `).join('')}
-          </table>
-        </div>
       `;
     }
 
-    // 3. FO LEVEL: DISTRICT + BLOCK + GRAM PANCHAYAT SHOW HO
-    else if(currentRole === "FO") {
+    // 4. FO LEVEL: ALL DISTRICTS, ALL BLOCKS & SEARCH/AUTO GRAM PANCHAYAT
+    else if(currentRole === "FO"){
       locationHTML = `
         <div class="location-card">
-          <h3>📍 FO Location Selection (Panchayat Level)</h3>
+          <h3>👨‍💼 Field Officer (FO) Panel — Panchayat Search & Select</h3>
           <div class="location-grid">
             <div>
-              <label>District Chune:</label>
+              <label>District Select Karein:</label>
               <select id="foDistSelect" onchange="updateFOBlocks()">
                 <option value="">-- District Select Karein --</option>
                 ${Object.keys(upData).map(dist => `<option value="${dist}">${dist}</option>`).join('')}
               </select>
             </div>
             <div>
-              <label>Block Chune:</label>
+              <label>Block Type ya Select Karein:</label>
               <select id="foBlockSelect" onchange="updateFOPanchayats()">
                 <option value="">-- Pehle District Chune --</option>
               </select>
             </div>
             <div>
-              <label>Gram Panchayat Chune:</label>
+              <label>Gram Panchayat List (Auto-Loaded):</label>
               <select id="foPanchayatSelect">
                 <option value="">-- Pehle Block Chune --</option>
               </select>
@@ -1104,112 +951,119 @@ function showPage(page,button){
       `;
     }
 
-    d.innerHTML=`
+    d.innerHTML = `
       <h1>${roles[currentRole].name} Dashboard</h1>
-      <div class="notice">
-        <b>Data Access Role:</b> ${roles[currentRole].name} Authorized Area.
-      </div>
-
+      <br>
       ${locationHTML}
 
       <div class="stats">
-        <div class="stat"><small>Members</small><strong>${data[0]}</strong></div>
-        <div class="stat"><small>Field Team</small><strong>${data[1]}</strong></div>
-        <div class="stat"><small>Pending Requests</small><strong>${data[2]}</strong></div>
-        <div class="stat"><small>Today Operations</small><strong>${data[3]}</strong></div>
+        <div class="stat"><small>Active DMs</small><strong>${usersList.filter(u=>u.role==='DM').length}</strong></div>
+        <div class="stat"><small>Active BMs</small><strong>${usersList.filter(u=>u.role==='BM').length}</strong></div>
+        <div class="stat"><small>Active FOs</small><strong>${usersList.filter(u=>u.role==='FO').length}</strong></div>
+        <div class="stat"><small>Total Network</small><strong>${usersList.length}</strong></div>
       </div>
 
       <div class="panel">
-        <h3>Recent Activity</h3>
+        <h3>System User Management & Authorization</h3>
+        <table class="table">
+          <tr><th>ID</th><th>Name</th><th>Role</th><th>District</th><th>Block</th><th>Status</th></tr>
+          ${usersList.map(u => `
+            <tr>
+              <td><b>${u.id}</b></td>
+              <td>${u.name}</td>
+              <td><span style="background:#eaf4fb;padding:3px 8px;border-radius:4px;font-weight:bold;">${u.role}</span></td>
+              <td>${u.district}</td>
+              <td>${u.block}</td>
+              <td><span style="color:green;font-weight:bold;">${u.status}</span></td>
+            </tr>
+          `).join('')}
+        </table>
+      </div>
+    `;
+  }
+
+  /* CREATE NEW ID PAGE (STRICT HIERARCHY RULE) */
+  else if(page === "create_id"){
+    let allowedRoleToCreate = "";
+    let ruleText = "";
+
+    if(currentRole === "OWNER"){
+      allowedRoleToCreate = "DM";
+      ruleText = "👑 Owner / Admin dwara Naya DM (District Manager) ID banayein.";
+    } else if(currentRole === "DM"){
+      allowedRoleToCreate = "BM";
+      ruleText = "🏛️ DM Login: Aap dwara naya BM (Block Manager) ID banayein.";
+    } else if(currentRole === "BM"){
+      allowedRoleToCreate = "FO";
+      ruleText = "🏢 BM Login: Aap dwara naya FO (Field Officer) ID banayein.";
+    } else {
+      d.innerHTML = `<h1>Access Restricted</h1><p>FO ya Customer ID create nahi kar sakte.</p>`;
+      return;
+    }
+
+    d.innerHTML = `
+      <h1>Create New ${allowedRoleToCreate} ID</h1>
+      <p style="color:#666;margin-bottom:15px;">${ruleText}</p>
+
+      <div class="panel" style="max-width:600px;">
+        <label>Full Name</label>
+        <input id="newUserName" placeholder="Enter Full Name">
+
+        <label>Select UP District</label>
+        <select id="newUserDist" onchange="updateCreateBlockDropdown()">
+          <option value="">-- District Select Karein --</option>
+          ${Object.keys(upData).map(dist => `<option value="${dist}">${dist}</option>`).join('')}
+        </select>
+
+        ${allowedRoleToCreate !== "DM" ? `
+          <label>Select Block</label>
+          <select id="newUserBlock">
+            <option value="">-- Pehle District Select Karein --</option>
+          </select>
+        ` : ''}
+
+        <button class="btn-success" style="margin-top:15px;width:100%;" onclick="processCreateID('${allowedRoleToCreate}')">GENERATE ${allowedRoleToCreate} ID</button>
+      </div>
+    `;
+  }
+
+  else if(page === "hierarchy"){
+    d.innerHTML = `
+      <h1>Network Hierarchy</h1>
+      <div class="panel">
+        <p><b>Rule Structure:</b> OWNER ➔ DM ➔ BM ➔ FO</p>
         <br>
-        <table class="table">
-          <tr><th>ID</th><th>Operation</th><th>Visibility</th><th>Status</th></tr>
-          <tr><td>FO-104</td><td>Member Registration</td><td>Authorized Users</td><td>Approved</td></tr>
-          <tr><td>WD-2081</td><td>Withdrawal Request</td><td>Management</td><td>Pending</td></tr>
-        </table>
+        <ul style="margin-left:20px;line-height:2;">
+          <li><b>OWNER / ADMIN:</b> Controls all UP Districts.</li>
+          <li><b>DISTRICT MANAGER (DM):</b> Manages assigned District and creates BM IDs.</li>
+          <li><b>BLOCK MANAGER (BM):</b> Manages assigned District/Block and creates FO IDs.</li>
+          <li><b>FIELD OFFICER (FO):</b> Works at Gram Panchayat level.</li>
+        </ul>
       </div>
     `;
   }
 
-  else if(page==="id"){
-    d.innerHTML=`
-      <h1>🪪 My ID</h1>
-      <div class="panel">
-        <h2 style="color:#1787c8">SEWANYA HEALTH</h2>
-        <br><h2>${roles[currentRole].id}</h2>
-        <h3>${roles[currentRole].name}</h3>
-        <br><p>Assigned Area: Uttar Pradesh</p>
-        <br><button class="blue-btn" onclick="window.print()">🖨 Print / Save ID</button>
-      </div>
-    `;
-  }
-
-  else if(page==="members"){
-    d.innerHTML=`
-      <h1>👥 Members</h1>
-      <div class="panel">
-        <table class="table">
-          <tr><th>ID</th><th>Name</th><th>Type</th><th>Status</th></tr>
-          <tr><td>CUS-001</td><td>Customer</td><td>Health Member</td><td>Active</td></tr>
-          <tr><td>FO-104</td><td>Field Officer</td><td>FO</td><td>Active</td></tr>
-          <tr><td>BM-001</td><td>Block Manager</td><td>BM</td><td>Active</td></tr>
-        </table>
-      </div>
-    `;
-  }
-
-  else if(page==="wallet"){
-    d.innerHTML=`
-      <h1>💳 Wallet</h1>
+  else if(page === "wallet"){
+    d.innerHTML = `
+      <h1>Wallet</h1>
       <div class="panel">
         <h3>Available Balance</h3>
-        <br><h1 style="color:#1787c8">₹ ${currentRole==="DM"?"2,45,000":currentRole==="BM"?"48,500":currentRole==="FO"?"12,850":"1,250"}</h1>
+        <h1 style="color:#218fd5;margin-top:10px;">₹ 45,200.00</h1>
       </div>
     `;
   }
 
-  else if(page==="withdrawal"){
-    d.innerHTML=`
-      <h1>💸 Withdrawal</h1>
+  else if(page === "reports"){
+    d.innerHTML = `
+      <h1>Reports</h1>
       <div class="panel">
-        <input id="withdrawAmount" type="number" placeholder="Amount ₹">
-        <button class="blue-btn" onclick="withdraw()">SUBMIT WITHDRAWAL</button>
-      </div>
-    `;
-  }
-
-  else if(page==="messages"){
-    d.innerHTML=`
-      <h1>💬 Messages</h1>
-      <div class="panel">
-        <textarea placeholder="Message likhiye..."></textarea>
-        <button class="blue-btn" onclick="alert('Message sent successfully')">SEND MESSAGE</button>
-      </div>
-    `;
-  }
-
-  else if(page==="reports"){
-    d.innerHTML=`
-      <h1>📊 Reports</h1>
-      <div class="panel">
-        <h3>${roles[currentRole].name} Report</h3>
-        <button class="blue-btn" onclick="alert('Report generated')">GENERATE REPORT</button>
+        <p>System hierarchy report generated successfully for ${roles[currentRole].name}.</p>
       </div>
     `;
   }
 }
 
-/* BM FO APPROVAL FUNCTION */
-function approveFO(foId){
-  let fo = foList.find(item => item.id === foId);
-  if(fo){
-    fo.status = "Approved";
-    alert(fo.name + " (" + fo.id + ") ko BM dwara Approve kar diya gaya hai!");
-    showPage("dashboard");
-  }
-}
-
-/* DYNAMIC LOCATION CASCADE FUNCTIONS */
+/* DYNAMIC CASCADE DROPDOWNS FOR LOCATION */
 function updateBMBlocks() {
   let dist = document.getElementById("bmDistSelect").value;
   let blockSelect = document.getElementById("bmBlockSelect");
@@ -1239,7 +1093,7 @@ function updateFOPanchayats() {
   let dist = document.getElementById("foDistSelect").value;
   let block = document.getElementById("foBlockSelect").value;
   let panchayatSelect = document.getElementById("foPanchayatSelect");
-  panchayatSelect.innerHTML = '<option value="">-- Gram Panchayat Select Karein --</option>';
+  panchayatSelect.innerHTML = '<option value="">-- Select Gram Panchayat --</option>';
 
   if(dist && block && upData[dist][block]) {
     upData[dist][block].forEach(panchayat => {
@@ -1248,25 +1102,59 @@ function updateFOPanchayats() {
   }
 }
 
-function withdraw(){
-  let amount=document.getElementById("withdrawAmount").value;
-  if(!amount){ alert("Amount enter karein."); return; }
-  alert("Withdrawal request submitted. Status: Pending.");
+function updateCreateBlockDropdown(){
+  let dist = document.getElementById("newUserDist").value;
+  let blockSelect = document.getElementById("newUserBlock");
+  if(!blockSelect) return;
+  
+  blockSelect.innerHTML = '<option value="">-- Block Select Karein --</option>';
+  if(dist && upData[dist]){
+    Object.keys(upData[dist]).forEach(b => {
+      blockSelect.innerHTML += `<option value="${b}">${b}</option>`;
+    });
+  }
 }
 
-function sendEnquiry(){
-  let name=document.getElementById("ename").value;
-  let phone=document.getElementById("ephone").value;
-  if(!name || !phone){ alert("Name aur mobile number bhariye."); return; }
-  alert("Enquiry submitted successfully.");
+/* ID GENERATION LOGIC */
+function processCreateID(targetRole){
+  let name = document.getElementById("newUserName").value;
+  let dist = document.getElementById("newUserDist").value;
+  let blockElem = document.getElementById("newUserBlock");
+  let block = blockElem ? blockElem.value : "ALL";
+
+  if(!name || !dist || (blockElem && !block)){
+    alert("Kripya saari details bhariye!");
+    return;
+  }
+
+  let prefix = targetRole === "DM" ? "SPN83" : targetRole === "BM" ? "BM-" : "FO-";
+  let randomNum = Math.floor(1000 + Math.random() * 9000);
+  let newGeneratedId = prefix + randomNum + (targetRole === "DM" ? "DM001" : "");
+
+  usersList.push({
+    id: newGeneratedId,
+    name: name,
+    role: targetRole,
+    district: dist,
+    block: block,
+    status: "Approved"
+  });
+
+  alert(`Naya ID safaltapoorvak ban gaya hai!\n\nRole: ${targetRole}\nGenerated ID: ${newGeneratedId}\nPassword: 1234`);
+  renderMenuGeneratedIds();
+  showPage("dashboard");
 }
 
 function logout(){
-  currentRole=null;
-  document.getElementById("portal").style.display="none";
-  document.getElementById("public").style.display="block";
+  currentRole = null;
+  currentUserId = null;
+  document.getElementById("portal").style.display = "none";
+  document.getElementById("public").style.display = "block";
   window.scrollTo(0,0);
 }
+
+// Initial Menu Setup
+renderMenuGeneratedIds();
 
 </script>
 
