@@ -1,1496 +1,1814 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Sewanya Health</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sewanya Healthcare</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:#f5f8fc;
-  color:#172033;
+  background:#f6f9fc;
+  color:#243746;
 }
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
 
+/* TOP BAR */
+.topbar{
+  background:#164b7d;
+  color:white;
+  padding:6px 5%;
+  font-size:12px;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* HEADER */
 .header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  height:70px;
-  background:#fff;
+  height:82px;
+  background:white;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 22px;
-  box-shadow:0 2px 12px #0001;
+  padding:0 5%;
+  border-bottom:1px solid #ddd;
 }
+
 .logo{
-  font-size:24px;
-  font-weight:800;
-  color:#0969d8;
-}
-.logo span{color:#19a974}
-
-.menuBtn{
-  border:0;
-  background:#0969d8;
-  color:#fff;
-  width:45px;
-  height:42px;
-  border-radius:9px;
-  font-size:22px;
-}
-
-.drawer{
-  display:none;
-  position:fixed;
-  top:70px;
-  right:15px;
-  width:250px;
-  background:#fff;
-  box-shadow:0 8px 30px #0002;
-  border-radius:12px;
-  z-index:2000;
-  padding:10px;
-}
-.drawer.show{display:block}
-.drawer button{
-  width:100%;
-  padding:13px;
-  margin:3px 0;
-  border:0;
-  background:#fff;
-  text-align:left;
-  border-radius:8px;
-}
-.drawer button:hover{background:#eef6ff}
-
-.hero{
-  min-height:500px;
   display:flex;
   align-items:center;
-  padding:50px 7%;
-  background:
-   linear-gradient(90deg,#062b55ee,#062b5570),
-   url("https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1800&q=85")
-   center/cover;
-  color:white;
+  gap:9px;
 }
-.heroBox{max-width:650px}
-.hero h1{font-size:52px;line-height:1.1;margin-bottom:20px}
-.hero p{font-size:19px;line-height:1.7;margin-bottom:25px}
 
-.btn{
-  border:0;
-  padding:13px 20px;
-  border-radius:8px;
-  background:#0969d8;
-  color:#fff;
+.logo-circle{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#38a94d,#178bd0);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
   font-weight:bold;
 }
-.btn.green{background:#19a974}
-.btn.light{background:#fff;color:#0969d8}
 
-section{
-  padding:65px 7%;
-}
-.title{
-  text-align:center;
-  font-size:32px;
-  margin-bottom:35px;
+.logo-text{
+  font-size:21px;
+  font-weight:bold;
+  color:#24518a;
 }
 
-.about{
-  background:#fff;
+.logo-text span{
+  color:#40a653;
 }
-.aboutGrid{
+
+.tagline{
+  font-size:9px;
+  color:#dd7b2f;
+}
+
+/* BUTTON */
+.join{
+  background:#2294da;
+  color:white;
+  border:0;
+  padding:11px 18px;
+  border-radius:4px;
+  font-weight:bold;
+  margin-right:10px;
+}
+
+.menu-btn{
+  width:42px;
+  height:42px;
+  background:#2294da;
+  border:0;
+  border-radius:4px;
+}
+
+.menu-btn span{
+  display:block;
+  width:22px;
+  height:3px;
+  background:white;
+  margin:4px auto;
+}
+
+/* HERO */
+.hero{
+  min-height:480px;
+  position:relative;
+  background:
+  linear-gradient(90deg,rgba(255,255,255,.96),rgba(255,255,255,.72),rgba(255,255,255,.10)),
+  url("https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1600&q=85");
+  background-size:cover;
+  background-position:center;
+}
+
+.hero-content{
+  max-width:1100px;
+  margin:auto;
+  padding:80px 6%;
+}
+
+.hero small{
+  color:#1688c9;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+
+.hero h1{
+  max-width:650px;
+  font-size:48px;
+  line-height:1.1;
+  color:#173e5b;
+  margin:15px 0;
+}
+
+.hero p{
+  max-width:600px;
+  font-size:17px;
+  line-height:1.7;
+  color:#536875;
+}
+
+.hero button{
+  margin-top:20px;
+}
+
+/* BLUE RIBBON */
+.ribbon{
+  background:#064299;
+  color:white;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:35px;
+  grid-template-columns:repeat(4,1fr);
+  text-align:center;
 }
-.card{
-  background:#fff;
-  padding:25px;
-  border-radius:15px;
-  box-shadow:0 4px 20px #0000000c;
-}
-.about p{line-height:1.8;color:#596579}
 
-.plans{
+.ribbon div{
+  padding:17px 5px;
+  border-right:1px solid #ffffff55;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.ribbon b{
+  display:block;
+  font-size:23px;
+  margin-bottom:5px;
+}
+
+/* SECTION */
+.section{
+  max-width:1100px;
+  margin:auto;
+  padding:60px 5%;
+}
+
+.section h2{
+  text-align:center;
+  color:#203e56;
+  margin-bottom:12px;
+  font-size:32px;
+}
+
+.description{
+  text-align:center;
+  color:#697984;
+  max-width:700px;
+  margin:auto;
+  line-height:1.6;
+}
+
+.about-img{
+  width:100%;
+  max-height:540px;
+  object-fit:cover;
+  border-radius:7px;
+  margin:35px 0;
+  box-shadow:0 8px 25px #0002;
+}
+
+/* CARDS */
+.cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:20px;
+  gap:18px;
+  margin-top:30px;
 }
-.plan h3{color:#0969d8;margin-bottom:12px}
-.plan p{line-height:1.7;color:#667}
 
-.contact{
-  background:#eaf4ff;
+.card{
+  background:white;
+  border:1px solid #e0e8ee;
+  padding:23px;
+  border-radius:7px;
+  box-shadow:0 5px 18px #123e6310;
 }
-.contactGrid{
+
+.card h3{
+  margin:10px 0;
+  color:#234d66;
+}
+
+.card p{
+  color:#6b7881;
+  line-height:1.5;
+}
+
+.icon{
+  font-size:30px;
+}
+
+.blue-btn{
+  margin-top:15px;
+  background:#218fd5;
+  color:white;
+  border:0;
+  padding:11px 17px;
+  border-radius:4px;
+  font-weight:bold;
+}
+
+/* CONTACT */
+.contact{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:25px;
+  gap:20px;
 }
+
+.contact-box{
+  background:white;
+  padding:25px;
+  border-radius:8px;
+  border:1px solid #e0e8ee;
+}
+
 input,select,textarea{
   width:100%;
   padding:12px;
-  border:1px solid #ccd6e3;
-  border-radius:8px;
   margin:7px 0 12px;
-  outline:none;
-}
-textarea{min-height:110px}
-
-.footer{
-  background:#09233f;
-  color:#fff;
-  padding:30px 7%;
-  text-align:center;
-  line-height:1.8;
+  border:1px solid #ccd9e1;
+  border-radius:5px;
 }
 
+textarea{
+  height:110px;
+}
+
+/* FOOTER */
+footer{
+  background:#123e63;
+  color:white;
+  padding:30px 6%;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* MENU */
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0005;
+  z-index:1000;
+}
+
+.menu{
+  position:absolute;
+  right:0;
+  top:0;
+  width:min(500px,94%);
+  height:100%;
+  background:white;
+  overflow-y:auto;
+}
+
+.menu-head{
+  height:82px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+  border-bottom:1px solid #ddd;
+}
+
+.close{
+  border:0;
+  background:white;
+  font-size:32px;
+}
+
+.menu-title{
+  padding:15px 22px 8px;
+  font-size:12px;
+  color:#555;
+}
+
+.menu-item{
+  width:100%;
+  padding:15px 25px;
+  border:0;
+  border-bottom:1px solid #e4e4e4;
+  background:white;
+  text-align:left;
+  font-size:15px;
+}
+
+.menu-item:hover{
+  background:#2294da;
+  color:white;
+}
+
+.submenu{
+  display:none;
+  background:#f4f4f4;
+}
+
+.submenu button{
+  width:100%;
+  border:0;
+  border-bottom:1px solid #ddd;
+  background:#f4f4f4;
+  padding:13px 43px;
+  text-align:left;
+}
+
+.submenu.show{
+  display:block;
+}
+
+/* MODAL */
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:#0008;
-  z-index:5000;
+  background:#092b3baa;
+  z-index:2000;
   align-items:center;
   justify-content:center;
   padding:15px;
 }
-.modal.show{display:flex}
-.modalBox{
-  width:100%;
-  max-width:480px;
-  max-height:90vh;
+
+.modal-box{
+  width:min(550px,100%);
+  max-height:92vh;
   overflow:auto;
-  background:#fff;
-  border-radius:15px;
+  background:white;
+  border-radius:10px;
   padding:25px;
+  position:relative;
 }
-.close{
-  float:right;
-  border:0;
-  background:#eee;
-  width:32px;
-  height:32px;
-  border-radius:50%;
-}
-.modal h2{margin-bottom:20px;color:#0969d8}
 
-#portal{display:none}
-.portalHead{
-  background:#09233f;
-  color:#fff;
-  padding:20px;
+.modal-close{
+  position:absolute;
+  right:12px;
+  top:7px;
+  border:0;
+  background:none;
+  font-size:30px;
 }
-.portalHeadRow{
+
+.modal-box h2{
+  color:#173e5b;
+  margin-bottom:18px;
+}
+
+/* PORTAL */
+#portal{
+  display:none;
+  min-height:100vh;
+  background:#f3f7fa;
+}
+
+.portal-head{
+  height:70px;
+  background:white;
+  border-bottom:1px solid #ddd;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:15px;
-}
-.logout{
-  background:#e53935;
-  border:0;
-  color:#fff;
-  padding:10px 15px;
-  border-radius:7px;
+  justify-content:space-between;
+  padding:0 20px;
 }
 
-.portalLayout{
+.portal-layout{
   display:grid;
   grid-template-columns:230px 1fr;
-  min-height:calc(100vh - 80px);
 }
+
 .sidebar{
-  background:#fff;
-  padding:15px;
-  box-shadow:2px 0 10px #0001;
+  background:#123e63;
+  min-height:calc(100vh - 70px);
+  padding:14px;
 }
-.sideBtn{
+
+.sidebar button{
   width:100%;
-  padding:12px;
-  margin:3px 0;
+  padding:13px;
+  margin-bottom:5px;
   border:0;
-  background:#fff;
+  border-radius:5px;
+  background:transparent;
+  color:white;
   text-align:left;
-  border-radius:8px;
 }
-.sideBtn:hover,.sideBtn.active{
-  background:#eaf4ff;
-  color:#0969d8;
+
+.sidebar button:hover,
+.sidebar button.active{
+  background:#218fd5;
 }
-.portalMain{padding:25px}
+
+.dashboard{
+  padding:25px;
+}
 
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:15px;
-  margin-bottom:25px;
 }
+
 .stat{
-  background:#fff;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 3px 15px #0000000b;
+  background:white;
+  padding:18px;
+  border-radius:8px;
+  border:1px solid #e0e8ed;
 }
-.stat small{color:#778}
+
+.stat small{
+  color:#71808a;
+}
+
 .stat strong{
   display:block;
   font-size:27px;
   margin-top:8px;
-  color:#0969d8;
+  color:#173e5b;
 }
 
 .panel{
-  background:#fff;
-  padding:22px;
-  border-radius:12px;
-  margin-bottom:20px;
-  box-shadow:0 3px 15px #0000000b;
+  background:white;
+  margin-top:20px;
+  padding:20px;
+  border-radius:8px;
+  border:1px solid #e0e8ed;
+  overflow:auto;
 }
-.panel h2{margin-bottom:18px}
 
-table{
+.table{
   width:100%;
   border-collapse:collapse;
 }
-th,td{
-  border-bottom:1px solid #e4e8ee;
-  padding:12px 8px;
-  text-align:left;
-}
-th{background:#f4f7fb}
 
-.idBox{
-  text-align:center;
-  padding:30px;
-  background:linear-gradient(135deg,#0969d8,#19a974);
-  color:#fff;
-  border-radius:15px;
+.table th,
+.table td{
+  padding:11px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+  font-size:13px;
 }
-.idBox .bigId{
-  font-size:38px;
-  font-weight:800;
+
+.notice{
+  background:#eaf6ff;
+  border-left:4px solid #218fd5;
+  padding:13px;
   margin:15px 0;
 }
 
-.healthCard{
-  max-width:650px;
-  margin:auto;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 8px 30px #0002;
-  background:#fff;
-}
-.healthTop{
-  background:#0969d8;
-  color:#fff;
-  padding:25px;
-}
-.healthBody{padding:25px}
-.healthRow{
-  display:flex;
-  justify-content:space-between;
-  padding:11px 0;
-  border-bottom:1px solid #eee;
-}
+/* MOBILE */
+@media(max-width:750px){
 
-.hidden{display:none!important}
+  .topbar{
+    font-size:9px;
+  }
 
-@media(max-width:800px){
- .hero h1{font-size:38px}
- .aboutGrid,.contactGrid{grid-template-columns:1fr}
- .plans{grid-template-columns:1fr}
- .portalLayout{grid-template-columns:1fr}
- .sidebar{
-   display:flex;
-   overflow-x:auto;
-   gap:5px;
- }
- .sideBtn{min-width:125px}
- .stats{grid-template-columns:1fr 1fr}
-}
+  .header{
+    padding:0 12px;
+    height:75px;
+  }
 
-@media(max-width:500px){
- .header{padding:0 15px}
- section{padding:45px 5%}
- .hero{padding:45px 5%}
- .hero h1{font-size:32px}
- .stats{grid-template-columns:1fr}
+  .join{
+    display:none;
+  }
+
+  .logo-text{
+    font-size:18px;
+  }
+
+  .hero{
+    min-height:520px;
+  }
+
+  .hero-content{
+    padding:65px 22px;
+  }
+
+  .hero h1{
+    font-size:37px;
+  }
+
+  .ribbon{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .cards,
+  .contact{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .portal-layout{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    min-height:auto;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .dashboard{
+    padding:18px;
+  }
+
+  footer{
+    display:block;
+  }
+
+  footer span{
+    display:block;
+    margin-top:8px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- PUBLIC WEBSITE -->
+<!-- ================= PUBLIC WEBSITE ================= -->
 
-<div id="website">
+<div id="public">
 
-<header class="header">
-  <div class="logo">Sewanya <span>Health</span></div>
-  <button class="menuBtn" onclick="toggleMenu()">☰</button>
-</header>
-
-<div id="drawer" class="drawer">
-  <button onclick="goHome()">🏠 Home</button>
-  <button onclick="goAbout()">ℹ️ About Us</button>
-  <button onclick="goPlans()">💳 Membership Plans</button>
-  <button onclick="goContact()">📞 Contact</button>
-  <hr>
-  <button onclick="openLogin('Customer')">👤 Customer Login</button>
-  <button onclick="openLogin('FO')">🧑‍💼 FO Login</button>
-  <button onclick="openLogin('BM')">👨‍💼 BM Login</button>
-  <button onclick="openLogin('DM')">🏢 DM Login</button>
+<div class="topbar">
+  <span>✉ support@sewanyahealthcare.com</span>
+  <span>Trusted Healthcare Network • Customer First</span>
 </div>
 
-<section class="hero" id="home">
-  <div class="heroBox">
-    <h1>Sewanya Health</h1>
-    <p>
-      Better Healthcare, Better Life.
-      Join Sewanya Health and manage your healthcare
-      membership and services from one place.
-    </p>
-    <button class="btn green" onclick="openRegister('Customer')">
-      Join Now
-    </button>
-    <button class="btn light" onclick="goContact()">
-      Contact Us
-    </button>
-  </div>
-</section>
+<header class="header">
 
-<section class="about" id="about">
-  <h2 class="title">About Sewanya Health</h2>
-  <div class="aboutGrid">
-    <div class="card">
-      <h2>Our Mission</h2>
-      <p>
-        Sewanya Health का उद्देश्य healthcare services को
-        सरल, व्यवस्थित और लोगों तक आसानी से पहुँचाना है।
-      </p>
+<div class="logo">
+  <div class="logo-circle">✚</div>
+  <div>
+    <div class="logo-text">
+      Sewanya<span>Health</span>
     </div>
-    <div class="card">
-      <h2>Our Services</h2>
-      <p>
-        Membership, customer management, health card,
-        field network और digital management services.
-      </p>
+    <div class="tagline">
+      Har Jarurat, One Card Solution.
     </div>
   </div>
+</div>
+
+<div>
+<button class="join" onclick="openModal('register')">
+JOIN NOW +
+</button>
+
+<button class="menu-btn" onclick="openMenu()">
+<span></span>
+<span></span>
+<span></span>
+</button>
+</div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<small>SEWANYA HEALTHCARE</small>
+
+<h1>
+Quality Healthcare & Care Services For Everyone.
+</h1>
+
+<p>
+Customer membership, digital health card,
+healthcare support aur professional field network —
+sab ek hi platform par.
+</p>
+
+<button class="blue-btn"
+onclick="openModal('register')">
+JOIN NOW +
+</button>
+
+</div>
+
 </section>
 
-<section id="plans">
-  <h2 class="title">Membership Plans</h2>
-  <div class="plans">
-    <div class="card plan">
-      <h3>Basic</h3>
-      <p>Basic healthcare membership.</p>
-      <br>
-      <button class="btn" onclick="openRegister('Customer')">Join</button>
-    </div>
 
-    <div class="card plan">
-      <h3>Standard</h3>
-      <p>Additional healthcare benefits and support.</p>
-      <br>
-      <button class="btn" onclick="openRegister('Customer')">Join</button>
-    </div>
+<!-- BLUE STRIP -->
 
-    <div class="card plan">
-      <h3>Premium</h3>
-      <p>Premium membership and priority support.</p>
-      <br>
-      <button class="btn green" onclick="openRegister('Customer')">Join</button>
-    </div>
-  </div>
+<div class="ribbon">
+
+<div>
+<b>✓</b>
+UP TO 50%<br>
+DISCOUNT
+</div>
+
+<div>
+<b>▦</b>
+WIDE RANGE OF<br>
+TREATMENTS
+</div>
+
+<div>
+<b>♡</b>
+PATIENT SAFETY<br>
+OUR PRIORITY
+</div>
+
+<div>
+<b>♟</b>
+CARING FOR YOU<br>
+& YOUR FAMILY
+</div>
+
+</div>
+
+
+<!-- ABOUT -->
+
+<section class="section">
+
+<h2>About Us</h2>
+
+<p class="description">
+Sewanya Healthcare ek trusted healthcare network
+hai jahan customer membership, health card,
+field operations aur management services ko
+ek hi platform par manage kiya ja sakta hai.
+</p>
+
+<img class="about-img"
+src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85">
+
+<h2 style="text-align:left;font-size:25px">
+Why Choose Sewanya Healthcare?
+</h2>
+
+<div class="cards">
+
+<div class="card">
+✓ Verified Service Network
+</div>
+
+<div class="card">
+✓ Transparent Membership Structure
+</div>
+
+<div class="card">
+✓ Digital Health Card
+</div>
+
+<div class="card">
+✓ Customer & Family Support
+</div>
+
+</div>
+
 </section>
 
-<section class="contact" id="contact">
-  <h2 class="title">Contact Us</h2>
-  <div class="contactGrid">
-    <div class="card">
-      <h2>Sewanya Health</h2>
-      <p style="margin-top:15px;line-height:2">
-        📞 Phone: <b>8303636348</b><br>
-        📧 Email: <b>farhanmoha786@gmail.com</b><br>
-        📍 Uttar Pradesh, India
-      </p>
-    </div>
 
-    <div class="card">
-      <h2>Send Enquiry</h2>
-      <input id="enqName" placeholder="Your Name">
-      <input id="enqPhone" placeholder="Mobile Number">
-      <textarea id="enqMsg" placeholder="Your Message"></textarea>
-      <button class="btn" onclick="sendEnquiry()">Send Message</button>
-    </div>
-  </div>
+<!-- PLANS -->
+
+<section class="section"
+style="background:#f5fafd;max-width:none">
+
+<h2>Membership Plans</h2>
+
+<p class="description">
+Affordable healthcare membership aur
+professional network options.
+</p>
+
+<div class="cards"
+style="max-width:1100px;margin:30px auto">
+
+<div class="card">
+
+<div class="icon">🪪</div>
+
+<h3>Customer</h3>
+
+<p>
+Customer registration, health card,
+profile aur personal services.
+</p>
+
+<button class="blue-btn"
+onclick="openModal('register')">
+REGISTER
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">👨‍💼</div>
+
+<h3>Field Officer</h3>
+
+<p>
+Field work, customers aur assigned
+members manage karein.
+</p>
+
+<button class="blue-btn"
+onclick="openModal('fo')">
+FO JOIN
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🏢</div>
+
+<h3>Management</h3>
+
+<p>
+Block Manager aur District Manager
+management portal.
+</p>
+
+<button class="blue-btn"
+onclick="openModal('login')">
+PORTAL LOGIN
+</button>
+
+</div>
+
+</div>
+
 </section>
 
-<footer class="footer">
-  <b>Sewanya Health</b><br>
-  Better Healthcare, Better Life.<br>
-  © 2026 Sewanya Health. All Rights Reserved.
+
+<!-- CONTACT -->
+
+<section class="section">
+
+<h2>Contact Us</h2>
+
+<p class="description">
+Membership ya network ke liye enquiry bhejiye.
+</p>
+
+<div class="contact">
+
+<div class="contact-box">
+
+<h3>Customer Support</h3>
+
+<br>
+
+<p>📞 Phone / WhatsApp:
+<b>+91 XXXXX XXXXX</b></p>
+
+<br>
+
+<p>✉ Email:
+<b>support@sewanyahealthcare.com</b></p>
+
+<br>
+
+<p>📍 Uttar Pradesh, India</p>
+
+</div>
+
+
+<div class="contact-box">
+
+<h3>Send Enquiry</h3>
+
+<input id="ename"
+placeholder="Your Name">
+
+<input id="ephone"
+placeholder="Mobile Number">
+
+<textarea id="emessage"
+placeholder="How can we help?"></textarea>
+
+<button class="blue-btn"
+onclick="sendEnquiry()">
+SEND ENQUIRY
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<b>Sewanya Healthcare</b>
+
+<span>
+Healthcare Management Portal • Customer • FO • BM • DM
+</span>
+
 </footer>
 
 </div>
 
-<!-- PORTAL -->
+
+<!-- ================= MENU ================= -->
+
+<div class="overlay" id="overlay">
+
+<div class="menu">
+
+<div class="menu-head">
+
+<div class="logo">
+
+<div class="logo-circle">✚</div>
+
+<div class="logo-text">
+Sewanya<span>Health</span>
+</div>
+
+</div>
+
+<button class="close"
+onclick="closeMenu()">
+×
+</button>
+
+</div>
+
+
+<div class="menu-title">
+MAIN
+</div>
+
+<button class="menu-item"
+onclick="closeMenu()">
+HOME
+</button>
+
+<button class="menu-item"
+onclick="closeMenu()">
+ABOUT US
+</button>
+
+<button class="menu-item"
+onclick="closeMenu()">
+MEMBERSHIP PLANS
+</button>
+
+<button class="menu-item"
+onclick="closeMenu()">
+CONTACT
+</button>
+
+
+<div class="menu-title">
+LOGIN
+</div>
+
+<button class="menu-item"
+onclick="toggleLogin()">
+LOGIN
+<span style="float:right">⌄</span>
+</button>
+
+
+<div class="submenu"
+id="loginSub">
+
+<button onclick="openModal('customerLogin')">
+CUSTOMER LOGIN
+</button>
+
+<button onclick="openModal('foLogin')">
+FIELD OFFICER
+</button>
+
+<button onclick="openModal('bmLogin')">
+BLOCK MANAGER
+</button>
+
+<button onclick="openModal('dmLogin')">
+DISTRICT MANAGER
+</button>
+
+</div>
+
+
+<div class="menu-title">
+CUSTOMER
+</div>
+
+<button class="menu-item"
+onclick="openModal('register')">
+CUSTOMER REGISTER
+</button>
+
+
+<button class="menu-item"
+onclick="openModal('customerLogin')">
+CUSTOMER LOGIN
+</button>
+
+
+<div class="menu-title">
+NETWORK
+</div>
+
+<button class="menu-item"
+onclick="openModal('fo')">
+ASSOCIATE / FO REGISTRATION
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<button class="modal-close"
+onclick="closeModal()">
+×
+</button>
+
+<div id="modalContent"></div>
+
+</div>
+
+</div>
+
+
+<!-- ================= PORTAL ================= -->
 
 <div id="portal">
 
-<div class="portalHead">
-  <div class="portalHeadRow">
-    <div>
-      <h2>Sewanya Health Portal</h2>
-      <small id="portalUserText"></small>
-    </div>
-    <button class="logout" onclick="logout()">Logout</button>
-  </div>
+<header class="portal-head">
+
+<div class="logo">
+
+<div class="logo-circle">✚</div>
+
+<div>
+
+<div class="logo-text">
+Sewanya<span>Health</span>
 </div>
 
-<div class="portalLayout">
+<small id="roleText"></small>
 
-<aside class="sidebar" id="sidebar"></aside>
+</div>
 
-<main class="portalMain">
+</div>
 
-<div id="portalContent"></div>
+<div>
 
+<b id="userID"></b>
+
+<button class="blue-btn"
+onclick="logout()">
+Logout
+</button>
+
+</div>
+
+</header>
+
+
+<div class="portal-layout">
+
+<aside class="sidebar"
+id="sidebar">
+</aside>
+
+<main class="dashboard"
+id="dashboard">
 </main>
-</div>
-</div>
 
-<!-- LOGIN MODAL -->
-
-<div class="modal" id="loginModal">
-<div class="modalBox">
-<button class="close" onclick="closeModal('loginModal')">×</button>
-<h2 id="loginTitle">Login</h2>
-
-<input id="loginId" placeholder="Enter ID">
-<input id="loginPassword" type="password" placeholder="Password">
-
-<button class="btn" style="width:100%" onclick="login()">
-Login
-</button>
-
-<p style="margin-top:15px;text-align:center">
-Demo password: <b>1234</b>
-</p>
-
-<hr style="margin:20px 0">
-
-<button class="btn green" style="width:100%" onclick="openRegisterFromLogin()">
-Create New Account
-</button>
-</div>
 </div>
 
-<!-- REGISTER MODAL -->
-
-<div class="modal" id="registerModal">
-<div class="modalBox">
-<button class="close" onclick="closeModal('registerModal')">×</button>
-<h2 id="registerTitle">Registration</h2>
-
-<input id="regName" placeholder="Full Name">
-<input id="regMobile" placeholder="Mobile Number">
-<input id="regEmail" placeholder="Email">
-<input id="regAddress" placeholder="Address">
-
-<select id="regRole">
-<option value="Customer">Customer</option>
-<option value="FO">FO</option>
-<option value="BM">BM</option>
-<option value="DM">DM</option>
-</select>
-
-<button class="btn green" style="width:100%" onclick="registerUser()">
-Generate ID & Register
-</button>
-
-<div id="generatedBox" style="margin-top:20px"></div>
 </div>
-</div>
+
 
 <script>
-/* =========================
-   DATA
-========================= */
 
-let users = JSON.parse(localStorage.getItem("sewanya_users") || "[]");
-let currentUser = JSON.parse(localStorage.getItem("sewanya_current") || "null");
-let currentLoginRole = "Customer";
+/* ================= DATA ACCESS LEVEL =================
 
-let withdrawals =
-JSON.parse(localStorage.getItem("sewanya_withdrawals") || "[]");
+CUSTOMER = ONLY OWN DATA
 
-let messages =
-JSON.parse(localStorage.getItem("sewanya_messages") || "[]");
+FO = OWN DATA + ASSIGNED CUSTOMER DATA
 
-let wallet =
-JSON.parse(localStorage.getItem("sewanya_wallet") || "{}");
+BM = OWN DATA + FO DATA + CUSTOMER DATA
+       OF ASSIGNED BLOCK
 
-function save(){
-  localStorage.setItem("sewanya_users",JSON.stringify(users));
-  localStorage.setItem("sewanya_withdrawals",JSON.stringify(withdrawals));
-  localStorage.setItem("sewanya_messages",JSON.stringify(messages));
-  localStorage.setItem("sewanya_wallet",JSON.stringify(wallet));
+DM = DISTRICT LEVEL DATA
+
+*/
+
+const roles={
+
+customer:{
+ name:"CUSTOMER",
+ id:"CUS-001",
+ level:0
+},
+
+FO:{
+ name:"FIELD OFFICER",
+ id:"FO-SHAH-001",
+ level:1
+},
+
+BM:{
+ name:"BLOCK MANAGER",
+ id:"BM-SHAH-001",
+ level:2
+},
+
+DM:{
+ name:"DISTRICT MANAGER",
+ id:"DM-SHAH-001",
+ level:3
 }
 
-/* =========================
-   MENU
-========================= */
+};
 
-function toggleMenu(){
- document.getElementById("drawer").classList.toggle("show");
+let currentRole=null;
+
+
+/* MENU */
+
+function openMenu(){
+
+document.getElementById("overlay")
+.style.display="block";
+
 }
 
-function goHome(){
- toggleMenu();
- document.getElementById("home").scrollIntoView();
+function closeMenu(){
+
+document.getElementById("overlay")
+.style.display="none";
+
 }
 
-function goAbout(){
- toggleMenu();
- document.getElementById("about").scrollIntoView();
+function toggleLogin(){
+
+document.getElementById("loginSub")
+.classList.toggle("show");
+
 }
 
-function goPlans(){
- toggleMenu();
- document.getElementById("plans").scrollIntoView();
+
+/* MODAL */
+
+function closeModal(){
+
+document.getElementById("modal")
+.style.display="none";
+
 }
 
-function goContact(){
- document.getElementById("contact").scrollIntoView();
+function openModal(type){
+
+let c=document.getElementById("modalContent");
+
+if(type==="register"){
+
+c.innerHTML=`
+
+<h2>Customer Registration</h2>
+
+<label>Full Name</label>
+<input id="rname" placeholder="Full Name">
+
+<label>Mobile</label>
+<input id="rphone"
+maxlength="10"
+placeholder="10 Digit Mobile">
+
+<label>District</label>
+<select id="rdistrict">
+<option>Shahjahanpur</option>
+<option>Bareilly</option>
+<option>Lucknow</option>
+<option>Other</option>
+</select>
+
+<label>Block / Area</label>
+<input id="rblock"
+placeholder="Block / Area">
+
+<button class="blue-btn"
+onclick="registerCustomer()">
+REGISTER CUSTOMER
+</button>
+
+`;
+
 }
 
-/* =========================
-   MODALS
-========================= */
+else if(type==="fo"){
 
-function openLogin(role){
- currentLoginRole=role;
- document.getElementById("loginTitle").innerText=role+" Login";
- document.getElementById("loginId").value="";
- document.getElementById("loginPassword").value="";
- document.getElementById("loginModal").classList.add("show");
- document.getElementById("drawer").classList.remove("show");
+c.innerHTML=`
+
+<h2>Associate / FO Registration</h2>
+
+<input id="aname"
+placeholder="Full Name">
+
+<input id="aphone"
+maxlength="10"
+placeholder="Mobile Number">
+
+<select id="arole">
+
+<option value="FO">
+Field Officer (FO)
+</option>
+
+<option value="BM">
+Block Manager (BM)
+</option>
+
+</select>
+
+<input id="adistrict"
+value="Shahjahanpur">
+
+<input id="ablock"
+placeholder="Block / Area">
+
+<button class="blue-btn"
+onclick="associateRegister()">
+SUBMIT REQUEST
+</button>
+
+`;
+
 }
 
-function openRegister(role="Customer"){
- document.getElementById("registerModal").classList.add("show");
- document.getElementById("regRole").value=role;
- document.getElementById("registerTitle").innerText=role+" Registration";
- document.getElementById("generatedBox").innerHTML="";
+else{
+
+let role="DM";
+
+if(type==="customerLogin")
+role="customer";
+
+if(type==="foLogin")
+role="FO";
+
+if(type==="bmLogin")
+role="BM";
+
+if(type==="dmLogin")
+role="DM";
+
+c.innerHTML=`
+
+<h2>${roles[role].name} LOGIN</h2>
+
+<label>Login ID</label>
+
+<input id="loginID"
+value="${roles[role].id}">
+
+<label>Password</label>
+
+<input id="password"
+type="password"
+placeholder="Password">
+
+<button class="blue-btn"
+onclick="login('${role}')"
+style="width:100%">
+LOGIN
+</button>
+
+`;
+
 }
 
-function openRegisterFromLogin(){
- closeModal("loginModal");
- openRegister(currentLoginRole);
+document.getElementById("modal")
+.style.display="flex";
+
 }
 
-function closeModal(id){
- document.getElementById(id).classList.remove("show");
+
+/* CUSTOMER REGISTER */
+
+function registerCustomer(){
+
+let name=document.getElementById("rname").value;
+let phone=document.getElementById("rphone").value;
+
+if(!name || phone.length!==10){
+
+alert("Name aur 10 digit mobile number bhariye.");
+
+return;
+
 }
 
-/* =========================
-   ID GENERATOR
-========================= */
+closeModal();
 
-function makeId(role){
- let prefix={
-   Customer:"CUS",
-   FO:"FO",
-   BM:"BM",
-   DM:"DM"
- }[role] || "CUS";
+alert("Customer registration submitted successfully.");
 
- let number=users.filter(u=>u.role===role).length+1;
-
- let id=prefix+String(number).padStart(4,"0");
-
- while(users.some(u=>u.id===id)){
-   number++;
-   id=prefix+String(number).padStart(4,"0");
- }
-
- return id;
 }
 
-/* =========================
-   REGISTER
-========================= */
 
-function registerUser(){
+/* ASSOCIATE */
 
- let name=document.getElementById("regName").value.trim();
- let mobile=document.getElementById("regMobile").value.trim();
- let email=document.getElementById("regEmail").value.trim();
- let address=document.getElementById("regAddress").value.trim();
- let role=document.getElementById("regRole").value;
+function associateRegister(){
 
- if(!name || !mobile){
-   alert("Name और Mobile Number भरें");
-   return;
- }
+let name=document.getElementById("aname").value;
+let phone=document.getElementById("aphone").value;
 
- let id=makeId(role);
+if(!name || phone.length!==10){
 
- let user={
-   id:id,
-   role:role,
-   name:name,
-   mobile:mobile,
-   email:email,
-   address:address,
-   password:"1234",
-   wallet:0,
-   created:new Date().toLocaleString()
- };
+alert("Name aur mobile number bhariye.");
 
- users.push(user);
+return;
 
- if(role!=="Customer"){
-   user.parentId=currentUser ? currentUser.id : "";
- }
-
- save();
-
- document.getElementById("generatedBox").innerHTML=`
- <div class="idBox">
-   <div>Registration Successful</div>
-   <div class="bigId">${id}</div>
-   <div>Password: 1234</div>
-   <br>
-   <button class="btn light" onclick="openLogin('${role}')">
-   Login Now
-   </button>
- </div>
- `;
-
- document.getElementById("regName").value="";
- document.getElementById("regMobile").value="";
- document.getElementById("regEmail").value="";
- document.getElementById("regAddress").value="";
 }
 
-/* =========================
-   LOGIN
-========================= */
+closeModal();
 
-function login(){
+alert("Associate request submitted successfully.");
 
- let id=document.getElementById("loginId").value.trim();
- let password=document.getElementById("loginPassword").value;
-
- let user=users.find(u=>
-   u.id===id &&
-   u.password===password
- );
-
- if(!user){
-   alert("Wrong ID या Password");
-   return;
- }
-
- if(user.role!==currentLoginRole){
-   alert("इस ID का role "+user.role+" है");
-   return;
- }
-
- currentUser=user;
- localStorage.setItem("sewanya_current",JSON.stringify(user));
-
- closeModal("loginModal");
- document.getElementById("website").style.display="none";
- document.getElementById("portal").style.display="block";
-
- loadPortal();
 }
 
-/* =========================
-   LOGOUT
-========================= */
 
-function logout(){
- currentUser=null;
- localStorage.removeItem("sewanya_current");
+/* LOGIN */
 
- document.getElementById("portal").style.display="none";
- document.getElementById("website").style.display="block";
+function login(role){
 
- window.scrollTo(0,0);
+currentRole=role;
+
+document.getElementById("public")
+.style.display="none";
+
+document.getElementById("portal")
+.style.display="block";
+
+document.getElementById("roleText")
+.textContent=roles[role].name;
+
+document.getElementById("userID")
+.textContent=
+document.getElementById("loginID").value
+||roles[role].id;
+
+closeModal();
+
+createSidebar();
+
+showPage("dashboard");
+
 }
 
-/* =========================
-   PORTAL
-========================= */
 
-function loadPortal(){
+/* SIDEBAR */
 
- document.getElementById("portalUserText").innerText=
- `${currentUser.name} | ${currentUser.role} | ${currentUser.id}`;
+function createSidebar(){
 
- buildSidebar();
- showPage("dashboard");
+let menu=[
+
+["dashboard","🏠 Dashboard"],
+
+["id","🪪 My ID"],
+
+["members","👥 Members"],
+
+["wallet","💳 Wallet"],
+
+["withdrawal","💸 Withdrawal"],
+
+["messages","💬 Messages"],
+
+["reports","📊 Reports"]
+
+];
+
+let html="";
+
+menu.forEach(x=>{
+
+html+=`
+
+<button onclick="showPage('${x[0]}',this)">
+${x[1]}
+</button>
+
+`;
+
+});
+
+document.getElementById("sidebar")
+.innerHTML=html;
+
 }
 
-function buildSidebar(){
 
- let role=currentUser.role;
+/* PAGE */
 
- let buttons=[
-  ["dashboard","🏠 Dashboard"],
-  ["myid","🪪 My ID"],
-  ["customer","👤 Customer"],
- ];
+function showPage(page,button){
 
- if(role==="FO" || role==="BM" || role==="DM"){
-   buttons.push(["fo","🧑‍💼 FO"]);
- }
+if(button){
 
- if(role==="BM" || role==="DM"){
-   buttons.push(["bm","👨‍💼 BM"]);
- }
+document.querySelectorAll(".sidebar button")
+.forEach(b=>b.classList.remove("active"));
 
- if(role==="DM"){
-   buttons.push(["dm","🏢 DM"]);
- }
+button.classList.add("active");
 
- buttons.push(
-  ["wallet","💰 Wallet"],
-  ["withdrawal","💸 Withdrawal"],
-  ["card","💳 Health Card"],
-  ["reports","📊 Reports"],
-  ["messages","✉️ Messages"],
-  ["settings","⚙️ Settings"]
- );
-
- document.getElementById("sidebar").innerHTML=
- buttons.map(b=>
- `<button class="sideBtn" onclick="showPage('${b[0]}')">${b[1]}</button>`
- ).join("");
 }
 
-/* =========================
-   PAGE ROUTER
-========================= */
+let d=document.getElementById("dashboard");
 
-function showPage(page){
 
- document.querySelectorAll(".sideBtn")
- .forEach(x=>x.classList.remove("active"));
+/* DASHBOARD */
 
- let content=document.getElementById("portalContent");
+if(page==="dashboard"){
 
- if(page==="dashboard") content.innerHTML=dashboardPage();
- if(page==="myid") content.innerHTML=myIdPage();
- if(page==="customer") content.innerHTML=customerPage();
- if(page==="fo") content.innerHTML=foPage();
- if(page==="bm") content.innerHTML=bmPage();
- if(page==="dm") content.innerHTML=dmPage();
- if(page==="wallet") content.innerHTML=walletPage();
- if(page==="withdrawal") content.innerHTML=withdrawalPage();
- if(page==="card") content.innerHTML=cardPage();
- if(page==="reports") content.innerHTML=reportsPage();
- if(page==="messages") content.innerHTML=messagesPage();
- if(page==="settings") content.innerHTML=settingsPage();
+let data;
+
+if(currentRole==="DM"){
+
+data=["18,420","146","32","124"];
+
 }
 
-/* =========================
-   DASHBOARD
-========================= */
+else if(currentRole==="BM"){
 
-function dashboardPage(){
+data=["1,284","9","7","27"];
 
- let allCustomers=users.filter(u=>u.role==="Customer").length;
- let allFO=users.filter(u=>u.role==="FO").length;
- let allBM=users.filter(u=>u.role==="BM").length;
- let allDM=users.filter(u=>u.role==="DM").length;
-
- return `
- <h1>Dashboard</h1>
- <p style="margin:8px 0 25px;color:#667">
- Welcome ${currentUser.name}
- </p>
-
- <div class="stats">
-  <div class="stat">
-   <small>Customers</small>
-   <strong>${allCustomers}</strong>
-  </div>
-
-  <div class="stat">
-   <small>FO</small>
-   <strong>${allFO}</strong>
-  </div>
-
-  <div class="stat">
-   <small>BM</small>
-   <strong>${allBM}</strong>
-  </div>
-
-  <div class="stat">
-   <small>DM</small>
-   <strong>${allDM}</strong>
-  </div>
- </div>
-
- <div class="panel">
-  <h2>Account</h2>
-  <p>Name: <b>${currentUser.name}</b></p>
-  <p>ID: <b>${currentUser.id}</b></p>
-  <p>Role: <b>${currentUser.role}</b></p>
- </div>
- `;
 }
 
-/* =========================
-   MY ID
-========================= */
+else if(currentRole==="FO"){
 
-function myIdPage(){
+data=["184","—","2","8"];
 
- return `
- <h1>My ID</h1>
- <br>
- <div class="idBox">
-  <div>${currentUser.role}</div>
-  <div class="bigId">${currentUser.id}</div>
-  <div>${currentUser.name}</div>
-  <br>
-  <button class="btn light" onclick="window.print()">Print ID</button>
- </div>
- `;
 }
 
-/* =========================
-   CUSTOMER
-========================= */
+else{
 
-function getVisibleCustomers(){
+data=["1","—","—","1"];
 
- if(currentUser.role==="Customer"){
-   return users.filter(u=>u.id===currentUser.id);
- }
-
- if(currentUser.role==="FO"){
-   return users.filter(u=>
-     u.role==="Customer" &&
-     (!u.parentId || u.parentId===currentUser.id)
-   );
- }
-
- if(currentUser.role==="BM"){
-   let foIds=users
-    .filter(u=>u.role==="FO" &&
-     (u.parentId===currentUser.id || !u.parentId))
-    .map(u=>u.id);
-
-   return users.filter(u=>
-     u.role==="Customer" &&
-     (foIds.includes(u.parentId) || !u.parentId)
-   );
- }
-
- return users.filter(u=>u.role==="Customer");
 }
 
-function customerPage(){
 
- let list=getVisibleCustomers();
+let visibility="";
 
- return `
- <h1>Customer</h1>
- <br>
- ${currentUser.role!=="Customer" ? `
- <button class="btn green" onclick="openRegister('Customer')">
- + Add Customer
- </button><br><br>`:""}
+if(currentRole==="DM"){
 
- <div class="panel">
- <table>
- <thead>
- <tr>
- <th>ID</th>
- <th>Name</th>
- <th>Mobile</th>
- <th>Role</th>
- </tr>
- </thead>
- <tbody>
- ${list.map(u=>`
- <tr>
- <td>${u.id}</td>
- <td>${u.name}</td>
- <td>${u.mobile}</td>
- <td>${u.role}</td>
- </tr>
- `).join("")}
- </tbody>
- </table>
- </div>
- `;
+visibility=
+"DM: District ka authorized data dekh sakta hai.";
+
 }
 
-/* =========================
-   FO
-========================= */
+if(currentRole==="BM"){
 
-function foPage(){
+visibility=
+"BM: Apna + assigned FO/BM area ka data dekh sakta hai.";
 
- if(currentUser.role==="FO"){
-  return `
-  <h1>FO</h1>
-  <div class="panel">
-   <h2>My FO Information</h2>
-   <p>ID: <b>${currentUser.id}</b></p>
-   <p>Name: <b>${currentUser.name}</b></p>
-  </div>
-  `;
- }
-
- let list=users.filter(u=>u.role==="FO");
-
- return `
- <h1>FO Management</h1><br>
-
- <button class="btn green"
- onclick="openRegister('FO')">
- + Generate FO ID
- </button>
-
- <br><br>
-
- <div class="panel">
- <table>
- <tr>
- <th>FO ID</th>
- <th>Name</th>
- <th>Mobile</th>
- <th>Parent</th>
- </tr>
-
- ${list.map(u=>`
- <tr>
- <td>${u.id}</td>
- <td>${u.name}</td>
- <td>${u.mobile}</td>
- <td>${u.parentId||"-"}</td>
- </tr>
- `).join("")}
-
- </table>
- </div>
- `;
 }
 
-/* =========================
-   BM
-========================= */
+if(currentRole==="FO"){
 
-function bmPage(){
+visibility=
+"FO: Apna aur assigned customer data dekh sakta hai.";
 
- if(currentUser.role==="BM"){
-  return `
-  <h1>BM</h1>
-  <div class="panel">
-   <h2>My BM Information</h2>
-   <p>ID: <b>${currentUser.id}</b></p>
-   <p>Name: <b>${currentUser.name}</b></p>
-  </div>
-  `;
- }
-
- let list=users.filter(u=>u.role==="BM");
-
- return `
- <h1>BM Management</h1><br>
-
- <button class="btn green"
- onclick="openRegister('BM')">
- + Generate BM ID
- </button>
-
- <br><br>
-
- <div class="panel">
- <table>
- <tr>
- <th>BM ID</th>
- <th>Name</th>
- <th>Mobile</th>
- <th>Parent</th>
- </tr>
-
- ${list.map(u=>`
- <tr>
- <td>${u.id}</td>
- <td>${u.name}</td>
- <td>${u.mobile}</td>
- <td>${u.parentId||"-"}</td>
- </tr>
- `).join("")}
-
- </table>
- </div>
- `;
 }
 
-/* =========================
-   DM
-========================= */
+if(currentRole==="customer"){
 
-function dmPage(){
+visibility=
+"Customer: Sirf apna personal data dekh sakta hai.";
 
- if(currentUser.role!=="DM"){
-  return `
-  <h1>DM</h1>
-  <div class="panel">
-   <p>Only DM can access DM management.</p>
-  </div>
-  `;
- }
-
- let list=users.filter(u=>u.role==="DM");
-
- return `
- <h1>DM Management</h1><br>
-
- <button class="btn green"
- onclick="openRegister('DM')">
- + Generate DM ID
- </button>
-
- <br><br>
-
- <div class="panel">
- <table>
- <tr>
- <th>DM ID</th>
- <th>Name</th>
- <th>Mobile</th>
- </tr>
-
- ${list.map(u=>`
- <tr>
- <td>${u.id}</td>
- <td>${u.name}</td>
- <td>${u.mobile}</td>
- </tr>
- `).join("")}
-
- </table>
- </div>
- `;
 }
 
-/* =========================
-   WALLET
-========================= */
 
-function getWallet(){
- return Number(currentUser.wallet || 0);
+d.innerHTML=`
+
+<h1>${roles[currentRole].name} Dashboard</h1>
+
+<div class="notice">
+<b>Data Access:</b> ${visibility}
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<small>Members</small>
+<strong>${data[0]}</strong>
+</div>
+
+<div class="stat">
+<small>Field Team</small>
+<strong>${data[1]}</strong>
+</div>
+
+<div class="stat">
+<small>Pending Requests</small>
+<strong>${data[2]}</strong>
+</div>
+
+<div class="stat">
+<small>Today Operations</small>
+<strong>${data[3]}</strong>
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h3>Recent Activity</h3>
+
+<br>
+
+<table class="table">
+
+<tr>
+<th>ID</th>
+<th>Operation</th>
+<th>Visibility</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>FO-104</td>
+<td>Member Registration</td>
+<td>Authorized Users</td>
+<td>Approved</td>
+</tr>
+
+<tr>
+<td>WD-2081</td>
+<td>Withdrawal Request</td>
+<td>Management</td>
+<td>Pending</td>
+</tr>
+
+</table>
+
+</div>
+
+`;
+
 }
 
-function walletPage(){
 
- return `
- <h1>Wallet</h1><br>
+/* MY ID */
 
- <div class="stats">
-  <div class="stat">
-   <small>Available Balance</small>
-   <strong>₹${getWallet()}</strong>
-  </div>
- </div>
+if(page==="id"){
 
- <div class="panel">
-  <h2>Wallet Information</h2>
-  <p>Account ID: <b>${currentUser.id}</b></p>
-  <p>Current Balance: <b>₹${getWallet()}</b></p>
- </div>
- `;
+d.innerHTML=`
+
+<h1>🪪 My ID</h1>
+
+<div class="panel">
+
+<h2 style="color:#1787c8">
+SEWANYA HEALTH
+</h2>
+
+<br>
+
+<h2>
+${roles[currentRole].id}
+</h2>
+
+<h3>
+${roles[currentRole].name}
+</h3>
+
+<br>
+
+<p>
+Assigned Area:
+Shahjahanpur / Bhawal Khera
+</p>
+
+<br>
+
+<button class="blue-btn"
+onclick="window.print()">
+🖨 Print / Save ID
+</button>
+
+</div>
+
+`;
+
 }
 
-/* =========================
-   WITHDRAWAL
-========================= */
 
-function withdrawalPage(){
+/* MEMBERS */
 
- let myWithdrawals=withdrawals.filter(
-  w=>w.userId===currentUser.id
- );
+if(page==="members"){
 
- return `
- <h1>Withdrawal</h1><br>
+let access="";
 
- <div class="panel">
+if(currentRole==="customer")
+access="Only your own customer profile";
 
- <h2>Request Withdrawal</h2>
+if(currentRole==="FO")
+access="Your assigned customers";
 
- <input id="withdrawAmount"
- placeholder="Amount"
- type="number">
+if(currentRole==="BM")
+access="Your block + assigned FO";
 
- <input id="withdrawMethod"
- placeholder="UPI / Bank Account">
+if(currentRole==="DM")
+access="District authorized data";
 
- <button class="btn green"
- onclick="requestWithdrawal()">
- Request Withdrawal
- </button>
 
- </div>
+d.innerHTML=`
 
- <div class="panel">
- <h2>My Requests</h2>
+<h1>👥 Members</h1>
 
- <table>
- <tr>
- <th>Amount</th>
- <th>Method</th>
- <th>Status</th>
- <th>Date</th>
- </tr>
+<div class="notice">
+<b>Visible Data:</b> ${access}
+</div>
 
- ${myWithdrawals.map(w=>`
- <tr>
- <td>₹${w.amount}</td>
- <td>${w.method}</td>
- <td>${w.status}</td>
- <td>${w.date}</td>
- </tr>
- `).join("")}
+<div class="panel">
 
- </table>
- </div>
- `;
+<table class="table">
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Type</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>CUS-001</td>
+<td>Customer</td>
+<td>Health Member</td>
+<td>Active</td>
+</tr>
+
+<tr>
+<td>FO-104</td>
+<td>Field Officer</td>
+<td>FO</td>
+<td>Active</td>
+</tr>
+
+<tr>
+<td>BM-001</td>
+<td>Block Manager</td>
+<td>BM</td>
+<td>Active</td>
+</tr>
+
+</table>
+
+</div>
+
+`;
+
 }
 
-function requestWithdrawal(){
 
- let amount=Number(document.getElementById("withdrawAmount").value);
- let method=document.getElementById("withdrawMethod").value.trim();
+/* WALLET */
 
- if(!amount || amount<=0){
-   alert("Valid amount डालें");
-   return;
- }
+if(page==="wallet"){
 
- if(amount>getWallet()){
-   alert("Wallet balance कम है");
-   return;
- }
+d.innerHTML=`
 
- if(!method){
-   alert("UPI या Bank details डालें");
-   return;
- }
+<h1>💳 Wallet</h1>
 
- currentUser.wallet=getWallet()-amount;
+<div class="panel">
 
- let index=users.findIndex(u=>u.id===currentUser.id);
+<h3>Available Balance</h3>
 
- if(index>=0) users[index]=currentUser;
+<br>
 
- withdrawals.push({
-  userId:currentUser.id,
-  amount:amount,
-  method:method,
-  status:"Pending",
-  date:new Date().toLocaleString()
- });
+<h1 style="color:#1787c8">
+₹ ${currentRole==="DM"?"2,45,000":
+currentRole==="BM"?"48,500":
+currentRole==="FO"?"12,850":
+"1,250"}
+</h1>
 
- save();
+<br>
 
- localStorage.setItem(
-  "sewanya_current",
-  JSON.stringify(currentUser)
- );
+<p>
+Wallet data role ke according visible hai.
+</p>
 
- alert("Withdrawal request submitted");
- showPage("withdrawal");
+<br>
+
+<button class="blue-btn">
+VIEW TRANSACTIONS
+</button>
+
+</div>
+
+`;
+
 }
 
-/* =========================
-   HEALTH CARD
-========================= */
 
-function cardPage(){
+/* WITHDRAWAL */
 
- return `
- <h1>Health Card</h1><br>
+if(page==="withdrawal"){
 
- <div class="healthCard" id="healthCard">
+d.innerHTML=`
 
- <div class="healthTop">
-  <h1>Sewanya Health</h1>
-  <p>Digital Health Membership Card</p>
- </div>
+<h1>💸 Withdrawal</h1>
 
- <div class="healthBody">
+<div class="panel">
 
-  <div class="healthRow">
-   <span>Name</span>
-   <b>${currentUser.name}</b>
-  </div>
+<p>
+Withdrawal request create karein.
+</p>
 
-  <div class="healthRow">
-   <span>Member ID</span>
-   <b>${currentUser.id}</b>
-  </div>
+<br>
 
-  <div class="healthRow">
-   <span>Role</span>
-   <b>${currentUser.role}</b>
-  </div>
+<input
+id="withdrawAmount"
+type="number"
+placeholder="Amount ₹">
 
-  <div class="healthRow">
-   <span>Mobile</span>
-   <b>${currentUser.mobile}</b>
-  </div>
+<button class="blue-btn"
+onclick="withdraw()">
+SUBMIT WITHDRAWAL
+</button>
 
-  <div class="healthRow">
-   <span>Status</span>
-   <b style="color:#19a974">ACTIVE</b>
-  </div>
+</div>
 
-  <br>
+`;
 
-  <button class="btn" onclick="window.print()">
-   Print / Save PDF
-  </button>
-
- </div>
- </div>
- `;
 }
 
-/* =========================
-   REPORTS
-========================= */
 
-function reportsPage(){
+/* MESSAGES */
 
- let list=getVisibleCustomers();
+if(page==="messages"){
 
- return `
- <h1>Reports</h1><br>
+d.innerHTML=`
 
- <div class="panel">
-  <h2>Customer Report</h2>
+<h1>💬 Messages</h1>
 
-  <button class="btn green" onclick="downloadCSV()">
-  Download CSV
-  </button>
+<div class="panel">
 
-  <br><br>
+<p>
+Role based communication center
+</p>
 
-  <p>Total visible customers:
-  <b>${list.length}</b></p>
- </div>
- `;
+<br>
+
+<textarea
+placeholder="Message likhiye..."
+></textarea>
+
+<button class="blue-btn"
+onclick="alert('Message sent successfully')">
+SEND MESSAGE
+</button>
+
+</div>
+
+`;
+
 }
 
-function downloadCSV(){
 
- let list=getVisibleCustomers();
+/* REPORTS */
 
- let csv="ID,Name,Mobile,Email,Address,Role\\n";
+if(page==="reports"){
 
- list.forEach(u=>{
-  csv+=`"${u.id}","${u.name}","${u.mobile}","${u.email}","${u.address}","${u.role}"\\n`;
- });
+d.innerHTML=`
 
- let blob=new Blob([csv],{type:"text/csv"});
- let url=URL.createObjectURL(blob);
+<h1>📊 Reports</h1>
 
- let a=document.createElement("a");
- a.href=url;
- a.download="sewanya_customers.csv";
- a.click();
+<div class="panel">
 
- URL.revokeObjectURL(url);
+<h3>
+${roles[currentRole].name} Report
+</h3>
+
+<br>
+
+<p>
+Authorized reports sirf role ke
+permission ke according visible hain.
+</p>
+
+<br>
+
+<button class="blue-btn"
+onclick="alert('Report generated')">
+GENERATE REPORT
+</button>
+
+</div>
+
+`;
+
 }
 
-/* =========================
-   MESSAGES
-========================= */
-
-function messagesPage(){
-
- let mine=messages.filter(
-  m=>m.userId===currentUser.id || currentUser.role==="DM"
- );
-
- return `
- <h1>Messages</h1><br>
-
- <div class="panel">
-
- ${mine.length ?
- mine.map(m=>`
- <div style="padding:15px;border-bottom:1px solid #eee">
-  <b>${m.name}</b>
-  <p>${m.message}</p>
-  <small>${m.date}</small>
- </div>
- `).join("")
- :
- "<p>No messages found.</p>"
- }
-
- </div>
- `;
 }
 
-/* =========================
-   SETTINGS
-========================= */
 
-function settingsPage(){
+/* WITHDRAW */
 
- return `
- <h1>Settings</h1><br>
+function withdraw(){
 
- <div class="panel">
+let amount=
+document.getElementById("withdrawAmount").value;
 
- <h2>Profile</h2>
+if(!amount){
 
- <input value="${currentUser.name}" id="setName">
+alert("Amount enter karein.");
 
- <input value="${currentUser.mobile}" id="setMobile">
+return;
 
- <input value="${currentUser.email}" id="setEmail">
-
- <input value="${currentUser.address}" id="setAddress">
-
- <button class="btn" onclick="saveSettings()">
- Save Changes
- </button>
-
- </div>
-
- <div class="panel">
-
- <h2>Demo Data</h2>
-
- <button class="btn"
- onclick="resetData()">
- Reset All Local Data
- </button>
-
- </div>
- `;
 }
 
-function saveSettings(){
+alert(
+"Withdrawal request submitted. Status: Pending."
+);
 
- currentUser.name=document.getElementById("setName").value;
- currentUser.mobile=document.getElementById("setMobile").value;
- currentUser.email=document.getElementById("setEmail").value;
- currentUser.address=document.getElementById("setAddress").value;
-
- let index=users.findIndex(u=>u.id===currentUser.id);
-
- if(index>=0) users[index]=currentUser;
-
- save();
-
- localStorage.setItem(
-  "sewanya_current",
-  JSON.stringify(currentUser)
- );
-
- alert("Profile updated");
- loadPortal();
 }
 
-function resetData(){
 
- if(!confirm("सारा local demo data delete करना है?")) return;
-
- localStorage.removeItem("sewanya_users");
- localStorage.removeItem("sewanya_current");
- localStorage.removeItem("sewanya_withdrawals");
- localStorage.removeItem("sewanya_messages");
- localStorage.removeItem("sewanya_wallet");
-
- users=[];
- withdrawals=[];
- messages=[];
- wallet={};
- currentUser=null;
-
- alert("All local demo data deleted");
-
- location.reload();
-}
-
-/* =========================
-   ENQUIRY
-========================= */
+/* ENQUIRY */
 
 function sendEnquiry(){
 
- let name=document.getElementById("enqName").value.trim();
- let phone=document.getElementById("enqPhone").value.trim();
- let msg=document.getElementById("enqMsg").value.trim();
+let name=
+document.getElementById("ename").value;
 
- if(!name || !phone || !msg){
-  alert("सभी details भरें");
-  return;
- }
+let phone=
+document.getElementById("ephone").value;
 
- messages.push({
-  userId:"PUBLIC",
-  name:name,
-  phone:phone,
-  message:msg,
-  date:new Date().toLocaleString()
- });
+if(!name || !phone){
 
- save();
+alert("Name aur mobile number bhariye.");
 
- document.getElementById("enqName").value="";
- document.getElementById("enqPhone").value="";
- document.getElementById("enqMsg").value="";
+return;
 
- alert("Your enquiry has been submitted");
 }
 
-/* =========================
-   START
-========================= */
+alert("Enquiry submitted successfully.");
 
-if(currentUser){
- document.getElementById("website").style.display="none";
- document.getElementById("portal").style.display="block";
- loadPortal();
 }
 
-/* =========================
-   CLOSE MODAL OUTSIDE
-========================= */
 
-document.querySelectorAll(".modal").forEach(m=>{
- m.addEventListener("click",function(e){
-  if(e.target===m) m.classList.remove("show");
- });
-});
+/* LOGOUT */
+
+function logout(){
+
+currentRole=null;
+
+document.getElementById("portal")
+.style.display="none";
+
+document.getElementById("public")
+.style.display="block";
+
+window.scrollTo(0,0);
+
+}
+
 </script>
 
 </body>
