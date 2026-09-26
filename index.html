@@ -9,7 +9,10 @@
 
 .slider{position:relative;overflow:hidden;height:330px;background:#123}.slides{display:flex;height:100%;transition:transform .6s ease}.slide{min-width:100%;position:relative}.slide img{width:100%;height:100%;object-fit:cover}.caption{position:absolute;left:7%;bottom:35px;color:#fff;background:#0008;padding:15px 22px;border-radius:10px}.dots{position:absolute;bottom:12px;left:0;right:0;text-align:center}.dot{display:inline-block;width:9px;height:9px;background:#fff8;border-radius:50%;margin:0 4px}.dot.active{background:#fff}.cardPreview{max-width:560px;margin:18px auto;padding:22px;border-radius:18px;background:linear-gradient(135deg,#075b9d,#17a7d8);color:#fff;box-shadow:0 12px 30px #0002}.cardTop{display:flex;justify-content:space-between;align-items:center}.cardId{font-size:13px;opacity:.9}.cardName{font-size:25px;font-weight:bold;margin:18px 0 5px}.cardGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px}.printBtn{margin-top:15px;background:#fff;color:#176aa1;border:0;border-radius:8px;padding:10px 16px;font-weight:bold}
 </style>
-</head>
+<style>
+.toast{position:fixed;right:18px;bottom:18px;background:#182a44;color:#fff;padding:13px 17px;border-radius:9px;display:none;z-index:50}
+.success{background:#28a66a;color:#fff;border:0;padding:8px 12px;border-radius:7px}.danger{background:#e74c3c;color:#fff;border:0;padding:8px 12px;border-radius:7px}
+</style></head>
 <body>
 
 <div id="home">
@@ -51,6 +54,12 @@
 <div class="stat">DISTRICT MANAGERS<b id="dmCount">0</b></div><div class="stat">BLOCK MANAGERS<b id="bmCount">0</b></div><div class="stat">FIELD OFFICERS<b id="foCount">0</b></div><div class="stat">CUSTOMERS<b id="cuCount">0</b></div>
 </div></section>
 
+
+<section class="section" id="roleManagement" style="display:block">
+<h2>🔐 Role & Approval Management</h2>
+<div class="notice">Hierarchy: <b>ADMIN → DM → BM → FO</b>. DM approval Admin करेगा; approved DM ही BM create कर सकता है; approved BM ही FO create कर सकता है.</div>
+<div id="roleCreateBox" style="margin-top:15px"></div>
+</section>
 <section class="section" id="adminCreate">
 <h2>➕ New User Create</h2>
 <div class="grid">
@@ -126,12 +135,275 @@ function generateCard(){
  document.getElementById('cardArea').innerHTML=`<div class="cardPreview" id="printCard"><div class="cardTop"><b>SEWANYA HEALTHCARE</b><span>HEALTH CARD</span></div><div class="cardId">Card ID: ${card}</div><div class="cardName">${n}</div><div class="cardGrid"><div>Mobile: ${m}</div><div>Age/Gender: ${a} / ${g}</div><div>Village: ${v}</div><div>District: ${d}</div></div><div style="margin-top:18px;font-size:12px">Generated through Field Officer Portal</div><button class="printBtn" onclick="printCard()">🖨 Print / Save PDF</button></div>`;
  toast('New Health Card generate ho gaya');
 }
-function printCard(){const w=window.open('','_blank');w.document.write('<html><head><title>Sewanya Health Card</title><style>body{font-family:Arial;padding:30px} .card{max-width:560px;margin:auto;padding:30px;border-radius:18px;background:#0b76a8;color:#fff}</style></head><body><div class="card">'+document.getElementById('printCard').innerHTML.replace(/<button[\s\S]*?<\/button>/,'')+'</div><script>window.print()<\/script></body></html>');w.document.close()}
+function printCard(){const w=window.open('','_blank');w.document.write('<html><head><title>Sewanya Health Card</title><style>body{font-family:Arial;padding:30px} .card{max-width:560px;margin:auto;padding:30px;border-radius:18px;background:#0b76a8;color:#fff}</style><style>
+.toast{position:fixed;right:18px;bottom:18px;background:#182a44;color:#fff;padding:13px 17px;border-radius:9px;display:none;z-index:50}
+.success{background:#28a66a;color:#fff;border:0;padding:8px 12px;border-radius:7px}.danger{background:#e74c3c;color:#fff;border:0;padding:8px 12px;border-radius:7px}
+</style></head><body><div class="card">'+document.getElementById('printCard').innerHTML.replace(/<button[\s\S]*?<\/button>/,'')+'</div><script>window.print()<\/script>
+<script>
+/* Sewanya Healthcare Portal v3 upgrade
+   Admin -> DM -> BM -> FO hierarchy
+   DM cannot operate/create BM until Admin approval.
+   BM creation is restricted to approved DM; FO creation to approved BM.
+*/
+(function(){
+const USERS='sewanya_users_v3', CARDS='sewanya_cards_v3';
+const UP_DISTRICTS=["Agra","Aligarh","Ambedkar Nagar","Amethi","Amroha","Auraiya","Ayodhya","Azamgarh","Baghpat","Bahraich","Ballia","Balrampur","Banda","Barabanki","Bareilly","Basti","Bhadohi","Bijnor","Budaun","Bulandshahr","Chandauli","Chitrakoot","Deoria","Etah","Etawah","Farrukhabad","Fatehpur","Firozabad","Gautam Buddha Nagar","Ghaziabad","Ghazipur","Gonda","Gorakhpur","Hamirpur","Hapur","Hardoi","Hathras","Jalaun","Jaunpur","Jhansi","Kannauj","Kanpur Dehat","Kanpur Nagar","Kasganj","Kaushambi","Kheri","Kushinagar","Lalitpur","Lucknow","Maharajganj","Mahoba","Mainpuri","Mathura","Mau","Meerut","Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Pratapgarh","Prayagraj","Raebareli","Rampur","Saharanpur","Sambhal","Sant Kabir Nagar","Shahjahanpur","Shamli","Shravasti","Siddharthnagar","Sitapur","Sonbhadra","Sultanpur","Unnao","Varanasi"];
+const FALLBACK_BLOCKS={"Agra":["Achhnera","Akola","Barauli Ahir","Bichpuri","Etmadpur","Fatehabad","Fatehpur Sikri","Kheragarh","Khandauli","Pinahat","Saiyan","Shamsabad"],"Aligarh":["Akrabad","Atrauli","Chandaus","Dhanipur","Gabhana","Gangiri","Iglas","Jawan Sikandarpur","Khair","Lodha","Tappal"],"Lucknow":["Bakshi Ka Talab","Chinhat","Gosainganj","Kakori","Malihabad","Mohanlalganj","Maal","Sarojini Nagar"],"Kanpur Nagar":["Bilhaur","Bhitargaon","Chaubepur","Kalyanpur","Patara","Sarsaul","Shivrajpur","Vidhunu"],"Varanasi":["Arajiline","Chiraigaon","Harhua","Kashi Vidyapeeth","Pindra","Sewapuri"],"Prayagraj":["Bahadurpur","Bahria","Chaka","Dhanupur","Holagarh","Jasra","Karchhana","Kaudihar","Koraon","Meja","Phulpur","Pratappur","Shankargarh","Soraon"],"Shahjahanpur":["Banda","Dadrol","Jalalabad","Kalan","Khutar","Powayan","Sindhauli"],"Hamirpur":["Gohand","Maudaha","Muskra","Rath","Sarila","Sumerpur"],"Banda":["Baberu","Bisanda","Jaspura","Kamasin","Mahua","Naraini","Tindwari"],"Hardoi":["BAWAN","MALLAWAN","Pihani","Sandi","TADIYAWAN"],"Chitrakoot":["Karbi (Chitrakoot Dham)","Manikpur","Pahari","Ramnagar"],"Jhansi":["Babina","Bangra","Chirgaon","Mauranipur"],"Lalitpur":["Bar","Birdha","Jakhora","Mahroni","Talbehat"],"Jalaun":["Dakore","Konch"],"Mirzapur":["Jamalpur","Kon","Narainpur","Pahari","Patehra","Rajgarh"],"Mahoba":["Charkhari","Jyotpur","Kabrai","Panwari"],"Amethi":["Amethi","Bhadar","Bhetua","Jagdishpur","Jamo","Shukul Bazar"],"Budaun":["Ambiapur","Asafpur","Jagat","Salarpur","Usawan","Wazirganj"],"Kannauj":["Jalalabad","Umarda"],"Meerut":["Daurala","Kharkhoda"],"Etawah":["Chakkarnagar","Takha"],"Deoria":["Pathardewa"],"Gorakhpur":["Bansgaon","Chargawan","Khorabar"],"Bahraich":["Shivpur","Tejwapur"],"Chandauli":["Chahaniya"],"Hathras":["Sehpau"],"Azamgarh":["Sathiyaon"],"Sonbhadra":["Ghorawal","KARMA","KONE","Myorepur","Nagawa"],"Baghpat":["Chhaprauli","Pilana"],"Bulandshahr":["Agauta"],"Barabanki":["Masauli"],"Muzaffarnagar":["Budhana","Shahpur"],"Shamli":["Un"]};
+let users=JSON.parse(localStorage.getItem(USERS)||'[]');
+let cards=JSON.parse(localStorage.getItem(CARDS)||'[]');
+let session=null;
+
+function save(){localStorage.setItem(USERS,JSON.stringify(users));renderUsers();}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function toast(m){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t)}t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+function seed(){
+ if(users.length)return;
+ users=[
+  {role:'DM',name:'Demo District Manager',id:'SWH-DM-001',password:'DM@123',district:'Lucknow',block:'',status:'PENDING'},
+  {role:'BM',name:'Demo Block Manager',id:'SWH-BM-001',password:'BM@123',district:'Lucknow',block:'Mohanlalganj',status:'PENDING'},
+  {role:'FO',name:'Demo Field Officer',id:'SWH-FO-001',password:'FO@123',district:'Lucknow',block:'Mohanlalganj',status:'PENDING'}
+ ];
+ save();
+}
+function fillDistricts(id){
+ const el=document.getElementById(id); if(!el)return;
+ el.innerHTML=UP_DISTRICTS.map(d=>`<option>${d}</option>`).join('');
+}
+function openRoleLogin(r){
+ window.role=r;
+ document.getElementById('home').style.display='none';
+ document.getElementById('login').style.display='flex';
+ document.getElementById('loginTitle').textContent=r+' LOGIN';
+ document.getElementById('roleLabel').textContent=r;
+}
+window.openLogin=openRoleLogin;
+window.fillDemo=function(r){
+ const d={ADMIN:['SWH-ADMIN-001','Admin@123'],DM:['SWH-DM-001','DM@123'],BM:['SWH-BM-001','BM@123'],FO:['SWH-FO-001','FO@123']}[r];
+ openRoleLogin(r);document.getElementById('uid').value=d[0];document.getElementById('pwd').value=d[1];
+};
+window.doLogin=function(){
+ const id=document.getElementById('uid').value.trim(), pw=document.getElementById('pwd').value;
+ if(window.role==='ADMIN'&&id==='SWH-ADMIN-001'&&pw==='Admin@123'){session={role:'ADMIN',name:'Administrator',id};return show();}
+ const u=users.find(x=>x.id===id&&x.password===pw&&x.role===window.role);
+ if(!u){toast('ID ya password galat hai');return}
+ if(u.status!=='APPROVED'){toast('Approval pending hai. Parent/Admin approval ke baad login hoga.');return}
+ session=u;show();
+};
+function show(){
+ document.getElementById('login').style.display='none';document.getElementById('dash').style.display='block';
+ const who=document.getElementById('who'), rt=document.getElementById('roleText');
+ if(who)who.textContent=session.name;if(rt)rt.textContent=session.role+' Dashboard';
+ buildControls();renderUsers();fillDistricts('hcDistrict');fillDistricts('districtSelect');
+}
+function buildControls(){
+ const sec=document.getElementById('adminCreate'); if(sec) sec.style.display=session.role==='ADMIN'?'block':'none';
+ const hc=document.getElementById('healthCardSection'); if(hc)hc.style.display=['ADMIN','FO'].includes(session.role)?'block':'none';
+ const box=document.getElementById('roleCreateBox'); if(!box)return;
+ const allowed=session.role==='ADMIN'?['DM','BM','FO','CUSTOMER']:session.role==='DM'?['BM']:session.role==='BM'?['FO']:[];
+ if(!allowed.length){box.innerHTML='<div class="notice">इस role को user create करने की permission नहीं है.</div>';return}
+ box.innerHTML='<div class="grid">'+
+ '<div class="field"><label>Role</label><select id="newRole2">'+allowed.map(x=>'<option>'+x+'</option>').join('')+'</select></div>'+
+ '<div class="field"><label>Name</label><input id="newName2" placeholder="Full name"></div>'+
+ '<div class="field"><label>Username / ID</label><input id="newId2" placeholder="SWH-ROLE-001"></div>'+
+ '<div class="field"><label>Password</label><input id="newPass2" placeholder="Password"></div>'+
+ '<div class="field"><label>District</label><select id="newDistrict2"></select></div>'+
+ '<div class="field"><label>Block</label><select id="newBlock2"></select></div></div>'+
+ '<br><button class="btn" onclick="createRoleUser()">CREATE USER</button>';
+ fillDistricts('newDistrict2');
+ const d=document.getElementById('newDistrict2'), b=document.getElementById('newBlock2');
+ function loadB(){const a=FALLBACK_BLOCKS[d.value]||['Use official UP JJM block directory'];b.innerHTML=a.map(x=>'<option>'+esc(x)+'</option>').join('')}
+ d.onchange=loadB;loadB();
+}
+window.createRoleUser=function(){
+ const r=document.getElementById('newRole2').value,n=document.getElementById('newName2').value.trim(),id=document.getElementById('newId2').value.trim(),p=document.getElementById('newPass2').value;
+ if(!canCreate(r)){toast('Permission denied');return}
+ if(!n||!id||!p){toast('Name, ID aur password zaroor bharein');return}
+ if(users.some(x=>x.id===id)){toast('Ye ID already maujood hai');return}
+ users.push({role:r,name:n,id,password:p,district:document.getElementById('newDistrict2').value,block:document.getElementById('newBlock2').value,status:'PENDING',createdBy:session.role});
+ save();buildControls();toast(r+' create hua; approval ke baad active hoga');
+};
+function canCreate(target){
+ if(session.role==='ADMIN')return ['DM','BM','FO','CUSTOMER'].includes(target);
+ if(session.role==='DM')return target==='BM'&&session.status==='APPROVED';
+ if(session.role==='BM')return target==='FO'&&session.status==='APPROVED';
+ return false;
+}
+window.createUser=function(){
+ const r=document.getElementById('newRole').value,n=document.getElementById('newName').value.trim(),id=document.getElementById('newId').value.trim(),p=document.getElementById('newPass').value;
+ if(!canCreate(r)){toast('Is role ko create karne ki permission nahi hai');return}
+ if(!n||!id||!p){toast('Name, ID aur password zaroor bharein');return}
+ if(users.some(x=>x.id===id)){toast('Ye ID already maujood hai');return}
+ const u={role:r,name:n,id,password:p,district:document.getElementById('newDistrict')?.value||'',block:document.getElementById('newBlock')?.value||'',status:'PENDING',createdBy:session.role};
+ users.push(u);save();toast(r+' create hua; approval ke baad active hoga');
+};
+function renderUsers(){
+ const rows=document.getElementById('userRows');if(!rows)return;
+ rows.innerHTML=users.map((u,i)=>`<tr><td>${u.role}</td><td>${esc(u.name)}</td><td>${esc(u.id)}</td><td>${esc(u.district||'-')}</td><td>${esc(u.block||'-')}</td><td>${u.status}</td><td>${session?.role==='ADMIN'?`<button class="success" onclick="approveUser(${i})">Approve</button> <button class="danger" onclick="deleteUser(${i})">Delete</button>`:'-'}</td></tr>`).join('');
+ const d=document.getElementById('dmCount'),b=document.getElementById('bmCount'),f=document.getElementById('foCount'),c=document.getElementById('cuCount');
+ if(d)d.textContent=users.filter(x=>x.role==='DM').length;if(b)b.textContent=users.filter(x=>x.role==='BM').length;if(f)f.textContent=users.filter(x=>x.role==='FO').length;if(c)c.textContent=users.filter(x=>x.role==='CUSTOMER').length;
+ const hc=document.getElementById('hcCount');if(hc)hc.textContent=cards.length;
+}
+window.approveUser=function(i){if(session.role!=='ADMIN')return;users[i].status='APPROVED';save();toast(users[i].role+' approved');};
+window.deleteUser=function(i){if(session.role!=='ADMIN')return;users.splice(i,1);save();toast('User deleted');};
+window.logout=function(){session=null;document.getElementById('dash').style.display='none';document.getElementById('login').style.display='none';document.getElementById('home').style.display='block';toast('Logout successful');};
+window.home=function(){logout();};
+window.generateCard=function(){
+ if(!['ADMIN','FO'].includes(session?.role)){toast('Health Card sirf FO/Admin bana sakte hain');return}
+ const n=hcName.value.trim(),m=hcMobile.value.trim(),a=hcAge.value.trim(),v=hcVillage.value.trim(),d=hcDistrict.value;
+ if(!n||!m||!a||!v||!d){toast('Sabhi zaroori details bharein');return}
+ const card={id:'SWH-HC-'+Date.now().toString().slice(-8),name:n,mobile:m,age:a,gender:hcGender.value,village:v,district:d,createdBy:session.id};
+ cards.unshift(card);localStorage.setItem(CARDS,JSON.stringify(cards));renderUsers();
+ document.getElementById('cardArea').innerHTML=`<div class="cardPreview" id="printCard"><div class="cardTop"><b>SEWANYA HEALTHCARE</b><span>HEALTH CARD</span></div><div class="cardId">Card ID: ${card.id}</div><div class="cardName">${esc(n)}</div><div class="cardGrid"><div>Mobile: ${esc(m)}</div><div>Age/Gender: ${a} / ${esc(hcGender.value)}</div><div>Village: ${esc(v)}</div><div>District: ${esc(d)}</div></div><button class="printBtn" onclick="printCard()">🖨 Print / Save PDF</button></div>`;
+ toast('Health Card generate ho gaya');
+};
+window.printCard=function(){const w=window.open('','_blank');w.document.write('<html><body><div>'+document.getElementById('printCard').innerHTML.replace(/<button[\\s\\S]*?<\\/button>/,'')+'</div><script>window.print()<\\/script></body></html>');w.document.close()};
+function setupDistrictBlock(){
+ fillDistricts('newDistrict');fillDistricts('hcDistrict');fillDistricts('districtSelect');
+ const d=document.getElementById('newDistrict'),b=document.getElementById('newBlock');
+ if(d&&b)d.onchange=()=>{const a=FALLBACK_BLOCKS[d.value]||['Block directory will load from official UP JJM'];b.innerHTML=a.map(x=>`<option>${esc(x)}</option>`).join('')};
+ if(d)d.dispatchEvent(new Event('change'));
+}
+seed();
+setTimeout(setupDistrictBlock,0);
+window.sewanyaUpgrade={UP_DISTRICTS,FALLBACK_BLOCKS};
+})();
+</script>
+</body></html>');w.document.close()}
 let slideIndex=0;
 setInterval(()=>{const s=document.querySelector('.slides');const ds=document.querySelectorAll('.dot');if(!s)return;slideIndex=(slideIndex+1)%3;s.style.transform=`translateX(-${slideIndex*100}%)`;ds.forEach((d,i)=>d.classList.toggle('active',i===slideIndex))},3500);
 
 function home(){document.getElementById('dash').style.display='none';document.getElementById('login').style.display='none';document.getElementById('home').style.display='block'}
 function toast(m){let t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
 render();
+</script>
+
+<script>
+/* Sewanya Healthcare Portal v3 upgrade
+   Admin -> DM -> BM -> FO hierarchy
+   DM cannot operate/create BM until Admin approval.
+   BM creation is restricted to approved DM; FO creation to approved BM.
+*/
+(function(){
+const USERS='sewanya_users_v3', CARDS='sewanya_cards_v3';
+const UP_DISTRICTS=["Agra","Aligarh","Ambedkar Nagar","Amethi","Amroha","Auraiya","Ayodhya","Azamgarh","Baghpat","Bahraich","Ballia","Balrampur","Banda","Barabanki","Bareilly","Basti","Bhadohi","Bijnor","Budaun","Bulandshahr","Chandauli","Chitrakoot","Deoria","Etah","Etawah","Farrukhabad","Fatehpur","Firozabad","Gautam Buddha Nagar","Ghaziabad","Ghazipur","Gonda","Gorakhpur","Hamirpur","Hapur","Hardoi","Hathras","Jalaun","Jaunpur","Jhansi","Kannauj","Kanpur Dehat","Kanpur Nagar","Kasganj","Kaushambi","Kheri","Kushinagar","Lalitpur","Lucknow","Maharajganj","Mahoba","Mainpuri","Mathura","Mau","Meerut","Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Pratapgarh","Prayagraj","Raebareli","Rampur","Saharanpur","Sambhal","Sant Kabir Nagar","Shahjahanpur","Shamli","Shravasti","Siddharthnagar","Sitapur","Sonbhadra","Sultanpur","Unnao","Varanasi"];
+const FALLBACK_BLOCKS={"Agra":["Achhnera","Akola","Barauli Ahir","Bichpuri","Etmadpur","Fatehabad","Fatehpur Sikri","Kheragarh","Khandauli","Pinahat","Saiyan","Shamsabad"],"Aligarh":["Akrabad","Atrauli","Chandaus","Dhanipur","Gabhana","Gangiri","Iglas","Jawan Sikandarpur","Khair","Lodha","Tappal"],"Lucknow":["Bakshi Ka Talab","Chinhat","Gosainganj","Kakori","Malihabad","Mohanlalganj","Maal","Sarojini Nagar"],"Kanpur Nagar":["Bilhaur","Bhitargaon","Chaubepur","Kalyanpur","Patara","Sarsaul","Shivrajpur","Vidhunu"],"Varanasi":["Arajiline","Chiraigaon","Harhua","Kashi Vidyapeeth","Pindra","Sewapuri"],"Prayagraj":["Bahadurpur","Bahria","Chaka","Dhanupur","Holagarh","Jasra","Karchhana","Kaudihar","Koraon","Meja","Phulpur","Pratappur","Shankargarh","Soraon"],"Shahjahanpur":["Banda","Dadrol","Jalalabad","Kalan","Khutar","Powayan","Sindhauli"],"Hamirpur":["Gohand","Maudaha","Muskra","Rath","Sarila","Sumerpur"],"Banda":["Baberu","Bisanda","Jaspura","Kamasin","Mahua","Naraini","Tindwari"],"Hardoi":["BAWAN","MALLAWAN","Pihani","Sandi","TADIYAWAN"],"Chitrakoot":["Karbi (Chitrakoot Dham)","Manikpur","Pahari","Ramnagar"],"Jhansi":["Babina","Bangra","Chirgaon","Mauranipur"],"Lalitpur":["Bar","Birdha","Jakhora","Mahroni","Talbehat"],"Jalaun":["Dakore","Konch"],"Mirzapur":["Jamalpur","Kon","Narainpur","Pahari","Patehra","Rajgarh"],"Mahoba":["Charkhari","Jyotpur","Kabrai","Panwari"],"Amethi":["Amethi","Bhadar","Bhetua","Jagdishpur","Jamo","Shukul Bazar"],"Budaun":["Ambiapur","Asafpur","Jagat","Salarpur","Usawan","Wazirganj"],"Kannauj":["Jalalabad","Umarda"],"Meerut":["Daurala","Kharkhoda"],"Etawah":["Chakkarnagar","Takha"],"Deoria":["Pathardewa"],"Gorakhpur":["Bansgaon","Chargawan","Khorabar"],"Bahraich":["Shivpur","Tejwapur"],"Chandauli":["Chahaniya"],"Hathras":["Sehpau"],"Azamgarh":["Sathiyaon"],"Sonbhadra":["Ghorawal","KARMA","KONE","Myorepur","Nagawa"],"Baghpat":["Chhaprauli","Pilana"],"Bulandshahr":["Agauta"],"Barabanki":["Masauli"],"Muzaffarnagar":["Budhana","Shahpur"],"Shamli":["Un"]};
+let users=JSON.parse(localStorage.getItem(USERS)||'[]');
+let cards=JSON.parse(localStorage.getItem(CARDS)||'[]');
+let session=null;
+
+function save(){localStorage.setItem(USERS,JSON.stringify(users));renderUsers();}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function toast(m){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t)}t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+function seed(){
+ if(users.length)return;
+ users=[
+  {role:'DM',name:'Demo District Manager',id:'SWH-DM-001',password:'DM@123',district:'Lucknow',block:'',status:'PENDING'},
+  {role:'BM',name:'Demo Block Manager',id:'SWH-BM-001',password:'BM@123',district:'Lucknow',block:'Mohanlalganj',status:'PENDING'},
+  {role:'FO',name:'Demo Field Officer',id:'SWH-FO-001',password:'FO@123',district:'Lucknow',block:'Mohanlalganj',status:'PENDING'}
+ ];
+ save();
+}
+function fillDistricts(id){
+ const el=document.getElementById(id); if(!el)return;
+ el.innerHTML=UP_DISTRICTS.map(d=>`<option>${d}</option>`).join('');
+}
+function openRoleLogin(r){
+ window.role=r;
+ document.getElementById('home').style.display='none';
+ document.getElementById('login').style.display='flex';
+ document.getElementById('loginTitle').textContent=r+' LOGIN';
+ document.getElementById('roleLabel').textContent=r;
+}
+window.openLogin=openRoleLogin;
+window.fillDemo=function(r){
+ const d={ADMIN:['SWH-ADMIN-001','Admin@123'],DM:['SWH-DM-001','DM@123'],BM:['SWH-BM-001','BM@123'],FO:['SWH-FO-001','FO@123']}[r];
+ openRoleLogin(r);document.getElementById('uid').value=d[0];document.getElementById('pwd').value=d[1];
+};
+window.doLogin=function(){
+ const id=document.getElementById('uid').value.trim(), pw=document.getElementById('pwd').value;
+ if(window.role==='ADMIN'&&id==='SWH-ADMIN-001'&&pw==='Admin@123'){session={role:'ADMIN',name:'Administrator',id};return show();}
+ const u=users.find(x=>x.id===id&&x.password===pw&&x.role===window.role);
+ if(!u){toast('ID ya password galat hai');return}
+ if(u.status!=='APPROVED'){toast('Approval pending hai. Parent/Admin approval ke baad login hoga.');return}
+ session=u;show();
+};
+function show(){
+ document.getElementById('login').style.display='none';document.getElementById('dash').style.display='block';
+ const who=document.getElementById('who'), rt=document.getElementById('roleText');
+ if(who)who.textContent=session.name;if(rt)rt.textContent=session.role+' Dashboard';
+ buildControls();renderUsers();fillDistricts('hcDistrict');fillDistricts('districtSelect');
+}
+function buildControls(){
+ const sec=document.getElementById('adminCreate'); if(sec) sec.style.display=session.role==='ADMIN'?'block':'none';
+ const hc=document.getElementById('healthCardSection'); if(hc)hc.style.display=['ADMIN','FO'].includes(session.role)?'block':'none';
+ const box=document.getElementById('roleCreateBox'); if(!box)return;
+ const allowed=session.role==='ADMIN'?['DM','BM','FO','CUSTOMER']:session.role==='DM'?['BM']:session.role==='BM'?['FO']:[];
+ if(!allowed.length){box.innerHTML='<div class="notice">इस role को user create करने की permission नहीं है.</div>';return}
+ box.innerHTML='<div class="grid">'+
+ '<div class="field"><label>Role</label><select id="newRole2">'+allowed.map(x=>'<option>'+x+'</option>').join('')+'</select></div>'+
+ '<div class="field"><label>Name</label><input id="newName2" placeholder="Full name"></div>'+
+ '<div class="field"><label>Username / ID</label><input id="newId2" placeholder="SWH-ROLE-001"></div>'+
+ '<div class="field"><label>Password</label><input id="newPass2" placeholder="Password"></div>'+
+ '<div class="field"><label>District</label><select id="newDistrict2"></select></div>'+
+ '<div class="field"><label>Block</label><select id="newBlock2"></select></div></div>'+
+ '<br><button class="btn" onclick="createRoleUser()">CREATE USER</button>';
+ fillDistricts('newDistrict2');
+ const d=document.getElementById('newDistrict2'), b=document.getElementById('newBlock2');
+ function loadB(){const a=FALLBACK_BLOCKS[d.value]||['Use official UP JJM block directory'];b.innerHTML=a.map(x=>'<option>'+esc(x)+'</option>').join('')}
+ d.onchange=loadB;loadB();
+}
+window.createRoleUser=function(){
+ const r=document.getElementById('newRole2').value,n=document.getElementById('newName2').value.trim(),id=document.getElementById('newId2').value.trim(),p=document.getElementById('newPass2').value;
+ if(!canCreate(r)){toast('Permission denied');return}
+ if(!n||!id||!p){toast('Name, ID aur password zaroor bharein');return}
+ if(users.some(x=>x.id===id)){toast('Ye ID already maujood hai');return}
+ users.push({role:r,name:n,id,password:p,district:document.getElementById('newDistrict2').value,block:document.getElementById('newBlock2').value,status:'PENDING',createdBy:session.role});
+ save();buildControls();toast(r+' create hua; approval ke baad active hoga');
+};
+function canCreate(target){
+ if(session.role==='ADMIN')return ['DM','BM','FO','CUSTOMER'].includes(target);
+ if(session.role==='DM')return target==='BM'&&session.status==='APPROVED';
+ if(session.role==='BM')return target==='FO'&&session.status==='APPROVED';
+ return false;
+}
+window.createUser=function(){
+ const r=document.getElementById('newRole').value,n=document.getElementById('newName').value.trim(),id=document.getElementById('newId').value.trim(),p=document.getElementById('newPass').value;
+ if(!canCreate(r)){toast('Is role ko create karne ki permission nahi hai');return}
+ if(!n||!id||!p){toast('Name, ID aur password zaroor bharein');return}
+ if(users.some(x=>x.id===id)){toast('Ye ID already maujood hai');return}
+ const u={role:r,name:n,id,password:p,district:document.getElementById('newDistrict')?.value||'',block:document.getElementById('newBlock')?.value||'',status:'PENDING',createdBy:session.role};
+ users.push(u);save();toast(r+' create hua; approval ke baad active hoga');
+};
+function renderUsers(){
+ const rows=document.getElementById('userRows');if(!rows)return;
+ rows.innerHTML=users.map((u,i)=>`<tr><td>${u.role}</td><td>${esc(u.name)}</td><td>${esc(u.id)}</td><td>${esc(u.district||'-')}</td><td>${esc(u.block||'-')}</td><td>${u.status}</td><td>${session?.role==='ADMIN'?`<button class="success" onclick="approveUser(${i})">Approve</button> <button class="danger" onclick="deleteUser(${i})">Delete</button>`:'-'}</td></tr>`).join('');
+ const d=document.getElementById('dmCount'),b=document.getElementById('bmCount'),f=document.getElementById('foCount'),c=document.getElementById('cuCount');
+ if(d)d.textContent=users.filter(x=>x.role==='DM').length;if(b)b.textContent=users.filter(x=>x.role==='BM').length;if(f)f.textContent=users.filter(x=>x.role==='FO').length;if(c)c.textContent=users.filter(x=>x.role==='CUSTOMER').length;
+ const hc=document.getElementById('hcCount');if(hc)hc.textContent=cards.length;
+}
+window.approveUser=function(i){if(session.role!=='ADMIN')return;users[i].status='APPROVED';save();toast(users[i].role+' approved');};
+window.deleteUser=function(i){if(session.role!=='ADMIN')return;users.splice(i,1);save();toast('User deleted');};
+window.logout=function(){session=null;document.getElementById('dash').style.display='none';document.getElementById('login').style.display='none';document.getElementById('home').style.display='block';toast('Logout successful');};
+window.home=function(){logout();};
+window.generateCard=function(){
+ if(!['ADMIN','FO'].includes(session?.role)){toast('Health Card sirf FO/Admin bana sakte hain');return}
+ const n=hcName.value.trim(),m=hcMobile.value.trim(),a=hcAge.value.trim(),v=hcVillage.value.trim(),d=hcDistrict.value;
+ if(!n||!m||!a||!v||!d){toast('Sabhi zaroori details bharein');return}
+ const card={id:'SWH-HC-'+Date.now().toString().slice(-8),name:n,mobile:m,age:a,gender:hcGender.value,village:v,district:d,createdBy:session.id};
+ cards.unshift(card);localStorage.setItem(CARDS,JSON.stringify(cards));renderUsers();
+ document.getElementById('cardArea').innerHTML=`<div class="cardPreview" id="printCard"><div class="cardTop"><b>SEWANYA HEALTHCARE</b><span>HEALTH CARD</span></div><div class="cardId">Card ID: ${card.id}</div><div class="cardName">${esc(n)}</div><div class="cardGrid"><div>Mobile: ${esc(m)}</div><div>Age/Gender: ${a} / ${esc(hcGender.value)}</div><div>Village: ${esc(v)}</div><div>District: ${esc(d)}</div></div><button class="printBtn" onclick="printCard()">🖨 Print / Save PDF</button></div>`;
+ toast('Health Card generate ho gaya');
+};
+window.printCard=function(){const w=window.open('','_blank');w.document.write('<html><body><div>'+document.getElementById('printCard').innerHTML.replace(/<button[\\s\\S]*?<\\/button>/,'')+'</div><script>window.print()<\\/script></body></html>');w.document.close()};
+function setupDistrictBlock(){
+ fillDistricts('newDistrict');fillDistricts('hcDistrict');fillDistricts('districtSelect');
+ const d=document.getElementById('newDistrict'),b=document.getElementById('newBlock');
+ if(d&&b)d.onchange=()=>{const a=FALLBACK_BLOCKS[d.value]||['Block directory will load from official UP JJM'];b.innerHTML=a.map(x=>`<option>${esc(x)}</option>`).join('')};
+ if(d)d.dispatchEvent(new Event('change'));
+}
+seed();
+setTimeout(setupDistrictBlock,0);
+window.sewanyaUpgrade={UP_DISTRICTS,FALLBACK_BLOCKS};
+})();
 </script>
 </body></html>
