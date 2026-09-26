@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sewanya Healthcare Management Portal</title>
+<style>
+:root{--blue:#0759a6;--blue2:#0b78d0;--dark:#102f55;--green:#16a56a;--orange:#f28b25;--red:#df3d3d;--bg:#f3f7fb;--text:#23334d;--muted:#6b7890;--line:#dce6f1}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select{font:inherit}button{cursor:pointer}
+.top{background:#0b467f;color:white;padding:9px 5%;display:flex;justify-content:space-between;font-size:13px}
+.nav{height:72px;background:white;display:flex;align-items:center;justify-content:space-between;padding:0 5%;box-shadow:0 2px 12px #0001}
+.logo{font-size:25px;font-weight:800;color:var(--blue)}.logo span{color:#20ad76}
+.btn{border:0;border-radius:9px;padding:11px 16px;background:var(--blue2);color:#fff;font-weight:700}
+.btn.green{background:var(--green)}.btn.red{background:var(--red)}.btn.gray{background:#64748b}
+.menu{display:none;position:absolute;right:5%;top:90px;background:white;width:290px;z-index:50;box-shadow:0 15px 35px #0003;border-radius:10px;overflow:hidden}
+.menu.open{display:block}.menu button{width:100%;border:0;background:white;text-align:left;padding:14px 17px;border-bottom:1px solid #eee}.menu button:hover{background:#eef7ff}
+.hero{height:330px;position:relative;overflow:hidden}.slides{display:flex;height:100%;transition:.5s}.slide{min-width:100%;position:relative}.slide img{width:100%;height:100%;object-fit:cover}.caption{position:absolute;left:7%;bottom:32px;background:#001b3acc;color:#fff;padding:17px 22px;border-radius:12px;font-size:20px}
+.dots{position:absolute;bottom:12px;width:100%;text-align:center}.dot{display:inline-block;width:10px;height:10px;background:#ffffff77;border-radius:50%;margin:0 4px}.dot.active{background:#fff}
+.homeInfo{max-width:1100px;margin:35px auto;padding:25px}.notice{background:#fff7df;border:1px solid #ffe0a1;padding:14px;border-radius:10px;color:#614a16}
+.loginPage{display:none;min-height:100vh;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#092e5a,#1682d3)}
+.loginBox{width:430px;max-width:100%;background:#fff;border-radius:18px;padding:30px;box-shadow:0 25px 60px #0005}.loginBox h1{margin:8px 0 20px}.field{margin-bottom:13px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:11px;background:white}
+.loginBtn{width:100%;border:0;border-radius:9px;padding:13px;background:var(--blue2);color:#fff;font-weight:700}.demoGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.demoGrid button{border:1px solid var(--line);background:#f8fbff;padding:9px;border-radius:8px}
+.back{color:var(--blue2);text-align:center;margin-top:15px;cursor:pointer}.hint{font-size:12px;color:var(--muted);margin-top:12px}
+.app{display:none;min-height:100vh}.sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:var(--dark);color:#fff;padding:20px 14px;z-index:20}.sideLogo{font-size:23px;font-weight:800;padding:8px 10px 25px}.sideLogo span{color:#29c68a}.navBtn{width:100%;background:transparent;color:#dce9f8;border:0;text-align:left;padding:12px 14px;border-radius:9px;margin:3px 0;font-weight:600}.navBtn:hover,.navBtn.active{background:#216fb9;color:#fff}.logoutSide{position:absolute;left:14px;right:14px;bottom:18px}
+.content{margin-left:240px;padding:22px;max-width:1500px}.topbar{background:#fff;border-radius:14px;padding:13px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.userChip{font-weight:700}.heroDash{background:linear-gradient(135deg,#103b69,#0a77c9);color:#fff;border-radius:20px;padding:24px}.heroDash h1{margin:5px 0}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}.stat{background:#ffffff19;border:1px solid #ffffff25;border-radius:13px;padding:14px}.stat b{display:block;font-size:26px;margin-top:7px}
+.page{display:none;background:#fff;border-radius:16px;padding:22px;margin-top:18px}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}.tableWrap{overflow:auto}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:11px;border-bottom:1px solid #edf1f5;text-align:left;white-space:nowrap}.badge{display:inline-block;padding:5px 9px;border-radius:99px;font-size:12px;font-weight:700}.approved{background:#dcfce7;color:#166534}.pending{background:#fff4cc;color:#8a5a00}.rejected{background:#fee2e2;color:#991b1b}
+.actionRow{display:flex;gap:8px;flex-wrap:wrap}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.quick button{border:0;border-radius:12px;padding:18px;color:white;font-weight:700;background:#196fd0}.quick .g{background:var(--green)}.quick .o{background:var(--orange)}.quick .p{background:#7652df}
+.card{max-width:570px;margin:20px auto;padding:23px;border-radius:18px;background:linear-gradient(135deg,#075b9d,#14a7c4);color:#fff;box-shadow:0 15px 35px #0002}.cardTop{display:flex;justify-content:space-between}.cardId{font-size:12px;opacity:.9;margin-top:8px}.cardName{font-size:26px;font-weight:800;margin:20px 0 7px}.cardGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px}.wallets{display:grid;grid-template-columns:1fr 1fr;gap:15px}.wallet{border-radius:15px;padding:20px;color:white;background:linear-gradient(120deg,#2866e8,#12a9d7)}.wallet.orange{background:linear-gradient(120deg,#ed6330,#f5a329)}.wallet b{display:block;font-size:28px;margin:10px 0}.toast{display:none;position:fixed;right:18px;bottom:18px;background:#162a45;color:white;padding:13px 18px;border-radius:9px;z-index:100}
+.hidden{display:none!important}.empty{color:var(--muted);padding:15px 0}
+@media(max-width:900px){.sidebar{width:75px}.sideLogo{font-size:0}.sideLogo:first-letter{font-size:25px}.navBtn{font-size:0;text-align:center}.navBtn::first-letter{font-size:20px}.content{margin-left:75px}.stats{grid-template-columns:repeat(2,1fr)}.grid,.grid2{grid-template-columns:1fr 1fr}.quick{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.top{padding:8px 12px}.nav{padding:0 12px}.hero{height:230px}.caption{font-size:15px;left:4%;bottom:20px}.content{padding:10px}.grid,.grid2,.stats,.quick{grid-template-columns:1fr}.sidebar{width:62px}.content{margin-left:62px}.topbar{gap:8px}.menu{right:12px;width:calc(100% - 24px)}}
+</style>
+</head>
+<body>
+
+<div id="home">
+  <div class="top"><span>✉ support@sewanyahealthcare.com</span><span>Better Health • Better Future</span></div>
+  <div class="nav">
+    <div class="logo">Sewanya<span>Healthcare</span></div>
+    <div><button class="btn" onclick="openLogin('CUSTOMER')">LOGIN</button> <button class="btn" onclick="toggleMenu()">☰</button></div>
+  </div>
+  <div id="menu" class="menu">
+    <button onclick="goHome()">🏠 HOME</button>
+    <button onclick="openLogin('CUSTOMER')">👤 CUSTOMER LOGIN</button>
+    <button onclick="openLogin('FO')">🧑‍⚕️ FO LOGIN</button>
+    <button onclick="openLogin('BM')">📋 BM LOGIN</button>
+    <button onclick="openLogin('DM')">🏢 DM LOGIN</button>
+    <button onclick="openLogin('ADMIN')">🛡 ADMIN LOGIN</button>
+  </div>
+  <div class="hero">
+    <div class="slides" id="slides">
+      <div class="slide"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=85"><div class="caption"><b>Professional Doctors</b><br>Sewanya Healthcare</div></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1600&q=85"><div class="caption"><b>Modern Hospital Care</b><br>Healthcare Services</div></div>
+      <div class="slide"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1600&q=85"><div class="caption"><b>Hospital & Patient Care</b><br>Trusted Healthcare Network</div></div>
+    </div>
+    <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+  </div>
+  <div class="homeInfo">
+    <h1>Sewanya Healthcare Management Portal</h1>
+    <p>Admin → DM → BM → FO → Health Card</p>
+    <div class="notice"><b>Working flow:</b> Admin approval ke bina DM active nahi hoga. Approved DM BM bana sakta hai, approved BM FO bana sakta hai, aur FO/Admin Health Card generate kar sakte hain.</div>
+  </div>
+</div>
+
+<div id="loginPage" class="loginPage">
+  <div class="loginBox">
+    <div id="loginRole" style="font-weight:800;color:#1670b8">LOGIN</div>
+    <h1 id="loginTitle">Login</h1>
+    <div class="field"><label>Username / ID</label><input id="loginId" autocomplete="username"></div>
+    <div class="field"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
+    <button class="loginBtn" onclick="login()">LOGIN</button>
+    <div class="demoGrid">
+      <button onclick="demoLogin('ADMIN')">Admin Demo</button>
+      <button onclick="demoLogin('DM')">DM Demo</button>
+      <button onclick="demoLogin('BM')">BM Demo</button>
+      <button onclick="demoLogin('FO')">FO Demo</button>
+    </div>
+    <div class="hint">Admin: <b>SWH-ADMIN-001</b> / <b>Admin@123</b></div>
+    <div class="back" onclick="goHome()">← Website par wapas</div>
+  </div>
+</div>
+
+<div id="app" class="app">
+  <aside class="sidebar">
+    <div class="sideLogo">Sewanya<span>Care</span></div>
+    <button class="navBtn active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
+    <button class="navBtn" onclick="showPage('users',this)">👥 User Management</button>
+    <button class="navBtn" onclick="showPage('locations',this)">📍 District & Block</button>
+    <button class="navBtn" onclick="showPage('health',this)">🪪 Health Card</button>
+    <button class="navBtn" onclick="showPage('reports',this)">📊 Reports</button>
+    <button class="navBtn" onclick="showPage('settings',this)">⚙ Settings</button>
+    <button class="navBtn logoutSide" onclick="logout()">↪ Logout</button>
+  </aside>
+
+  <main class="content">
+    <div class="topbar">
+      <div><b id="welcomeName">Welcome</b><div style="font-size:12px;color:#718096" id="welcomeRole"></div></div>
+      <div class="userChip"><span id="sessionStatus">● Active</span> <button class="btn red" onclick="logout()">Logout</button></div>
+    </div>
+
+    <section class="heroDash">
+      <small>🛡 Smart Business Dashboard</small>
+      <h1 id="dashTitle">Dashboard</h1>
+      <p id="dashSub">Role based management</p>
+      <div class="stats">
+        <div class="stat">DMs<b id="countDM">0</b></div>
+        <div class="stat">BMs<b id="countBM">0</b></div>
+        <div class="stat">FOs<b id="countFO">0</b></div>
+        <div class="stat">Customers<b id="countCustomer">0</b></div>
+        <div class="stat">Health Cards<b id="countCards">0</b></div>
+      </div>
+    </section>
+
+    <section id="page-dashboard" class="page active">
+      <h2>⚡ Quick Actions</h2>
+      <div class="quick">
+        <button onclick="showPage('users')">👥 Users</button>
+        <button class="g" onclick="showPage('health')">🪪 Health Card</button>
+        <button class="o" onclick="showPage('locations')">📍 UP Districts</button>
+        <button class="p" onclick="showPage('reports')">📊 Reports</button>
+      </div>
+      <hr>
+      <div class="notice"><b>Permissions:</b> Admin सब users approve कर सकता है. DM केवल approved होने के बाद BM बना सकता है. BM केवल approved होने के बाद FO बना सकता है. FO और Admin Health Card बना सकते हैं.</div>
+    </section>
+
+    <section id="page-users" class="page">
+      <h2>👥 User Management</h2>
+      <div id="createPanel"></div>
+      <hr>
+      <h3>Pending Approval</h3>
+      <div id="pendingList" class="empty"></div>
+      <h3>All Users</h3>
+      <div class="tableWrap">
+        <table class="table">
+          <thead><tr><th>Role</th><th>Name</th><th>ID</th><th>District</th><th>Block</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="userTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="page-locations" class="page">
+      <h2>📍 Uttar Pradesh District & Block</h2>
+      <div class="grid2">
+        <div class="field"><label>District (75)</label><select id="districtSelect" onchange="loadBlocks()"></select></div>
+        <div class="field"><label>Search Block</label><input id="blockSearch" oninput="loadBlocks()" placeholder="Block search"></div>
+      </div>
+      <div id="blockHeading" style="font-weight:800;margin-top:18px"></div>
+      <div id="blockList" style="margin-top:10px"></div>
+      <div class="notice" style="margin-top:15px">इस file में 75 UP districts मौजूद हैं. Common district blocks offline fallback में हैं; बाकी districts में block data जोड़ने के लिए backend/government API connection चाहिए.</div>
+    </section>
+
+    <section id="page-health" class="page">
+      <h2>🪪 Health Card</h2>
+      <div id="healthAccess"></div>
+      <div id="healthForm" class="hidden">
+        <div class="grid">
+          <div class="field"><label>Customer Name</label><input id="hcName"></div>
+          <div class="field"><label>Mobile</label><input id="hcMobile"></div>
+          <div class="field"><label>Age</label><input id="hcAge" type="number"></div>
+          <div class="field"><label>Gender</label><select id="hcGender"><option>Male</option><option>Female</option><option>Other</option></select></div>
+          <div class="field"><label>Village</label><input id="hcVillage"></div>
+          <div class="field"><label>District</label><select id="hcDistrict"></select></div>
+        </div>
+        <button class="btn green" onclick="generateCard()">GENERATE HEALTH CARD</button>
+        <div id="cardResult"></div>
+      </div>
+    </section>
+
+    <section id="page-reports" class="page">
+      <h2>📊 Reports</h2>
+      <div class="wallets">
+        <div class="wallet"><span>Total Users</span><b id="reportUsers">0</b>Current browser data</div>
+        <div class="wallet orange"><span>Pending DMs</span><b id="reportPending">0</b>Admin approval required</div>
+      </div>
+    </section>
+
+    <section id="page-settings" class="page">
+      <h2>⚙ Settings</h2>
+      <div class="notice">Current version localStorage पर data save करती है. Production में secure backend/database लगाना जरूरी है.</div>
+      <br><button class="btn red" onclick="clearDemoData()">Clear Demo Data</button>
+    </section>
+  </main>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const DISTRICTS = ["Agra", "Aligarh", "Ambedkar Nagar", "Amethi", "Amroha", "Auraiya", "Ayodhya", "Azamgarh", "Baghpat", "Bahraich", "Ballia", "Balrampur", "Banda", "Barabanki", "Bareilly", "Basti", "Bhadohi", "Bijnor", "Budaun", "Bulandshahr", "Chandauli", "Chitrakoot", "Deoria", "Etah", "Etawah", "Farrukhabad", "Fatehpur", "Firozabad", "Gautam Buddha Nagar", "Ghaziabad", "Ghazipur", "Gonda", "Gorakhpur", "Hamirpur", "Hapur", "Hardoi", "Hathras", "Jalaun", "Jaunpur", "Jhansi", "Kannauj", "Kanpur Dehat", "Kanpur Nagar", "Kasganj", "Kaushambi", "Kheri", "Kushinagar", "Lalitpur", "Lucknow", "Maharajganj", "Mahoba", "Mainpuri", "Mathura", "Mau", "Meerut", "Mirzapur", "Moradabad", "Muzaffarnagar", "Pilibhit", "Pratapgarh", "Prayagraj", "Raebareli", "Rampur", "Saharanpur", "Sambhal", "Sant Kabir Nagar", "Shahjahanpur", "Shamli", "Shravasti", "Siddharthnagar", "Sitapur", "Sonbhadra", "Sultanpur", "Unnao", "Varanasi"];
+const BLOCKS = {"Agra": ["Achhnera", "Akola", "Barauli Ahir", "Bichpuri", "Etmadpur", "Fatehabad", "Fatehpur Sikri", "Kheragarh", "Khandauli", "Pinahat", "Saiyan", "Shamsabad"], "Aligarh": ["Akrabad", "Atrauli", "Chandaus", "Dhanipur", "Gabhana", "Gangiri", "Iglas", "Jawan Sikandarpur", "Khair", "Lodha", "Tappal"], "Lucknow": ["Bakshi Ka Talab", "Chinhat", "Gosainganj", "Kakori", "Malihabad", "Mohanlalganj", "Maal", "Sarojini Nagar"], "Kanpur Nagar": ["Bilhaur", "Bhitargaon", "Chaubepur", "Kalyanpur", "Patara", "Sarsaul", "Shivrajpur", "Vidhunu"], "Varanasi": ["Arajiline", "Chiraigaon", "Harhua", "Kashi Vidyapeeth", "Pindra", "Sewapuri"], "Prayagraj": ["Bahadurpur", "Bahria", "Chaka", "Dhanupur", "Holagarh", "Jasra", "Karchhana", "Kaudihar", "Koraon", "Meja", "Phulpur", "Pratappur", "Shankargarh", "Soraon"], "Shahjahanpur": ["Banda", "Dadrol", "Jalalabad", "Kalan", "Khutar", "Powayan", "Sindhauli"], "Hamirpur": ["Gohand", "Maudaha", "Muskra", "Rath", "Sarila", "Sumerpur"], "Banda": ["Baberu", "Bisanda", "Jaspura", "Kamasin", "Mahua", "Naraini", "Tindwari"], "Hardoi": ["Bawan", "Mallawan", "Pihani", "Sandi", "Tadiyawan"], "Chitrakoot": ["Karwi", "Manikpur", "Pahari", "Ramnagar"], "Jhansi": ["Babina", "Bangra", "Chirgaon", "Mauranipur"], "Lalitpur": ["Bar", "Birdha", "Jakhora", "Mahroni", "Talbehat"], "Jalaun": ["Dakore", "Konch"], "Mirzapur": ["Jamalpur", "Kon", "Narainpur", "Pahari", "Patehra", "Rajgarh"], "Mahoba": ["Charkhari", "Kabrai", "Panwari"], "Amethi": ["Amethi", "Bhadar", "Bhetua", "Jagdishpur", "Jamo", "Shukul Bazar"], "Budaun": ["Ambiapur", "Asafpur", "Jagat", "Salarpur", "Usawan", "Wazirganj"], "Kannauj": ["Jalalabad", "Umarda"], "Meerut": ["Daurala", "Kharkhoda"], "Etawah": ["Chakkarnagar", "Takha"], "Deoria": ["Pathardewa"], "Gorakhpur": ["Bansgaon", "Chargawan", "Khorabar"], "Bahraich": ["Shivpur", "Tejwapur"], "Chandauli": ["Chahaniya"], "Hathras": ["Sehpau"], "Azamgarh": ["Sathiyaon"], "Sonbhadra": ["Ghorawal", "Karma", "Kone", "Myorepur", "Nagawa"], "Baghpat": ["Chhaprauli", "Pilana"], "Bulandshahr": ["Agauta"], "Barabanki": ["Masauli"], "Muzaffarnagar": ["Budhana", "Shahpur"], "Shamli": ["Un"]};
+const USERS_KEY = "sewanya_users_working_v1";
+const CARDS_KEY = "sewanya_cards_working_v1";
+
+let users = JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
+let cards = JSON.parse(localStorage.getItem(CARDS_KEY) || "[]");
+let session = null;
+let loginRole = "";
+
+function saveUsers(){ localStorage.setItem(USERS_KEY, JSON.stringify(users)); renderAll(); }
+function saveCards(){ localStorage.setItem(CARDS_KEY, JSON.stringify(cards)); renderAll(); }
+function esc(v){ return String(v ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
+function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.style.display="block"; setTimeout(()=>t.style.display="none",2400); }
+
+function toggleMenu(){ document.getElementById("menu").classList.toggle("open"); }
+function goHome(){
+  session=null;
+  document.getElementById("app").style.display="none";
+  document.getElementById("loginPage").style.display="none";
+  document.getElementById("home").style.display="block";
+  document.getElementById("menu").classList.remove("open");
+}
+function openLogin(role){
+  loginRole=role;
+  document.getElementById("menu").classList.remove("open");
+  document.getElementById("home").style.display="none";
+  document.getElementById("app").style.display="none";
+  document.getElementById("loginPage").style.display="flex";
+  document.getElementById("loginRole").textContent=role+" LOGIN";
+  document.getElementById("loginTitle").textContent=role+" Login";
+  document.getElementById("loginId").focus();
+}
+function demoLogin(role){
+  const d={
+    ADMIN:["SWH-ADMIN-001","Admin@123"],
+    DM:["SWH-DM-001","DM@123"],
+    BM:["SWH-BM-001","BM@123"],
+    FO:["SWH-FO-001","FO@123"]
+  }[role];
+  openLogin(role);
+  document.getElementById("loginId").value=d[0];
+  document.getElementById("loginPassword").value=d[1];
+}
+function login(){
+  const id=document.getElementById("loginId").value.trim();
+  const pw=document.getElementById("loginPassword").value;
+  if(loginRole==="ADMIN" && id==="SWH-ADMIN-001" && pw==="Admin@123"){
+    session={role:"ADMIN",name:"Administrator",id:"SWH-ADMIN-001",status:"APPROVED"};
+    enterApp(); return;
+  }
+  const u=users.find(x=>x.id===id && x.password===pw && x.role===loginRole);
+  if(!u){ toast("Username/Password गलत है"); return; }
+  if(u.status!=="APPROVED"){ toast("यह account अभी Admin/Parent approval में है"); return; }
+  session=u;
+  enterApp();
+}
+function enterApp(){
+  document.getElementById("loginPage").style.display="none";
+  document.getElementById("home").style.display="none";
+  document.getElementById("app").style.display="block";
+  document.getElementById("welcomeName").textContent="Welcome, "+session.name;
+  document.getElementById("welcomeRole").textContent=session.role+" • "+session.id;
+  document.getElementById("dashTitle").textContent=session.role+" Dashboard";
+  document.getElementById("dashSub").textContent=permissionText();
+  buildCreatePanel();
+  renderAll();
+  showPage("dashboard");
+}
+function permissionText(){
+  if(session.role==="ADMIN") return "Full control • Approve DM/BM/FO • Users • Health Card • Reports";
+  if(session.role==="DM") return "District Manager • Create BM after approval";
+  if(session.role==="BM") return "Block Manager • Create FO after approval";
+  if(session.role==="FO") return "Field Officer • Generate Health Cards";
+  return "Customer";
+}
+function logout(){ goHome(); toast("Logout successful"); }
+
+function allowedCreate(){
+  if(session.role==="ADMIN") return ["DM","BM","FO","CUSTOMER"];
+  if(session.role==="DM" && session.status==="APPROVED") return ["BM"];
+  if(session.role==="BM" && session.status==="APPROVED") return ["FO"];
+  return [];
+}
+function buildCreatePanel(){
+  const p=document.getElementById("createPanel");
+  const roles=allowedCreate();
+  if(!roles.length){
+    p.innerHTML='<div class="notice">आपके current role को नया user बनाने की permission नहीं है.</div>';
+    return;
+  }
+  p.innerHTML=`
+    <div class="notice"><b>${esc(session.role)}</b> can create: ${roles.join(", ")}</div>
+    <div class="grid" style="margin-top:14px">
+      <div class="field"><label>Role</label><select id="createRole">${roles.map(r=>`<option>${r}</option>`).join("")}</select></div>
+      <div class="field"><label>Name</label><input id="createName" placeholder="Full name"></div>
+      <div class="field"><label>Username / ID</label><input id="createId" placeholder="SWH-ROLE-001"></div>
+      <div class="field"><label>Password</label><input id="createPassword" placeholder="Password"></div>
+      <div class="field"><label>District</label><select id="createDistrict"></select></div>
+      <div class="field"><label>Block</label><select id="createBlock"></select></div>
+    </div>
+    <br><button class="btn" onclick="createUser()">CREATE USER</button>`;
+  fillSelect("createDistrict",DISTRICTS);
+  updateCreateBlocks();
+  document.getElementById("createDistrict").onchange=updateCreateBlocks;
+}
+function updateCreateBlocks(){
+  const d=document.getElementById("createDistrict");
+  const b=document.getElementById("createBlock");
+  if(!d||!b)return;
+  const arr=BLOCKS[d.value] || ["Block data add करें / official directory connect करें"];
+  b.innerHTML=arr.map(x=>`<option>${esc(x)}</option>`).join("");
+}
+function createUser(){
+  const role=document.getElementById("createRole").value;
+  if(!allowedCreate().includes(role)){toast("Permission denied");return}
+  const name=document.getElementById("createName").value.trim();
+  const id=document.getElementById("createId").value.trim();
+  const password=document.getElementById("createPassword").value;
+  if(!name||!id||!password){toast("Name, ID और Password भरें");return}
+  if(users.some(u=>u.id===id)){toast("यह ID पहले से मौजूद है");return}
+  users.push({
+    role,name,id,password,
+    district:document.getElementById("createDistrict").value,
+    block:document.getElementById("createBlock").value,
+    status:"PENDING",
+    createdBy:session.id
+  });
+  saveUsers();
+  buildCreatePanel();
+  toast(role+" create हो गया — approval के बाद login होगा");
+}
+
+function approveUser(index){
+  if(session.role!=="ADMIN"){toast("Only Admin can approve");return}
+  users[index].status="APPROVED";
+  saveUsers();
+  toast(users[index].role+" approved");
+}
+function deleteUser(index){
+  if(session.role!=="ADMIN"){toast("Only Admin can delete");return}
+  const name=users[index].name;
+  users.splice(index,1);
+  saveUsers();
+  toast(name+" deleted");
+}
+function renderUsers(){
+  const tbody=document.getElementById("userTable");
+  if(!tbody)return;
+  tbody.innerHTML=users.length ? users.map((u,i)=>`
+    <tr>
+      <td>${esc(u.role)}</td><td>${esc(u.name)}</td><td>${esc(u.id)}</td>
+      <td>${esc(u.district||"-")}</td><td>${esc(u.block||"-")}</td>
+      <td><span class="badge ${u.status==="APPROVED"?"approved":"pending"}">${u.status}</span></td>
+      <td>${session?.role==="ADMIN" && u.status!=="APPROVED" ? `<button class="btn green" onclick="approveUser(${i})">Approve</button> `:""}
+      ${session?.role==="ADMIN" ? `<button class="btn red" onclick="deleteUser(${i})">Delete</button>`:"-"}</td>
+    </tr>`).join("") : `<tr><td colspan="7" class="empty">Abhi koi user create नहीं हुआ.</td></tr>`;
+
+  const pending=users.filter(u=>u.status==="PENDING");
+  document.getElementById("pendingList").innerHTML=session?.role==="ADMIN"
+    ? (pending.length ? pending.map((u,i)=>{
+      const real=users.indexOf(u);
+      return `<div style="border:1px solid var(--line);padding:11px;border-radius:9px;margin:7px 0">
+        <b>${esc(u.role)}</b> — ${esc(u.name)} — ${esc(u.district||"-")} / ${esc(u.block||"-")}
+        <button class="btn green" style="float:right" onclick="approveUser(${real})">Approve</button>
+      </div>`}).join("") : "No pending approval.")
+    : "Only Admin can see and approve pending accounts.";
+}
+function fillSelect(id,arr){
+  const e=document.getElementById(id); if(!e)return;
+  e.innerHTML=arr.map(x=>`<option>${esc(x)}</option>`).join("");
+}
+function loadLocations(){
+  fillSelect("districtSelect",DISTRICTS);
+  fillSelect("hcDistrict",DISTRICTS);
+  loadBlocks();
+}
+function loadBlocks(){
+  const d=document.getElementById("districtSelect").value;
+  const q=(document.getElementById("blockSearch").value||"").toLowerCase();
+  const arr=(BLOCKS[d]||["Block data available through official directory/backend connection"]).filter(x=>x.toLowerCase().includes(q));
+  document.getElementById("blockHeading").textContent="Blocks in "+d;
+  document.getElementById("blockList").innerHTML=arr.map(x=>`<span class="badge approved" style="margin:4px">${esc(x)}</span>`).join("");
+}
+function generateCard(){
+  if(!session || !["ADMIN","FO"].includes(session.role)){toast("Health Card केवल Admin/FO बना सकते हैं");return}
+  const name=document.getElementById("hcName").value.trim();
+  const mobile=document.getElementById("hcMobile").value.trim();
+  const age=document.getElementById("hcAge").value.trim();
+  const gender=document.getElementById("hcGender").value;
+  const village=document.getElementById("hcVillage").value.trim();
+  const district=document.getElementById("hcDistrict").value;
+  if(!name||!mobile||!age||!village||!district){toast("सभी details भरें");return}
+  const card={id:"SWH-HC-"+Date.now().toString().slice(-8),name,mobile,age,gender,village,district,createdBy:session.id,date:new Date().toLocaleDateString("en-IN")};
+  cards.unshift(card);saveCards();
+  document.getElementById("cardResult").innerHTML=`
+    <div class="card" id="printCard">
+      <div class="cardTop"><b>💚 SEWANYA HEALTHCARE</b><b>HEALTH CARD</b></div>
+      <div class="cardId">Card ID: ${esc(card.id)}</div>
+      <div class="cardName">${esc(card.name)}</div>
+      <div class="cardGrid">
+        <div>Mobile: ${esc(card.mobile)}</div><div>Age/Gender: ${esc(card.age)} / ${esc(card.gender)}</div>
+        <div>Village: ${esc(card.village)}</div><div>District: ${esc(card.district)}</div>
+      </div>
+      <div style="margin-top:18px;font-size:12px">Created by: ${esc(session.name)} • ${esc(card.date)}</div>
+      <button class="btn" style="margin-top:15px;background:#fff;color:#075b9d" onclick="printCard()">🖨 Print / Save PDF</button>
+    </div>`;
+  toast("Health Card तैयार है");
+}
+function printCard(){
+  const el=document.getElementById("printCard");
+  const w=window.open("","_blank");
+  if(!w){toast("Popup blocked है — browser में popup allow करें");return}
+  w.document.write(`<html><head><title>Sewanya Health Card</title><style>body{font-family:Arial;padding:30px}.card{max-width:570px;margin:auto;padding:25px;border-radius:18px;background:#0876a6;color:#fff}.cardTop{display:flex;justify-content:space-between}.cardName{font-size:26px;font-weight:800;margin:20px 0 8px}.cardGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px}.cardId{font-size:12px}</style></head><body>${el.outerHTML.replace(/<button[\s\S]*?<\/button>/,"")}<script>window.onload=()=>window.print()<\/script></body></html>`);
+  w.document.close();
+}
+function renderReports(){
+  document.getElementById("reportUsers").textContent=users.length;
+  document.getElementById("reportPending").textContent=users.filter(u=>u.role==="DM"&&u.status==="PENDING").length;
+}
+function renderHealthAccess(){
+  const ok=session && ["ADMIN","FO"].includes(session.role);
+  document.getElementById("healthForm").classList.toggle("hidden",!ok);
+  document.getElementById("healthAccess").innerHTML=ok
+    ? `<div class="notice">आप ${session.role} हैं — Health Card create कर सकते हैं.</div><br>`
+    : `<div class="notice">Health Card generation अभी केवल <b>Admin और FO</b> के लिए enabled है.</div>`;
+}
+function showPage(name,btn){
+  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+  document.getElementById("page-"+name).classList.add("active");
+  document.querySelectorAll(".navBtn").forEach(x=>x.classList.remove("active"));
+  if(btn)btn.classList.add("active");
+  if(name==="locations")loadLocations();
+  if(name==="health")renderHealthAccess();
+  if(name==="reports")renderReports();
+}
+function renderAll(){
+  document.getElementById("countDM").textContent=users.filter(u=>u.role==="DM").length;
+  document.getElementById("countBM").textContent=users.filter(u=>u.role==="BM").length;
+  document.getElementById("countFO").textContent=users.filter(u=>u.role==="FO").length;
+  document.getElementById("countCustomer").textContent=users.filter(u=>u.role==="CUSTOMER").length;
+  document.getElementById("countCards").textContent=cards.length;
+  renderUsers();renderReports();
+}
+function clearDemoData(){
+  if(session?.role!=="ADMIN"){toast("Only Admin can clear data");return}
+  if(confirm("All locally saved users and cards delete करें?")){
+    localStorage.removeItem(USERS_KEY);localStorage.removeItem(CARDS_KEY);users=[];cards=[];renderAll();toast("Data cleared");
+  }
+}
+function seedDemoUsers(){
+  if(users.length)return;
+  users=[
+    {role:"DM",name:"Demo District Manager",id:"SWH-DM-001",password:"DM@123",district:"Lucknow",block:"",status:"PENDING",createdBy:"ADMIN"},
+    {role:"BM",name:"Demo Block Manager",id:"SWH-BM-001",password:"BM@123",district:"Lucknow",block:"Mohanlalganj",status:"PENDING",createdBy:"DM"},
+    {role:"FO",name:"Demo Field Officer",id:"SWH-FO-001",password:"FO@123",district:"Lucknow",block:"Mohanlalganj",status:"PENDING",createdBy:"BM"}
+  ];
+  saveUsers();
+}
+seedDemoUsers();
+loadLocations();
+
+let slide=0;
+setInterval(()=>{
+  const s=document.getElementById("slides");if(!s)return;
+  slide=(slide+1)%3;s.style.transform=`translateX(-${slide*100}%)`;
+  document.querySelectorAll(".dot").forEach((d,i)=>d.classList.toggle("active",i===slide));
+},3500);
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape")document.getElementById("menu").classList.remove("open");
+  if(e.key==="Enter" && document.getElementById("loginPage").style.display==="flex")login();
+});
+</script>
+</body>
+</html>
