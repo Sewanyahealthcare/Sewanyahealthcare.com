@@ -70,13 +70,18 @@ button,input,select{font:inherit}button{cursor:pointer}
     <div class="field"><label>Username / ID</label><input id="loginId" autocomplete="username"></div>
     <div class="field"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
     <button class="loginBtn" onclick="login()">LOGIN</button>
-    <div class="demoGrid">
-      <button onclick="demoLogin('ADMIN')">Admin Demo</button>
-      <button onclick="demoLogin('DM')">DM Demo</button>
-      <button onclick="demoLogin('BM')">BM Demo</button>
-      <button onclick="demoLogin('FO')">FO Demo</button>
+    <div style="display:flex;justify-content:center;gap:22px;margin:16px 0 4px;flex-wrap:wrap">
+      <button type="button" onclick="openRecovery('ID')" style="border:0;background:none;color:#0759a6;font-weight:700;text-decoration:underline;padding:4px">Forgot ID?</button>
+      <button type="button" onclick="openRecovery('PASSWORD')" style="border:0;background:none;color:#0759a6;font-weight:700;text-decoration:underline;padding:4px">Forgot Password?</button>
     </div>
-    <div class="hint">Admin: <b>SWH-ADMIN-001</b> / <b>Admin@123</b></div>
+    <div id="recoveryBox" class="hidden" style="margin-top:12px;padding:16px;border:1px solid var(--line);border-radius:12px;background:#f8fbff">
+      <h3 id="recoveryTitle" style="margin:0 0 12px">Account Recovery</h3>
+      <div id="recoveryFields"></div>
+      <button class="btn" type="button" onclick="recoverAccount()">CONTINUE</button>
+      <button class="btn gray" type="button" onclick="closeRecovery()" style="margin-left:6px">CANCEL</button>
+      <div id="recoveryResult" style="margin-top:12px"></div>
+      <div class="hint">Production version में OTP / registered mobile / email verification लगाना चाहिए.</div>
+    </div>
     <div class="back" onclick="goHome()">← Website par wapas</div>
   </div>
 </div>
@@ -221,7 +226,7 @@ function openLogin(role){
 }
 function demoLogin(role){
   const d={
-    ADMIN:["SWH-ADMIN-001","Admin@123"],
+    ADMIN:["Spn242001","Ummehani@786"],
     DM:["SWH-DM-001","DM@123"],
     BM:["SWH-BM-001","BM@123"],
     FO:["SWH-FO-001","FO@123"]
@@ -230,11 +235,112 @@ function demoLogin(role){
   document.getElementById("loginId").value=d[0];
   document.getElementById("loginPassword").value=d[1];
 }
+let recoveryMode = "";
+
+function openRecovery(mode){
+  recoveryMode = mode;
+  const box = document.getElementById("recoveryBox");
+  const title = document.getElementById("recoveryTitle");
+  const fields = document.getElementById("recoveryFields");
+  document.getElementById("recoveryResult").innerHTML = "";
+  box.classList.remove("hidden");
+
+  if(mode === "ID"){
+    title.textContent = "Forgot ID";
+    fields.innerHTML =
+      '<div class="field"><label>Role</label><select id="recoverRole"><option value="CUSTOMER">Customer</option><option value="FO">FO</option><option value="BM">BM</option><option value="DM">DM</option><option value="ADMIN">Admin</option></select></div>' +
+      '<div class="field"><label>Registered Name</label><input id="recoverName" placeholder="Enter registered name"></div>' +
+      '<div class="field"><label>District</label><select id="recoverDistrict"></select></div>';
+    fillSelect("recoverDistrict", DISTRICTS);
+  } else {
+    title.textContent = "Forgot Password";
+    fields.innerHTML =
+      '<div class="field"><label>Role</label><select id="recoverRole"><option value="CUSTOMER">Customer</option><option value="FO">FO</option><option value="BM">BM</option><option value="DM">DM</option><option value="ADMIN">Admin</option></select></div>' +
+      '<div class="field"><label>Username / ID</label><input id="recoverId" placeholder="Enter User ID"></div>' +
+      '<div class="field"><label>Registered Name</label><input id="recoverName" placeholder="Enter registered name"></div>' +
+      '<div class="field"><label>New Password</label><input id="recoverNewPassword" type="password" placeholder="Enter new password"></div>' +
+      '<div class="field"><label>Confirm Password</label><input id="recoverConfirmPassword" type="password" placeholder="Confirm new password"></div>';
+  }
+}
+
+function closeRecovery(){
+  document.getElementById("recoveryBox").classList.add("hidden");
+  document.getElementById("recoveryResult").innerHTML = "";
+  recoveryMode = "";
+}
+
+function recoverAccount(){
+  const role = document.getElementById("recoverRole").value;
+  const name = (document.getElementById("recoverName").value || "").trim();
+  const result = document.getElementById("recoveryResult");
+
+  if(!name){
+    result.innerHTML = '<span style="color:#b91c1c;font-weight:700">Registered name भरें.</span>';
+    return;
+  }
+
+  if(recoveryMode === "ID"){
+    if(role === "ADMIN"){
+      result.innerHTML = '<span style="color:#166534;font-weight:700">Admin User ID: Spn242001</span>';
+      return;
+    }
+    const district = document.getElementById("recoverDistrict").value;
+    const matches = users.filter(u => u.role === role && u.name.toLowerCase() === name.toLowerCase() && (u.district || "") === district);
+    if(!matches.length){
+      result.innerHTML = '<span style="color:#b91c1c;font-weight:700">Account नहीं मिला. Name, role और district check करें.</span>';
+      return;
+    }
+    result.innerHTML = '<span style="color:#166534;font-weight:700">Your User ID: ' + matches.map(u => esc(u.id)).join(", ") + '</span>';
+    return;
+  }
+
+  const id = (document.getElementById("recoverId").value || "").trim();
+  const newPassword = document.getElementById("recoverNewPassword").value || "";
+  const confirmPassword = document.getElementById("recoverConfirmPassword").value || "";
+
+  if(!id || !newPassword || !confirmPassword){
+    result.innerHTML = '<span style="color:#b91c1c;font-weight:700">सभी fields भरें.</span>';
+    return;
+  }
+  if(newPassword.length < 6){
+    result.innerHTML = '<span style="color:#b91c1c;font-weight:700">Password कम से कम 6 characters का रखें.</span>';
+    return;
+  }
+  if(newPassword !== confirmPassword){
+    result.innerHTML = '<span style="color:#b91c1c;font-weight:700">Passwords match नहीं कर रहे.</span>';
+    return;
+  }
+
+  if(role === "ADMIN"){
+    if(id !== "Spn242001" || name.toLowerCase() !== "administrator"){
+      result.innerHTML = '<span style="color:#b91c1c;font-weight:700">Admin details match नहीं हुईं.</span>';
+      return;
+    }
+    localStorage.setItem("sewanya_admin_password", newPassword);
+    result.innerHTML = '<span style="color:#166534;font-weight:700">Admin password reset हो गया. अब नए password से login करें.</span>';
+    document.getElementById("loginId").value = id;
+    document.getElementById("loginPassword").value = newPassword;
+    return;
+  }
+
+  const u = users.find(x => x.id === id && x.role === role && x.name.toLowerCase() === name.toLowerCase());
+  if(!u){
+    result.innerHTML = '<span style="color:#b91c1c;font-weight:700">Account नहीं मिला. ID, role और name check करें.</span>';
+    return;
+  }
+
+  u.password = newPassword;
+  saveUsers();
+  result.innerHTML = '<span style="color:#166534;font-weight:700">Password reset हो गया. अब नए password से login करें.</span>';
+  document.getElementById("loginId").value = id;
+  document.getElementById("loginPassword").value = newPassword;
+}
+
 function login(){
   const id=document.getElementById("loginId").value.trim();
   const pw=document.getElementById("loginPassword").value;
-  if(loginRole==="ADMIN" && id==="SWH-ADMIN-001" && pw==="Admin@123"){
-    session={role:"ADMIN",name:"Administrator",id:"SWH-ADMIN-001",status:"APPROVED"};
+  if(loginRole==="ADMIN" && id==="Spn242001" && pw===(localStorage.getItem("sewanya_admin_password") || "Ummehani@786")){
+    session={role:"ADMIN",name:"Administrator",id:"Spn242001",status:"APPROVED"};
     enterApp(); return;
   }
   const u=users.find(x=>x.id===id && x.password===pw && x.role===loginRole);
