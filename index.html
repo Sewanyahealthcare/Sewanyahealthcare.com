@@ -2,202 +2,223 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Sewanya Healthcare - Role Management</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sewanya Healthcare - Health, Family, Job Card and Welfare Services">
+<title>Sewanya Healthcare | Better Health • Brighter Future</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f8fc;color:#17324b}
-:root{--blue:#0878df;--dark:#062b4e;--green:#16a85a;--orange:#f59e0b;--purple:#7255e8}
-button,input,select{font:inherit}.hide{display:none!important}.top{height:64px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5%;box-shadow:0 2px 10px #0001}.logo{font-weight:800;color:#07539d;font-size:20px}.login{background:#12a94f;color:#fff;border:0;padding:11px 24px;border-radius:8px;font-weight:700;cursor:pointer}
-.hero{padding:55px 8%;background:linear-gradient(120deg,#e5f6ff,#fff);text-align:left}.hero h1{font-size:42px;color:#07539d}.hero p{max-width:700px;line-height:1.7}.cards{max-width:1100px;margin:25px auto;padding:0 18px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:#fff;padding:25px;border-radius:14px;text-align:center;box-shadow:0 4px 18px #12365c12}
-.loginpage{min-height:100vh;display:grid;place-items:center;background:#eaf6ff;padding:20px}.box{width:min(440px,100%);background:#fff;padding:30px;border-radius:16px;box-shadow:0 10px 35px #0002}.box h2{color:#07539d}.field{margin:13px 0}.field label{font-size:13px;font-weight:700;display:block;margin-bottom:6px}.field input,.field select{width:100%;padding:11px;border:1px solid #d6e1ea;border-radius:8px}.primary{background:var(--blue);color:#fff;border:0;padding:12px 18px;border-radius:8px;cursor:pointer;font-weight:700}.green{background:var(--green)}.back{background:none;border:0;color:var(--blue);cursor:pointer}
-.layout{display:flex;min-height:100vh}.side{width:240px;background:linear-gradient(#062b4e,#073e6d);color:#fff;position:fixed;top:0;bottom:0;padding:16px 12px}.side h3{padding:8px}.userbox{background:#ffffff15;border-radius:10px;padding:12px;margin-bottom:12px}.menu button{width:100%;border:0;background:none;color:#dcecff;text-align:left;padding:11px;border-radius:7px;cursor:pointer}.menu button.active,.menu button:hover{background:#1687ed;color:#fff}.main{margin-left:240px;width:calc(100% - 240px);padding:24px}.head{display:flex;justify-content:space-between;align-items:center}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}.stat{color:#fff;border-radius:10px;padding:17px}.stat b{font-size:25px;display:block;margin-top:8px}.b{background:#1687ed}.g{background:#16a85a}.o{background:#f39a0d}.p{background:#7255e8}.panel{background:#fff;border-radius:12px;padding:18px;margin-bottom:18px;box-shadow:0 3px 14px #12365c10}.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:10px;border-bottom:1px solid #edf1f5;text-align:left;white-space:nowrap}th{background:#f5f8fb}.pill{background:#def6e7;color:#128347;border-radius:20px;padding:4px 8px}.danger{background:#ef5350;color:white;border:0;padding:6px 10px;border-radius:5px}.small{font-size:12px;color:#60758a}.notice{padding:12px;border-radius:8px;background:#fff8df;border:1px solid #f4d97b;margin-bottom:15px}.site-footer{background:#063c6b;color:#fff;text-align:center;padding:28px 18px;line-height:1.8}.site-footer b{font-size:16px}.toast{position:fixed;right:20px;bottom:20px;background:#063c6b;color:#fff;padding:13px 18px;border-radius:8px;display:none}
-@media(max-width:800px){.cards,.stats{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr 1fr}.side{width:205px}.main{margin-left:205px;width:calc(100% - 205px)}}@media(max-width:560px){.cards,.stats,.formgrid{grid-template-columns:1fr}.side{position:relative;width:100%}.layout{display:block}.main{margin:0;width:100%;padding:14px}}
+:root{
+  --blue:#07569b;--blue2:#0b78d0;--green:#158347;--dark:#0b2745;
+  --light:#f4fbff;--line:#d9e9f4;--white:#fff;--shadow:0 8px 28px rgba(18,72,112,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Noto Sans Devanagari","Noto Sans",Arial,sans-serif;color:var(--dark);background:#fff}
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+.topbar{height:38px;background:linear-gradient(90deg,#064e8e,#0a67ad);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5%;font-size:13px}
+.top-left{display:flex;gap:28px}.top-right{display:flex;gap:17px}
+.navbar{height:94px;background:#fff;display:flex;align-items:center;gap:35px;padding:0 4.5%;position:relative;z-index:20;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.logo{display:flex;align-items:center;min-width:300px}.logo img{width:285px;height:88px;object-fit:contain;object-position:left center}
+.navlinks{display:flex;align-items:center;justify-content:center;gap:38px;flex:1;height:100%;font-weight:650}
+.navlinks a{height:100%;display:flex;align-items:center;border-bottom:3px solid transparent;transition:.2s}
+.navlinks a:hover,.navlinks a.active{color:var(--blue2);border-bottom-color:var(--blue2)}
+.login-area{position:relative}.login-btn{border:0;background:linear-gradient(135deg,#075aa0,#0875c9);color:#fff;border-radius:9px;padding:13px 34px;font-weight:700;cursor:pointer;box-shadow:0 5px 13px rgba(7,90,160,.2)}
+.login-dropdown{display:none;position:absolute;right:0;top:50px;width:235px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.16);padding:9px}
+.login-area.open .login-dropdown{display:block}
+.login-dropdown a{display:flex;gap:10px;align-items:center;padding:12px;border-radius:8px;font-size:14px}
+.login-dropdown a:hover{background:#eef7ff;color:var(--blue)}
+.mobile-menu{display:none;border:0;background:#0871c4;color:#fff;border-radius:7px;padding:9px 13px;font-size:20px}
+
+.hero{position:relative;min-height:430px;overflow:hidden;background:#e9f8ff}
+.hero-image{position:absolute;inset:0;background-image:url("sewanya-hero.jpg");background-size:cover;background-position:center;opacity:.48}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(239,250,255,.98) 0%,rgba(239,250,255,.91) 38%,rgba(239,250,255,.30) 72%,rgba(239,250,255,.05) 100%)}
+.hero-content{position:relative;z-index:2;max-width:1450px;margin:auto;padding:48px 5% 34px}
+.hero h1{margin:0;font-size:47px;line-height:1.18;color:#07569b;letter-spacing:-.5px}
+.hero h1 span{color:#168047}
+.hero p{font-size:18px;line-height:1.55;font-weight:600;margin:12px 0 25px;color:#12395e}
+.quick-cards{display:grid;grid-template-columns:repeat(4,145px);gap:10px}
+.quick-card{background:rgba(255,255,255,.95);border:1px solid #d8eaf5;border-radius:12px;text-align:center;padding:13px 8px;box-shadow:var(--shadow)}
+.quick-icon{width:44px;height:44px;border-radius:50%;margin:auto;display:grid;place-items:center;color:#fff;font-size:21px;background:#0879d2}
+.quick-card:nth-child(2) .quick-icon{background:#14a35a}.quick-card:nth-child(3) .quick-icon{background:#6541cf}.quick-card:nth-child(4) .quick-icon{background:#f08a16}
+.quick-card b{display:block;margin-top:7px;font-size:14px}.quick-card small{font-size:11px;color:#65788b}
+
+.trust{display:grid;grid-template-columns:repeat(6,1fr);background:#f0fff5;border-top:1px solid #d8efdf;border-bottom:1px solid #d8efdf;padding:11px 4%}
+.trust-item{display:flex;align-items:center;justify-content:center;gap:9px;padding:8px 12px;border-right:1px solid #d4e9dc;font-size:12px}
+.trust-item:last-child{border-right:0}.trust-icon{width:38px;height:38px;border-radius:50%;background:#0b7d46;color:#fff;display:grid;place-items:center;font-size:18px;flex:none}.trust-item b{display:block}
+
+.content{max-width:1420px;margin:auto;padding:25px 4.5%;display:grid;grid-template-columns:1.18fr .92fr .72fr;gap:18px}
+.box{background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);overflow:hidden}
+.about-visual{height:270px;background:linear-gradient(135deg,#dff5ff,#eaffef);display:grid;place-items:center;position:relative}
+.about-visual .big{font-size:78px;letter-spacing:15px}.about-copy{padding:18px 20px}.eyebrow{font-size:12px;color:#1980ca;font-weight:800;letter-spacing:.7px}.box h2{margin:5px 0 7px;font-size:23px}.about-copy p{margin:0;color:#65788a;line-height:1.55;font-size:14px}
+.services{padding:18px}.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:13px}.service{border:1px solid #dbeaf3;border-radius:11px;padding:15px;min-height:115px;background:linear-gradient(#fff,#f8fcff);position:relative}.service-icon{width:41px;height:41px;border-radius:50%;display:grid;place-items:center;background:#0878cf;color:#fff;font-size:20px}.service:nth-child(2) .service-icon{background:#32506c}.service:nth-child(3) .service-icon{background:#14a35a}.service:nth-child(4) .service-icon{background:#0878cf}.service b{display:block;margin-top:7px;font-size:14px}.service small{color:#65788a;font-size:11px}.arrow{position:absolute;right:11px;top:44px;width:24px;height:24px;border-radius:50%;background:#0871bf;color:#fff;display:grid;place-items:center;font-size:12px}
+.updates{padding:18px}.updates-head{display:flex;align-items:center;justify-content:space-between}.updates-head a{color:#0871bf;font-size:12px}.update{display:flex;gap:9px;padding:14px 0;border-bottom:1px solid #e4edf2;font-size:13px;line-height:1.4}.update:last-child{border-bottom:0}.dot{color:#18a55c;font-size:11px}.date{margin-left:auto;color:#8797a6;font-size:10px;white-space:nowrap}
+
+.cta{max-width:1420px;margin:0 auto 22px;padding:14px 20px;border:1px solid #d2e8f2;border-radius:12px;background:linear-gradient(90deg,#f0fbff,#f5fff9);display:flex;align-items:center;justify-content:space-between;gap:15px}.cta b{color:#07569b}.cta button{border:0;background:#0867b2;color:#fff;border-radius:24px;padding:11px 27px;font-weight:700;cursor:pointer}
+
+.footer{background:linear-gradient(135deg,#07518b,#063c68);color:#fff;padding:29px 5% 11px}.footer-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr 1fr;gap:30px;max-width:1450px;margin:auto}.footer-logo{background:#fff;border-radius:8px;width:255px;height:75px;object-fit:contain}.footer h3{margin:0 0 9px;font-size:16px}.footer p,.footer li{font-size:12px;line-height:1.75;color:#e8f4fc}.footer ul{list-style:none;padding:0;margin:0}.copyright{max-width:1450px;margin:19px auto 0;padding-top:11px;border-top:1px solid rgba(255,255,255,.2);text-align:center;color:#dbeefa;font-size:11px}
+
+.toast{position:fixed;right:20px;bottom:20px;background:#082e4e;color:#fff;padding:12px 17px;border-radius:9px;display:none;z-index:100;box-shadow:0 8px 22px #0003}
+@media(max-width:1100px){
+ .navbar{gap:15px}.logo{min-width:235px}.logo img{width:225px}.navlinks{gap:20px}.content{grid-template-columns:1fr 1fr}.content .updates-box{grid-column:1/-1}
+}
+@media(max-width:760px){
+ .topbar{padding:0 3%;font-size:10px}.top-right{display:none}.top-left{gap:12px}
+ .navbar{height:auto;min-height:75px;flex-wrap:wrap;padding:7px 4%}.logo{min-width:0;flex:1}.logo img{width:210px;height:66px}.mobile-menu{display:block}.navlinks{display:none;order:4;width:100%;height:auto;flex-direction:column;gap:0;background:#fff;border-top:1px solid var(--line)}.navbar.mobile-open .navlinks{display:flex}.navlinks a{width:100%;height:43px;justify-content:center;border-bottom:1px solid #eef3f7}.login-area{order:2}.login-btn{padding:10px 17px}
+ .hero{min-height:550px}.hero-image{background-position:60% center}.hero-overlay{background:linear-gradient(180deg,rgba(239,250,255,.97) 0%,rgba(239,250,255,.84) 52%,rgba(239,250,255,.35) 100%)}.hero-content{padding:36px 6%}.hero h1{font-size:34px}.hero p{font-size:15px}.quick-cards{grid-template-columns:1fr 1fr;max-width:330px}
+ .trust{grid-template-columns:1fr 1fr}.trust-item{border-bottom:1px solid #d4e9dc}.content{grid-template-columns:1fr;padding:20px 4%}.content .updates-box{grid-column:auto}.about-visual{height:220px}
+ .cta{margin:0 4% 20px;flex-direction:column;align-items:flex-start}.footer-grid{grid-template-columns:1fr 1fr}.footer-logo{width:220px}
+}
+@media(max-width:470px){.footer-grid{grid-template-columns:1fr}.login-dropdown{right:-15px}.hero h1{font-size:30px}}
 </style>
 </head>
 <body>
 
-<div id="home">
-<header class="top"><div class="logo">🌿 Sewanya Healthcare</div><button class="login" onclick="show('login')">Login</button></header>
-<section class="hero"><h1>हर परिवार तक स्वास्थ्य और सहयोग</h1><p>Admin → DM → BM → FO की role-based व्यवस्था। Admin DM बनाता है, DM अपने District के Block में BM बनाता है और BM अपनी Gram Panchayat में FO बनाता है।</p><button class="login" onclick="show('login')">Login / Dashboard</button></section>
-<div class="cards"><div class="card">👨‍💼<h3>Admin</h3><p>पूरे UP का नियंत्रण</p></div><div class="card">🏢<h3>DM</h3><p>District Management</p></div><div class="card">📍<h3>BM</h3><p>Block Management</p></div><div class="card">🏠<h3>FO</h3><p>Gram Panchayat Field Work</p></div></div>
-</div>
-<footer class="site-footer">
-  <b>Sewanya Healthcare – Head Office</b><br>
-  New Delhi Metro Station, Tughlaqabad, Delhi – 110044<br>
-  <span>Digital Healthcare &amp; Field Support Network</span><br>
-  <span>© 2026 Sewanya Healthcare. All Rights Reserved.</span>
+<header class="topbar">
+  <div class="top-left">
+    <span>✉ support@sewanyahealthcare.com</span>
+    <span>☎ +91 98765 43210</span>
+  </div>
+  <div class="top-right"><span>f</span><span>▶</span><span>◎</span><span>◉</span></div>
+</header>
+
+<nav class="navbar" id="navbar">
+  <a class="logo" href="#home"><img src="sewanya-logo.jpg" alt="Sewanya Healthcare"></a>
+  <button class="mobile-menu" id="mobileMenu">☰</button>
+
+  <div class="navlinks">
+    <a class="active" href="#home">⌂ &nbsp;Home</a>
+    <a href="#about">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <div class="login-area" id="loginArea">
+    <button class="login-btn" id="loginButton">👤 &nbsp; Login</button>
+    <div class="login-dropdown">
+      <a href="#" data-login="admin">👤 Admin Login</a>
+      <a href="#" data-login="customer">👥 Customer Login</a>
+      <a href="#" data-login="fo">🧑‍⚕️ Field Officer Login</a>
+      <a href="#" data-login="bm">💼 Block Manager Login</a>
+      <a href="#" data-login="dm">🏢 District Manager Login</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-image"></div><div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>हर परिवार तक<br><span>स्वास्थ्य और सहयोग</span></h1>
+    <p>Sewanya Healthcare के साथ, हर ग्राम पंचायत में<br>स्वास्थ्य, सुरक्षा और बेहतर भविष्य की ओर कदम!</p>
+    <div class="quick-cards">
+      <div class="quick-card"><div class="quick-icon">👥</div><b>Job Card</b><small>रोजगार और अवसर</small></div>
+      <div class="quick-card"><div class="quick-icon">👨‍👩‍👧</div><b>Family Card</b><small>परिवार की सुरक्षा</small></div>
+      <div class="quick-card"><div class="quick-icon">♥</div><b>Health Services</b><small>स्वस्थ समाज</small></div>
+      <div class="quick-card"><div class="quick-icon">₹</div><b>Support & Welfare</b><small>सहायता, योजनाएं और लाभ</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="trust-item"><div class="trust-icon">✓</div><span><b>100% Genuine</b>Products & Services</span></div>
+  <div class="trust-item"><div class="trust-icon">♟</div><span><b>Wide Network</b>Across UP</span></div>
+  <div class="trust-item"><div class="trust-icon">₹</div><span><b>Affordable</b>& Transparent</span></div>
+  <div class="trust-item"><div class="trust-icon">♥</div><span><b>Quality Health</b>Services</span></div>
+  <div class="trust-item"><div class="trust-icon">♨</div><span><b>Farmer & Rural</b>Support</span></div>
+  <div class="trust-item"><div class="trust-icon">♥</div><span><b>Trusted by</b>Millions</span></div>
+</section>
+
+<section class="content">
+  <div class="box" id="about">
+    <div class="about-visual" id="gallery">
+      <div class="big">🏥 👩‍⚕️ 👨‍👩‍👧 🌾</div>
+    </div>
+    <div class="about-copy">
+      <div class="eyebrow">ABOUT US</div>
+      <h2>Sewanya Healthcare</h2>
+      <p>हर परिवार तक स्वास्थ्य, सुरक्षा और बेहतर सेवाओं को आसान डिजिटल प्लेटफॉर्म के माध्यम से पहुंचाने की दिशा में एक प्रयास।</p>
+    </div>
+  </div>
+
+  <div class="box" id="services">
+    <div class="services">
+      <div class="eyebrow">SERVICES</div><h2>Our Services</h2>
+      <div class="services-grid">
+        <div class="service"><div class="service-icon">♥</div><b>Health Card</b><small>स्वास्थ्य सुरक्षा कार्ड</small><span class="arrow">→</span></div>
+        <div class="service"><div class="service-icon">▣</div><b>Job Card</b><small>रोजगार और विकास</small><span class="arrow">→</span></div>
+        <div class="service"><div class="service-icon">♟</div><b>Family Card</b><small>परिवार की सुरक्षा</small><span class="arrow">→</span></div>
+        <div class="service"><div class="service-icon">▥</div><b>Welfare Schemes</b><small>सरकारी योजनाएं</small><span class="arrow">→</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box updates-box">
+    <div class="updates">
+      <div class="updates-head"><h2>Latest Updates</h2><a href="#">View All →</a></div>
+      <div class="update"><span class="dot">●</span><span>नई योजना में पंजीकरण शुरू</span><span class="date">25 Apr 2025</span></div>
+      <div class="update"><span class="dot">●</span><span>स्वास्थ्य शिविर की तिथि जारी</span><span class="date">20 Apr 2025</span></div>
+      <div class="update"><span class="dot">●</span><span>DM / BM / FO नियुक्ति प्रक्रिया</span><span class="date">15 Apr 2025</span></div>
+      <div class="update"><span class="dot">●</span><span>Job Card के लिए नया पोर्टल</span><span class="date">10 Apr 2025</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <b>👨‍👩‍👧 &nbsp; Sewanya Healthcare – आपके स्वास्थ्य, सुरक्षा और समृद्धि के लिए समर्पित</b>
+  <button onclick="openLogin()">Login Now →</button>
+</section>
+</main>
+
+<footer class="footer" id="contact">
+  <div class="footer-grid">
+    <div><img class="footer-logo" src="sewanya-logo.jpg" alt="Sewanya Healthcare"></div>
+    <div><h3>📍 Head Office</h3><p>New Delhi Metro Station,<br>Tughlaqabad, Delhi – 110044</p></div>
+    <div><h3>Quick Links</h3><ul><li><a href="#home">→ Home</a></li><li><a href="#about">→ About Us</a></li><li><a href="#services">→ Services</a></li><li><a href="#contact">→ Contact</a></li></ul></div>
+    <div><h3>Contact Us</h3><p>☎ +91 98765 43210<br>✉ support@sewanyahealthcare.com<br>🌐 Sewanya Healthcare</p></div>
+  </div>
+  <div class="copyright">© 2026 Sewanya Healthcare. All Rights Reserved. &nbsp; | &nbsp; Head Office: New Delhi Metro Station, Tughlaqabad, Delhi – 110044 &nbsp; | &nbsp; Better Health • Brighter Future</div>
 </footer>
 
-<div id="login" class="loginpage hide"><div class="box">
-<button class="back" onclick="show('home')">← Home</button><h2>Login to Your Account</h2>
-<div class="field"><label>ID</label><input id="uid" placeholder="Enter ID"></div>
-<div class="field"><label>Password</label>
-  <input id="pwd" type="password" placeholder="Enter password">
-  <label style="display:flex;align-items:center;gap:7px;margin-top:8px;font-weight:400">
-    <input type="checkbox" id="showPwd" onchange="togglePassword()"> Password दिखाएँ
-  </label>
-</div>
-<button class="primary" style="width:100%" onclick="doLogin()">Login</button>
-<div style="display:flex;justify-content:space-between;margin-top:14px;font-size:13px">
-  <button class="back" onclick="forgotId()">Forgot ID?</button>
-  <button class="back" onclick="forgotPassword()">Forgot Password?</button>
-</div>
-<p class="small">Admin Login: <b>Spn1234</b> / <b>Spn242001</b></p>
-</div></div>
-
-<div id="app" class="layout hide">
-<aside class="side"><h3>🌿 Sewanya Healthcare</h3><div class="userbox"><b>Account</b><br><span id="loggedId"></span></div><div class="menu" id="menu"></div></aside>
-<main class="main">
-<div class="head"><div><h1 id="title">Dashboard</h1><span class="small" id="scope"></span></div><button class="danger" onclick="logout()">Logout</button></div>
-<div class="stats" id="stats"></div>
-<div id="content"></div>
-</main></div>
-<div id="toast" class="toast"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-const STORAGE="sewanya_demo_v2";
-const ADMIN={id:"Spn1234",password:"Spn242001",name:"Main Admin"};
-let db=JSON.parse(localStorage.getItem(STORAGE)||'{"dms":[],"bms":[],"fos":[],"cards":[]}');
+const navbar=document.getElementById('navbar');
+const mobileMenu=document.getElementById('mobileMenu');
+const loginArea=document.getElementById('loginArea');
+const loginButton=document.getElementById('loginButton');
+const toast=document.getElementById('toast');
 
-const districts=["Shahjahanpur","Bareilly","Lucknow","Hardoi","Lakhimpur Kheri","Sitapur","Pilibhit","Lakhimpur","Kanpur Nagar","Kanpur Dehat","Unnao","Lakhimpur Kheri","Barabanki","Bahraich","Gonda","Ayodhya","Prayagraj","Varanasi","Agra","Meerut","Moradabad","Budaun","Farrukhabad","Kannauj","Etawah","Mainpuri","Firozabad","Aligarh","Mathura","Sambhal"];
-const blocks=["Shahjahanpur","Kalan","Jalalabad","Tilhar","Powayan","Khutar","Banda","Nigohi","Bhwal Khera","Dadraul"];
-const gps=["Bhadra","Jalalabad","Khutar","Simra","Gangoha","Lakhanpur","Rampur","Lakshmipur","Bela","Chandpur"];
+mobileMenu.addEventListener('click',()=>navbar.classList.toggle('mobile-open'));
+loginButton.addEventListener('click',(e)=>{e.stopPropagation();loginArea.classList.toggle('open')});
+document.addEventListener('click',e=>{if(!loginArea.contains(e.target))loginArea.classList.remove('open')});
 
-function save(){localStorage.setItem(STORAGE,JSON.stringify(db))}
-function show(id){["home","login","app"].forEach(x=>document.getElementById(x).classList.add("hide"));document.getElementById(id).classList.remove("hide")}
-function toast(s){let t=document.getElementById("toast");t.textContent=s;t.style.display="block";setTimeout(()=>t.style.display="none",1800)}
-function uid(prefix,n){return prefix+String(n).padStart(4,"0")}
-function uniqueId(prefix,list){let n=list.length+1,id;do{id=uid(prefix,n++)}while(list.some(x=>x.id===id));return id}
-function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function select(list){return list.map(x=>`<option>${esc(x)}</option>`).join("")}
-function currentRole(){return sessionStorage.getItem("role")}
-function currentId(){return sessionStorage.getItem("id")}
+document.querySelectorAll('[data-login]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const role=a.dataset.login;
+    loginArea.classList.remove('open');
+    if(role==='admin') window.location.href='login.html?role=admin';
+    else if(role==='dm') window.location.href='login.html?role=dm';
+    else if(role==='bm') window.location.href='login.html?role=bm';
+    else if(role==='fo') window.location.href='login.html?role=fo';
+    else window.location.href='login.html?role=customer';
+  });
+});
 
-function togglePassword(){
- let p=document.getElementById("pwd");
- p.type=document.getElementById("showPwd").checked?"text":"password";
+function openLogin(){
+  loginArea.classList.add('open');
+  loginButton.focus();
 }
-function forgotId(){
- toast("ID recovery के लिए registered mobile/official admin support जरूरी है");
-}
-function forgotPassword(){
- toast("Password reset के लिए registered mobile/official admin support जरूरी है");
-}
-function doLogin(){
- let id=document.getElementById("uid").value.trim(),pw=document.getElementById("pwd").value;
- if(id===ADMIN.id&&pw===ADMIN.password)return openDash("admin",id,ADMIN.name);
- let found=db.dms.find(x=>x.id===id&&x.password===pw);
- if(found)return openDash("dm",id,found.name);
- found=db.bms.find(x=>x.id===id&&x.password===pw);
- if(found)return openDash("bm",id,found.name);
- found=db.fos.find(x=>x.id===id&&x.password===pw);
- if(found)return openDash("fo",id,found.name);
- toast("ID या Password गलत है");
-}
-function openDash(r,id,name){
- sessionStorage.setItem("role",r);sessionStorage.setItem("id",id);sessionStorage.setItem("name",name);
- document.getElementById("roleName").textContent="Account";
- document.getElementById("loggedId").textContent="ID: "+id;
-
- const menus={admin:["Dashboard","DM बनाएं / Manage","DM List","BM List","FO List","All UP Data","Reports"],dm:["Dashboard","BM बनाएं / Manage","BM List","FO List","Commission"],bm:["Dashboard","FO बनाएं / Manage","FO List","Health Card","Commission"],fo:["Dashboard","Health Card Generate","My Customers","My Area","Commission"]};
- document.getElementById("menu").innerHTML=menus[r].map((m,i)=>`<button class="${i===0?'active':''}" onclick="route('${m}')">${i===0?"⌂":"▣"} &nbsp; ${m}</button>`).join("");
- show("app");route("Dashboard");
-}
-function route(m){
- document.querySelectorAll(".menu button").forEach(b=>b.classList.toggle("active",b.textContent.includes(m)));
- const r=currentRole();document.getElementById("title").textContent=m==="Dashboard"?"Dashboard":m;document.getElementById("scope").textContent=scopeText(r);
- if(m==="Dashboard"){dashboard(r);return}
- if(r==="admin"&&m.includes("DM")) return adminDM(m);
- if(r==="admin"&&m==="BM List") return listBM("admin");
- if(r==="admin"&&m==="FO List") return listFO("admin");
- if(r==="admin"&&m==="All UP Data") return allData();
- if(r==="dm"&&m.includes("BM")) return dmBM(m);
- if(r==="dm"&&m==="BM List") return listBM("dm");
- if(r==="dm"&&m==="FO List") return listFO("dm");
- if(r==="dm"&&m==="Commission") return commission("dm");
- if(r==="bm"&&m.includes("FO")) return bmFO(m);
- if(r==="bm"&&m==="FO List") return listFO("bm");
- if(r==="bm"&&m==="Health Card") return cardForm();
- if(r==="bm"&&m==="Commission") return commission("bm");
- if(r==="fo"&&m==="Health Card Generate") return cardForm();
- if(r==="fo"&&m==="My Customers") return customers();
- if(r==="fo"&&m==="My Area") return area();
- if(r==="fo"&&m==="Commission") return commission("fo");
- if(m==="Reports") return reports();
-}
-function scopeText(r){if(r==="admin")return"All Uttar Pradesh";if(r==="dm"){let u=db.dms.find(x=>x.id===currentId());return u?"District: "+u.district:""}if(r==="bm"){let u=db.bms.find(x=>x.id===currentId());return u?"District: "+u.district+" | Block: "+u.block:""}let u=db.fos.find(x=>x.id===currentId());return u?"District: "+u.district+" | Block: "+u.block+" | GP: "+u.gp:""}
-function dashboard(r){
- const counts=r==="admin"?[districts.length,db.dms.length,db.bms.length,db.fos.length]:r==="dm"?[db.bms.filter(x=>x.dmId===currentId()).length,db.fos.filter(x=>x.dmId===currentId()).length,db.cards.filter(x=>x.dmId===currentId()).length,commissionValue(currentId(),"dm")]:r==="bm"?[db.fos.filter(x=>x.bmId===currentId()).length,db.cards.filter(x=>x.bmId===currentId()).length,0,commissionValue(currentId(),"bm")]:[db.cards.filter(x=>x.foId===currentId()).length,db.cards.filter(x=>x.foId===currentId()).length,0,commissionValue(currentId(),"fo")];
- document.getElementById("stats").innerHTML=[["Districts",counts[0],"b"],["BM / Cards",counts[1],"g"],["FO / Health Cards",counts[2],"o"],["Commission","₹"+counts[3],"p"]].map(x=>`<div class="stat ${x[2]}"><small>${x[0]}</small><b>${x[1]}</b></div>`).join("");
- document.getElementById("content").innerHTML=`<div class="panel"><h3>Role Workflow</h3><div class="notice">${r==="admin"?"Admin DM बनाता/approve करता है → DM अपने district के blocks में BM बनाता है → BM अपने block की Gram Panchayat में FO बनाता है → FO field में Health Card generate करता है.":"आपके अधिकार के अनुसार नीचे के menu से अपना काम करें। District / Block / GP hierarchy automatically linked है."}</div><p class="small">Demo HTML में data browser के localStorage में save होता है। Production में secure server/database लगाना जरूरी है।</p></div>`;
-}
-function adminDM(m){
- document.getElementById("stats").innerHTML="";let editing=m.includes("Manage");
- document.getElementById("content").innerHTML=`<div class="panel"><h3>${editing?"नया DM बनाएं":"DM List"}</h3>${editing?`<div class="formgrid">
-<div class="field"><label>DM Name</label><input id="n" placeholder="नाम"></div>
-<div class="field"><label>Mobile</label><input id="mobile" inputmode="numeric" placeholder="Mobile"></div>
-<div class="field"><label>District</label><select id="district">${select(districts)}</select></div>
-<div class="field"><label>Password</label><input id="pass" value="DM@123"></div></div><button class="primary" onclick="createDM()">DM ID बनाएं</button><hr>`:""}<div class="tablewrap">${dmTable()}</div></div>`;
-}
-function createDM(){
- let id=uniqueId("DM",db.dms);let u={id,name:v("n"),mobile:v("mobile"),district:v("district"),password:v("pass")};
- if(!u.name||!u.mobile){toast("Name और Mobile जरूरी है");return}db.dms.push(u);save();toast("DM बनाया: "+id);adminDM("DM List");
-}
-function dmTable(){return `<table><tr><th>ID</th><th>Name</th><th>Mobile</th><th>District</th><th>Password</th><th>Status</th></tr>${db.dms.map(x=>`<tr><td><b>${x.id}</b></td><td>${esc(x.name)}</td><td>${esc(x.mobile)}</td><td>${esc(x.district)}</td><td>${esc(x.password)}</td><td><span class="pill">Active</span></td></tr>`).join("")||"<tr><td colspan=6>No DM created</td></tr>"}</table>`}
-function dmBM(m){
- let d=db.dms.find(x=>x.id===currentId());if(!d){toast("DM profile नहीं मिला");return}
- document.getElementById("content").innerHTML=`<div class="panel"><h3>DM → BM Management</h3><div class="notice">आप केवल <b>${esc(d.district)}</b> district के blocks में BM बना सकते हैं। BM बनने पर उसकी commission chain DM से जुड़ जाएगी।</div>${m.includes("Manage")?`<div class="formgrid"><div class="field"><label>BM Name</label><input id="n"></div><div class="field"><label>Mobile</label><input id="mobile"></div><div class="field"><label>Block</label><select id="block">${select(blocks)}</select></div><div class="field"><label>Password</label><input id="pass" value="BM@123"></div></div><button class="primary" onclick="createBM()">BM ID बनाएं</button><hr>`:""}${bmTable("dm")}</div>`;
-}
-function createBM(){
- let d=db.dms.find(x=>x.id===currentId());let id=uniqueId("BM",db.bms);let u={id,name:v("n"),mobile:v("mobile"),district:d.district,block:v("block"),dmId:d.id,password:v("pass")};
- if(!u.name||!u.mobile){toast("Name और Mobile जरूरी है");return}db.bms.push(u);save();toast("BM बनाया: "+id);dmBM("BM List");
-}
-function bmTable(scope){
- let arr=scope==="admin"?db.bms:db.bms.filter(x=>x.dmId===currentId());return `<table><tr><th>ID</th><th>Name</th><th>Mobile</th><th>District</th><th>Block</th><th>DM</th></tr>${arr.map(x=>`<tr><td><b>${x.id}</b></td><td>${esc(x.name)}</td><td>${esc(x.mobile)}</td><td>${esc(x.district)}</td><td>${esc(x.block)}</td><td>${x.dmId}</td></tr>`).join("")||"<tr><td colspan=6>No BM created</td></tr>"}</table>`;
-}
-function listBM(s){document.getElementById("stats").innerHTML="";document.getElementById("content").innerHTML=`<div class="panel"><h3>BM List</h3>${bmTable(s)}</div>`}
-function bmFO(m){
- let b=db.bms.find(x=>x.id===currentId());if(!b){toast("BM profile नहीं मिला");return}
- document.getElementById("content").innerHTML=`<div class="panel"><h3>BM → FO Management</h3><div class="notice">FO automatically <b>${esc(b.district)} → ${esc(b.block)}</b> में रहेगा। आप केवल इसी block की Gram Panchayat में FO बना सकते हैं।</div>${m.includes("Manage")?`<div class="formgrid"><div class="field"><label>FO Name</label><input id="n"></div><div class="field"><label>Mobile</label><input id="mobile"></div><div class="field"><label>Aadhaar Number</label><input id="aadhaar" inputmode="numeric" maxlength="12" placeholder="12 digit"></div><div class="field"><label>Address</label><input id="address"></div><div class="field"><label>Gram Panchayat</label><select id="gp">${select(gps)}</select></div><div class="field"><label>Password</label><input id="pass" value="FO@123"></div></div><button class="primary" onclick="createFO()">FO ID बनाएं</button><hr>`:""}${foTable("bm")}</div>`;
-}
-function createFO(){
- let b=db.bms.find(x=>x.id===currentId());let id=uniqueId("FO",db.fos);let u={id,name:v("n"),mobile:v("mobile"),aadhaar:v("aadhaar"),address:v("address"),district:b.district,block:b.block,gp:v("gp"),bmId:b.id,dmId:b.dmId,password:v("pass")};
- if(!u.name||!u.mobile||u.aadhaar.length!==12){toast("Name, Mobile और 12 digit Aadhaar जरूरी है");return}db.fos.push(u);save();toast("FO बनाया: "+id);bmFO("FO List");
-}
-function foTable(scope){
- let arr=scope==="admin"?db.fos:scope==="dm"?db.fos.filter(x=>x.dmId===currentId()):db.fos.filter(x=>x.bmId===currentId());
- return `<table><tr><th>ID</th><th>Name</th><th>Mobile</th><th>Aadhaar</th><th>District</th><th>Block</th><th>GP</th></tr>${arr.map(x=>`<tr><td><b>${x.id}</b></td><td>${esc(x.name)}</td><td>${esc(x.mobile)}</td><td>XXXX-XXXX-${esc(x.aadhaar.slice(-4))}</td><td>${esc(x.district)}</td><td>${esc(x.block)}</td><td>${esc(x.gp)}</td></tr>`).join("")||"<tr><td colspan=7>No FO created</td></tr>"}</table>`;
-}
-function listFO(s){document.getElementById("stats").innerHTML="";document.getElementById("content").innerHTML=`<div class="panel"><h3>FO List</h3>${foTable(s)}</div>`}
-function cardForm(){
- let r=currentRole(),u=r==="fo"?db.fos.find(x=>x.id===currentId()):db.bms.find(x=>x.id===currentId());
- document.getElementById("content").innerHTML=`<div class="panel"><h3>Health Card Generate</h3><div class="notice">FO field में card generate करेगा। Area details ${r==="fo"?"FO profile से":"BM scope से"} automatically आएंगी।</div><div class="formgrid"><div class="field"><label>Family / Person Name</label><input id="cn"></div><div class="field"><label>Mobile</label><input id="cm"></div><div class="field"><label>Aadhaar</label><input id="ca" maxlength="12"></div><div class="field"><label>Address</label><input id="cad"></div><div class="field"><label>District</label><input id="cd" value="${esc(u.district)}" readonly></div><div class="field"><label>Block</label><input id="cb" value="${esc(u.block)}" readonly></div><div class="field"><label>Gram Panchayat</label><input id="cg" value="${esc(u.gp||"")} " readonly></div></div><button class="primary green" onclick="generateCard()">Generate Health Card</button></div><div class="panel"><h3>Generated Cards</h3>${cardTable(r)}</div>`;
-}
-function generateCard(){
- let r=currentRole(),fo=r==="fo"?db.fos.find(x=>x.id===currentId()):null,bm=r==="bm"?db.bms.find(x=>x.id===currentId()):null;
- let c={id:uniqueId("HC",db.cards),name:v("cn"),mobile:v("cm"),aadhaar:v("ca"),address:v("cad"),district:fo?fo.district:bm.district,block:fo?fo.block:bm.block,gp:fo?fo.gp:v("cg"),foId:fo?fo.id:"",bmId:fo?fo.bmId:bm.id,dmId:fo?fo.dmId:(bm?bm.dmId:""),createdBy:currentId(),createdRole:r};
- if(!c.name||c.aadhaar.length!==12){toast("Name और 12 digit Aadhaar जरूरी है");return}db.cards.push(c);save();toast("Health Card "+c.id+" generate हुआ");cardForm();
-}
-function cardTable(r){
- let arr=r==="fo"?db.cards.filter(x=>x.foId===currentId()):r==="bm"?db.cards.filter(x=>x.bmId===currentId()):db.cards;return `<table><tr><th>Card ID</th><th>Name</th><th>Mobile</th><th>Area</th><th>Created By</th></tr>${arr.map(x=>`<tr><td><b>${x.id}</b></td><td>${esc(x.name)}</td><td>${esc(x.mobile)}</td><td>${esc(x.district)} / ${esc(x.block)} / ${esc(x.gp)}</td><td>${x.createdBy}</td></tr>`).join("")||"<tr><td colspan=5>No cards</td></tr>"}</table>`;
-}
-function customers(){document.getElementById("content").innerHTML=`<div class="panel"><h3>My Customers</h3>${cardTable("fo")}</div>`}
-function area(){let f=db.fos.find(x=>x.id===currentId());document.getElementById("content").innerHTML=`<div class="panel"><h3>My Field Area</h3><p><b>District:</b> ${esc(f.district)}</p><p><b>Block:</b> ${esc(f.block)}</p><p><b>Gram Panchayat:</b> ${esc(f.gp)}</p><p class="small">यह area FO profile से automatically linked है।</p></div>`}
-function commissionValue(id,type){
- if(type==="dm")return db.bms.filter(x=>x.dmId===id).length*50+db.fos.filter(x=>x.dmId===id).length*25;
- if(type==="bm")return db.fos.filter(x=>x.bmId===id).length*25;
- return db.cards.filter(x=>x.foId===id).length*50;
-}
-function commission(r){
- let rows=r==="dm"?db.bms.filter(x=>x.dmId===currentId()).map(x=>[x.id,x.name,"BM creation",50]):r==="bm"?db.fos.filter(x=>x.bmId===currentId()).map(x=>[x.id,x.name,"FO creation",25]):db.cards.filter(x=>x.foId===currentId()).map(x=>[x.id,x.name,"Health Card",50]);
- document.getElementById("content").innerHTML=`<div class="panel"><h3>Commission</h3><div class="notice">Demo commission settings: BM creation ₹50 → DM; FO creation ₹25 → BM और ₹25 → DM; Health Card ₹50 → FO. Amounts production में Admin settings से बदल सकते हैं।</div><table><tr><th>ID</th><th>Name</th><th>Work</th><th>Commission</th></tr>${rows.map(x=>`<tr><td>${x[0]}</td><td>${esc(x[1])}</td><td>${x[2]}</td><td>₹${x[3]}</td></tr>`).join("")||"<tr><td colspan=4>No commission yet</td></tr>"}</table></div>`;
-}
-function allData(){document.getElementById("stats").innerHTML="";document.getElementById("content").innerHTML=`<div class="panel"><h3>UP Hierarchy Summary</h3><p>Districts: <b>${districts.length}</b> | DM: <b>${db.dms.length}</b> | BM: <b>${db.bms.length}</b> | FO: <b>${db.fos.length}</b> | Health Cards: <b>${db.cards.length}</b></p><p class="small">यह demo list है। Production में official UP district/block/GP master database backend से जोड़ना होगा।</p></div>`}
-function reports(){document.getElementById("content").innerHTML=`<div class="panel"><h3>Reports</h3><p>DM: ${db.dms.length} | BM: ${db.bms.length} | FO: ${db.fos.length} | Health Cards: ${db.cards.length}</p></div>`}
-function listBM(s){document.getElementById("stats").innerHTML="";document.getElementById("content").innerHTML=`<div class="panel"><h3>BM List</h3>${bmTable(s)}</div>`}
-function listFO(s){document.getElementById("stats").innerHTML="";document.getElementById("content").innerHTML=`<div class="panel"><h3>FO List</h3>${foTable(s)}</div>`}
-function v(id){let e=document.getElementById(id);return e?e.value.trim():""}
-function logout(){sessionStorage.clear();show("home");toast("Logout हो गया")}
+window.addEventListener('scroll',()=>{
+  const links=document.querySelectorAll('.navlinks a');
+  let current='home';
+  ['about','services','gallery','contact'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && window.scrollY>=el.offsetTop-150) current=id;
+  });
+  links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+current));
+});
 </script>
 </body>
 </html>
