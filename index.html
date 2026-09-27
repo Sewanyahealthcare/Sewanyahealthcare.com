@@ -3,282 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sewanya Healthcare</title>
+<meta name="description" content="Sewanya Healthcare - Health, Family, Job Card and Welfare Services">
+<title>Sewanya Healthcare | Better Health • Brighter Future</title>
 <style>
+:root{
+  --blue:#07569b;--blue2:#0b78d0;--green:#158347;--dark:#0b2745;
+  --light:#f4fbff;--line:#d9e9f4;--white:#fff;--shadow:0 8px 28px rgba(18,72,112,.10);
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;color:#17324d;background:#f4f8fb}
-button,input,select{font:inherit}
-button{cursor:pointer}
-.hide{display:none!important}
-:root{--blue:#07579c;--blue2:#087fc5;--green:#18a957;--dark:#06365f;--light:#eaf7ff}
+body{margin:0;font-family:"Noto Sans Devanagari","Noto Sans",Arial,sans-serif;color:var(--dark);background:#fff}
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+.topbar{height:38px;background:linear-gradient(90deg,#064e8e,#0a67ad);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5%;font-size:13px}
+.top-left{display:flex;gap:28px}.top-right{display:flex;gap:17px}
+.navbar{height:94px;background:#fff;display:flex;align-items:center;gap:35px;padding:0 4.5%;position:relative;z-index:20;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.logo{display:flex;align-items:center;min-width:300px}.logo img{width:285px;height:88px;object-fit:contain;object-position:left center}
+.navlinks{display:flex;align-items:center;justify-content:center;gap:38px;flex:1;height:100%;font-weight:650}
+.navlinks a{height:100%;display:flex;align-items:center;border-bottom:3px solid transparent;transition:.2s}
+.navlinks a:hover,.navlinks a.active{color:var(--blue2);border-bottom-color:var(--blue2)}
+.login-area{position:relative}.login-btn{border:0;background:linear-gradient(135deg,#075aa0,#0875c9);color:#fff;border-radius:9px;padding:13px 34px;font-weight:700;cursor:pointer;box-shadow:0 5px 13px rgba(7,90,160,.2)}
+.login-dropdown{display:none;position:absolute;right:0;top:50px;width:235px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.16);padding:9px}
+.login-area.open .login-dropdown{display:block}
+.login-dropdown a{display:flex;gap:10px;align-items:center;padding:12px;border-radius:8px;font-size:14px}
+.login-dropdown a:hover{background:#eef7ff;color:var(--blue)}
+.mobile-menu{display:none;border:0;background:#0871c4;color:#fff;border-radius:7px;padding:9px 13px;font-size:20px}
 
-.topbar{height:38px;background:#06365f;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5%;font-size:13px}
-.header{height:78px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5%;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px #0001}
-.logoBox{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logoImg{width:54px;height:54px;border-radius:50%;object-fit:cover}
-.logoText{font-size:24px;font-weight:800;color:var(--blue);line-height:1}.logoText span{color:var(--green)}
-.tag{font-size:10px;color:#60758a;margin-top:5px}
-.nav{display:flex;align-items:center;gap:24px}
-.nav a{color:#294e6d;text-decoration:none;font-size:14px;font-weight:600}
-.nav a:hover{color:var(--green)}
-.loginDrop{position:relative}
-.loginBtn{border:0;background:var(--green);color:#fff;border-radius:8px;padding:12px 22px;font-weight:700}
-.loginMenu{position:absolute;right:0;top:48px;background:#fff;width:205px;border-radius:12px;box-shadow:0 10px 30px #0002;padding:8px;display:none}
-.loginMenu.open{display:block}
-.loginMenu button{width:100%;text-align:left;background:#fff;border:0;padding:11px 12px;border-radius:7px;color:#17324d}
-.loginMenu button:hover{background:#eaf7ff}
-.mobileBtn{display:none;border:0;background:#07579c;color:#fff;border-radius:8px;padding:10px}
+.hero{position:relative;min-height:430px;overflow:hidden;background:#e9f8ff}
+.hero-image{position:absolute;inset:0;background-image:url("sewanya-hero.jpg");background-size:cover;background-position:center;opacity:.48}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(239,250,255,.98) 0%,rgba(239,250,255,.91) 38%,rgba(239,250,255,.30) 72%,rgba(239,250,255,.05) 100%)}
+.hero-content{position:relative;z-index:2;max-width:1450px;margin:auto;padding:48px 5% 34px}
+.hero h1{margin:0;font-size:47px;line-height:1.18;color:#07569b;letter-spacing:-.5px}
+.hero h1 span{color:#168047}
+.hero p{font-size:18px;line-height:1.55;font-weight:600;margin:12px 0 25px;color:#12395e}
+.quick-cards{display:grid;grid-template-columns:repeat(4,145px);gap:10px}
+.quick-card{background:rgba(255,255,255,.95);border:1px solid #d8eaf5;border-radius:12px;text-align:center;padding:13px 8px;box-shadow:var(--shadow)}
+.quick-icon{width:44px;height:44px;border-radius:50%;margin:auto;display:grid;place-items:center;color:#fff;font-size:21px;background:#0879d2}
+.quick-card:nth-child(2) .quick-icon{background:#14a35a}.quick-card:nth-child(3) .quick-icon{background:#6541cf}.quick-card:nth-child(4) .quick-icon{background:#f08a16}
+.quick-card b{display:block;margin-top:7px;font-size:14px}.quick-card small{font-size:11px;color:#65788b}
 
-.hero{min-height:calc(100vh - 116px);width:100%;display:flex;align-items:center;background:linear-gradient(120deg,#e7f7ff 0%,#fff 55%,#eaf9ef 100%);padding:70px 7%;position:relative;overflow:hidden}
-.hero:after{content:"";position:absolute;width:500px;height:500px;border-radius:50%;right:-170px;top:-150px;background:#18a95718}
-.heroContent{max-width:720px;position:relative;z-index:2}
-.hero small{font-weight:800;color:var(--green);letter-spacing:1px}
-.hero h1{font-size:52px;line-height:1.12;color:var(--blue);margin:14px 0}
-.hero p{font-size:18px;line-height:1.8;color:#526b80;max-width:680px}
-.heroBtns{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-.primary{background:var(--green);color:#fff;border:0;border-radius:9px;padding:13px 23px;font-weight:700}
-.secondary{background:#fff;color:var(--blue);border:1px solid #b9d9ea;border-radius:9px;padding:13px 23px;font-weight:700}
-.heroCard{position:absolute;right:7%;width:390px;min-height:260px;background:#fff;border-radius:25px;box-shadow:0 20px 50px #07579c22;padding:28px;z-index:2}
-.heroCard .circle{width:75px;height:75px;border-radius:50%;background:linear-gradient(135deg,#087fc5,#18a957);display:grid;place-items:center;color:#fff;font-size:36px}
-.heroCard h2{color:var(--blue);margin:15px 0 6px}
-.heroCard p{font-size:14px;margin:0;color:#60758a;line-height:1.6}
+.trust{display:grid;grid-template-columns:repeat(6,1fr);background:#f0fff5;border-top:1px solid #d8efdf;border-bottom:1px solid #d8efdf;padding:11px 4%}
+.trust-item{display:flex;align-items:center;justify-content:center;gap:9px;padding:8px 12px;border-right:1px solid #d4e9dc;font-size:12px}
+.trust-item:last-child{border-right:0}.trust-icon{width:38px;height:38px;border-radius:50%;background:#0b7d46;color:#fff;display:grid;place-items:center;font-size:18px;flex:none}.trust-item b{display:block}
 
-.section{padding:70px 6%;background:#fff}
-.section.alt{background:#f4f9fc}
-.sectionHead{text-align:center;max-width:700px;margin:0 auto 35px}
-.sectionHead small{color:var(--green);font-weight:800}.sectionHead h2{font-size:34px;color:var(--blue);margin:9px 0}.sectionHead p{color:#63788a;line-height:1.7}
-.cards{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.card{background:#fff;border-radius:15px;padding:25px;box-shadow:0 5px 22px #12365c12;border:1px solid #e3edf4;text-align:center}
-.icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;margin:auto;color:#fff;font-size:27px}
-.blue{background:#087fc5}.green{background:#18a957}.orange{background:#f39a12}.purple{background:#7759df}
-.card h3{margin:13px 0 7px;color:#183b59}.card p{margin:0;color:#6a7d8d;font-size:14px;line-height:1.5}
+.content{max-width:1420px;margin:auto;padding:25px 4.5%;display:grid;grid-template-columns:1.18fr .92fr .72fr;gap:18px}
+.box{background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow);overflow:hidden}
+.about-visual{height:270px;background:linear-gradient(135deg,#dff5ff,#eaffef);display:grid;place-items:center;position:relative}
+.about-visual .big{font-size:78px;letter-spacing:15px}.about-copy{padding:18px 20px}.eyebrow{font-size:12px;color:#1980ca;font-weight:800;letter-spacing:.7px}.box h2{margin:5px 0 7px;font-size:23px}.about-copy p{margin:0;color:#65788a;line-height:1.55;font-size:14px}
+.services{padding:18px}.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:13px}.service{border:1px solid #dbeaf3;border-radius:11px;padding:15px;min-height:115px;background:linear-gradient(#fff,#f8fcff);position:relative}.service-icon{width:41px;height:41px;border-radius:50%;display:grid;place-items:center;background:#0878cf;color:#fff;font-size:20px}.service:nth-child(2) .service-icon{background:#32506c}.service:nth-child(3) .service-icon{background:#14a35a}.service:nth-child(4) .service-icon{background:#0878cf}.service b{display:block;margin-top:7px;font-size:14px}.service small{color:#65788a;font-size:11px}.arrow{position:absolute;right:11px;top:44px;width:24px;height:24px;border-radius:50%;background:#0871bf;color:#fff;display:grid;place-items:center;font-size:12px}
+.updates{padding:18px}.updates-head{display:flex;align-items:center;justify-content:space-between}.updates-head a{color:#0871bf;font-size:12px}.update{display:flex;gap:9px;padding:14px 0;border-bottom:1px solid #e4edf2;font-size:13px;line-height:1.4}.update:last-child{border-bottom:0}.dot{color:#18a55c;font-size:11px}.date{margin-left:auto;color:#8797a6;font-size:10px;white-space:nowrap}
 
-.gallery{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.galleryBox{height:180px;border-radius:16px;background:linear-gradient(135deg,#dff4ff,#eaf9ef);display:grid;place-items:center;font-size:55px;color:#087fc5;border:1px solid #d8eaf3}
+.cta{max-width:1420px;margin:0 auto 22px;padding:14px 20px;border:1px solid #d2e8f2;border-radius:12px;background:linear-gradient(90deg,#f0fbff,#f5fff9);display:flex;align-items:center;justify-content:space-between;gap:15px}.cta b{color:#07569b}.cta button{border:0;background:#0867b2;color:#fff;border-radius:24px;padding:11px 27px;font-weight:700;cursor:pointer}
 
-.footer{background:#06365f;color:#fff;padding:45px 6% 18px}
-.footerGrid{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:35px}
-.footer h3{margin-top:0}.footer p,.footer a{color:#d6e6f2;line-height:1.7;text-decoration:none;font-size:14px}
-.copy{text-align:center;border-top:1px solid #ffffff22;margin-top:30px;padding-top:16px;color:#c8d9e6;font-size:12px}
+.footer{background:linear-gradient(135deg,#07518b,#063c68);color:#fff;padding:29px 5% 11px}.footer-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr 1fr;gap:30px;max-width:1450px;margin:auto}.footer-logo{background:#fff;border-radius:8px;width:255px;height:75px;object-fit:contain}.footer h3{margin:0 0 9px;font-size:16px}.footer p,.footer li{font-size:12px;line-height:1.75;color:#e8f4fc}.footer ul{list-style:none;padding:0;margin:0}.copyright{max-width:1450px;margin:19px auto 0;padding-top:11px;border-top:1px solid rgba(255,255,255,.2);text-align:center;color:#dbeefa;font-size:11px}
 
-.overlay{position:fixed;inset:0;background:#06365f88;z-index:100;display:none;align-items:center;justify-content:center;padding:18px}
-.overlay.show{display:flex}
-.modal{background:#fff;width:min(470px,100%);border-radius:18px;padding:28px;box-shadow:0 20px 60px #0004;position:relative}
-.close{position:absolute;right:14px;top:12px;border:0;background:#eef5f9;width:34px;height:34px;border-radius:50%;font-size:20px}
-.modal h2{color:var(--blue);margin:0 0 7px}.modal p{color:#6a7d8d}
-.field{margin:13px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input,.field select{width:100%;padding:12px;border:1px solid #c9dce8;border-radius:8px;outline:none}.field input:focus,.field select:focus{border-color:#087fc5}
-.error{background:#fff0f0;color:#b42318;padding:9px;border-radius:7px;font-size:13px;display:none;margin:10px 0}
-
-.dashboard{min-height:100vh;background:#f4f8fb}
-.dashTop{height:70px;background:#fff;border-bottom:1px solid #dde9f0;display:flex;align-items:center;justify-content:space-between;padding:0 3%;position:sticky;top:0;z-index:30}
-.dashBrand{font-weight:800;color:var(--blue);font-size:20px}.logout{border:0;background:#dc3545;color:#fff;padding:10px 17px;border-radius:8px}
-.dashBody{padding:28px 4%;max-width:1250px;margin:auto}
-.welcome{background:linear-gradient(120deg,#07579c,#087fc5);color:#fff;border-radius:18px;padding:28px;margin-bottom:20px}
-.welcome h1{margin:6px 0;font-size:30px}.welcome p{margin:0;opacity:.9}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:22px}.stat{background:#ffffff1c;border:1px solid #ffffff25;padding:15px;border-radius:10px}.stat small{display:block;opacity:.8}.stat strong{font-size:25px}
-.dashGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}.dashAction{background:#fff;border:1px solid #dce8ef;border-radius:13px;padding:22px;min-height:130px;box-shadow:0 4px 15px #12365c0d;text-align:left}.dashAction button{margin-top:12px;border:0;background:#eaf7ff;color:var(--blue);padding:8px 11px;border-radius:7px}
-.panel{background:#fff;border-radius:14px;padding:22px;border:1px solid #dce8ef;margin-top:18px}.panel h3{margin-top:0;color:var(--blue)}
-.formGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.full{grid-column:1/-1}
-.tableWrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{border:1px solid #dbe7ee;padding:9px;text-align:left}.table th{background:#eaf7ff}
-.toast{position:fixed;right:18px;bottom:18px;background:#06365f;color:#fff;padding:12px 16px;border-radius:9px;display:none;z-index:200}
-
-.healthCard{width:85.6mm;min-height:54mm;background:#fff;border:1px solid #087fc5;border-radius:5mm;overflow:hidden;box-shadow:0 8px 25px #0002;margin:20px auto;color:#083d73}
-.hcTop{display:flex;align-items:center;gap:8px;padding:10px}.hcLogo{width:48px;height:48px;border-radius:50%;object-fit:cover}.hcBrand{font-weight:800;font-size:17px;color:#07579c;line-height:1}.hcBrand span{color:#18a957}.hcTitle{margin-left:auto;background:linear-gradient(90deg,#087fc5,#087b52);color:#fff;padding:10px 13px;border-radius:10px 0 0 10px;font-weight:700}
-.hcMain{display:flex;gap:9px;padding:5px 10px 10px}.hcPhoto{width:75px;height:90px;border-radius:7px;background:linear-gradient(135deg,#dff4ff,#b9d9e8);display:grid;place-items:center;font-size:25px;color:#6b899d}.hcDetails{font-size:9px;line-height:1.65;flex:1}.hcDetails b{display:inline-block;width:58px}.hcQr{width:62px;height:62px;border:1px solid #aaa;display:grid;place-items:center;font-size:7px;text-align:center;background:repeating-linear-gradient(45deg,#111 0 2px,#fff 2px 4px)}
-.hcMeta{background:linear-gradient(90deg,#06498a,#087b70,#49aa2b);color:#fff;display:grid;grid-template-columns:1fr 1fr 1fr;padding:8px 10px;font-size:8px;gap:5px}.hcMeta b{display:block;font-weight:400;opacity:.85}.hcMeta strong{font-size:9px}
-.hcBottom{padding:7px 10px;background:linear-gradient(90deg,#0a6fae,#07825b);color:#fff;font-size:8px;display:flex;justify-content:space-between}
-
-@media(max-width:900px){
- .nav{display:none}.mobileBtn{display:block}.hero{min-height:calc(100vh - 116px);padding:55px 6%}.heroCard{display:none}.hero h1{font-size:42px}.cards{grid-template-columns:repeat(2,1fr)}.footerGrid{grid-template-columns:repeat(2,1fr)}.dashGrid{grid-template-columns:repeat(2,1fr)}
+.toast{position:fixed;right:20px;bottom:20px;background:#082e4e;color:#fff;padding:12px 17px;border-radius:9px;display:none;z-index:100;box-shadow:0 8px 22px #0003}
+@media(max-width:1100px){
+ .navbar{gap:15px}.logo{min-width:235px}.logo img{width:225px}.navlinks{gap:20px}.content{grid-template-columns:1fr 1fr}.content .updates-box{grid-column:1/-1}
 }
-@media(max-width:600px){
- .topbar{font-size:10px}.hero{min-height:calc(100vh - 116px)}.hero h1{font-size:34px}.hero p{font-size:15px}.section{padding:50px 5%}.cards,.gallery,.footerGrid,.stats,.dashGrid,.formGrid{grid-template-columns:1fr}.logoText{font-size:19px}.logoImg{width:45px;height:45px}.hcQr{display:none}
+@media(max-width:760px){
+ .topbar{padding:0 3%;font-size:10px}.top-right{display:none}.top-left{gap:12px}
+ .navbar{height:auto;min-height:75px;flex-wrap:wrap;padding:7px 4%}.logo{min-width:0;flex:1}.logo img{width:210px;height:66px}.mobile-menu{display:block}.navlinks{display:none;order:4;width:100%;height:auto;flex-direction:column;gap:0;background:#fff;border-top:1px solid var(--line)}.navbar.mobile-open .navlinks{display:flex}.navlinks a{width:100%;height:43px;justify-content:center;border-bottom:1px solid #eef3f7}.login-area{order:2}.login-btn{padding:10px 17px}
+ .hero{min-height:550px}.hero-image{background-position:60% center}.hero-overlay{background:linear-gradient(180deg,rgba(239,250,255,.97) 0%,rgba(239,250,255,.84) 52%,rgba(239,250,255,.35) 100%)}.hero-content{padding:36px 6%}.hero h1{font-size:34px}.hero p{font-size:15px}.quick-cards{grid-template-columns:1fr 1fr;max-width:330px}
+ .trust{grid-template-columns:1fr 1fr}.trust-item{border-bottom:1px solid #d4e9dc}.content{grid-template-columns:1fr;padding:20px 4%}.content .updates-box{grid-column:auto}.about-visual{height:220px}
+ .cta{margin:0 4% 20px;flex-direction:column;align-items:flex-start}.footer-grid{grid-template-columns:1fr 1fr}.footer-logo{width:220px}
 }
-@media print{
- body *{visibility:hidden}.healthCard,.healthCard *{visibility:visible}.healthCard{position:absolute;left:0;top:0;margin:0;box-shadow:none}.noPrint{display:none!important}
-}
+@media(max-width:470px){.footer-grid{grid-template-columns:1fr}.login-dropdown{right:-15px}.hero h1{font-size:30px}}
 </style>
 </head>
 <body>
 
-<div id="publicSite">
-<div class="topbar"><span>✉ support@sewanyahealthcare.com</span><span>Trusted Healthcare Network • Uttar Pradesh</span></div>
-<header class="header">
- <a href="#home" class="logoBox">
-  <img class="logoImg" id="logoImg" alt="Sewanya Healthcare">
-  <div><div class="logoText">Sewanya<span>Healthcare</span></div><div class="tag">Better Health • Brighter Future</div></div>
- </a>
- <nav class="nav" id="nav">
-  <a href="#home">Home</a><a href="#about">About Us</a><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
-  <div class="loginDrop">
-   <button class="loginBtn" id="loginButton">LOGIN ▾</button>
-   <div class="loginMenu" id="loginMenu">
-    <button data-role="admin">Admin Login</button><button data-role="dm">District Manager Login</button>
-    <button data-role="bm">Block Manager Login</button><button data-role="fo">Field Officer Login</button><button data-role="customer">Customer Login</button>
-   </div>
+<header class="topbar">
+  <div class="top-left">
+    <span>✉ support@sewanyahealthcare.com</span>
+    <span>☎ +91 98765 43210</span>
   </div>
- </nav>
- <button class="mobileBtn" id="mobileBtn">☰</button>
+  <div class="top-right"><span>f</span><span>▶</span><span>◎</span><span>◉</span></div>
 </header>
 
+<nav class="navbar" id="navbar">
+  <a class="logo" href="#home"><img src="sewanya-logo.jpg" alt="Sewanya Healthcare"></a>
+  <button class="mobile-menu" id="mobileMenu">☰</button>
+
+  <div class="navlinks">
+    <a class="active" href="#home">⌂ &nbsp;Home</a>
+    <a href="#about">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <div class="login-area" id="loginArea">
+    <button class="login-btn" id="loginButton">👤 &nbsp; Login</button>
+    <div class="login-dropdown">
+      <a href="#" data-login="admin">👤 Admin Login</a>
+      <a href="#" data-login="customer">👥 Customer Login</a>
+      <a href="#" data-login="fo">🧑‍⚕️ Field Officer Login</a>
+      <a href="#" data-login="bm">💼 Block Manager Login</a>
+      <a href="#" data-login="dm">🏢 District Manager Login</a>
+    </div>
+  </div>
+</nav>
+
+<main>
 <section class="hero" id="home">
- <div class="heroContent">
-  <small>SEWANYA HEALTHCARE SERVICES</small>
-  <h1>हर परिवार तक स्वास्थ्य और सहयोग</h1>
-  <p>Digital Health Card, Family Support और Field Management को एक ही आसान Sewanya Healthcare portal में जोड़ें।</p>
-  <div class="heroBtns">
-   <button class="primary" onclick="openRegister()">JOIN NOW</button>
-   <button class="secondary" onclick="openLogin('admin')">LOGIN / PORTAL</button>
+  <div class="hero-image"></div><div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>हर परिवार तक<br><span>स्वास्थ्य और सहयोग</span></h1>
+    <p>Sewanya Healthcare के साथ, हर ग्राम पंचायत में<br>स्वास्थ्य, सुरक्षा और बेहतर भविष्य की ओर कदम!</p>
+    <div class="quick-cards">
+      <div class="quick-card"><div class="quick-icon">👥</div><b>Job Card</b><small>रोजगार और अवसर</small></div>
+      <div class="quick-card"><div class="quick-icon">👨‍👩‍👧</div><b>Family Card</b><small>परिवार की सुरक्षा</small></div>
+      <div class="quick-card"><div class="quick-icon">♥</div><b>Health Services</b><small>स्वस्थ समाज</small></div>
+      <div class="quick-card"><div class="quick-icon">₹</div><b>Support & Welfare</b><small>सहायता, योजनाएं और लाभ</small></div>
+    </div>
   </div>
- </div>
- <div class="heroCard">
-  <div class="circle">♥</div><h2>Health Card</h2>
-  <p>FO customer की details भरकर Aadhaar-card size में Sewanya Healthcare Health Card generate और print कर सकता है।</p>
-  <button class="primary" style="margin-top:16px" onclick="openLogin('fo')">FO CARD LOGIN</button>
- </div>
 </section>
 
-<section class="section" id="about"><div class="sectionHead"><small>ABOUT US</small><h2>Sewanya Healthcare</h2><p>Admin → DM → BM → FO की role-based working के लिए यह frontend तैयार किया गया है। हर role को उसका अलग dashboard और काम के options मिलते हैं।</p></div>
- <div class="cards"><div class="card"><div class="icon blue">👨‍💼</div><h3>Admin</h3><p>पूरे portal का management और approvals.</p></div><div class="card"><div class="icon green">🏢</div><h3>DM</h3><p>District और Block management.</p></div><div class="card"><div class="icon orange">📍</div><h3>BM</h3><p>Block और Gram Panchayat workflow.</p></div><div class="card"><div class="icon purple">🏠</div><h3>FO</h3><p>Customer registration और Health Card.</p></div></div>
+<section class="trust">
+  <div class="trust-item"><div class="trust-icon">✓</div><span><b>100% Genuine</b>Products & Services</span></div>
+  <div class="trust-item"><div class="trust-icon">♟</div><span><b>Wide Network</b>Across UP</span></div>
+  <div class="trust-item"><div class="trust-icon">₹</div><span><b>Affordable</b>& Transparent</span></div>
+  <div class="trust-item"><div class="trust-icon">♥</div><span><b>Quality Health</b>Services</span></div>
+  <div class="trust-item"><div class="trust-icon">♨</div><span><b>Farmer & Rural</b>Support</span></div>
+  <div class="trust-item"><div class="trust-icon">♥</div><span><b>Trusted by</b>Millions</span></div>
 </section>
 
-<section class="section alt" id="services"><div class="sectionHead"><small>OUR SERVICES</small><h2>हमारी सेवाएँ</h2></div>
- <div class="cards">
-  <div class="card"><div class="icon blue">🪪</div><h3>Health Card</h3><p>Aadhaar-card size printable card.</p><button class="secondary" onclick="openLogin('fo')">Open</button></div>
-  <div class="card"><div class="icon green">👨‍👩‍👧</div><h3>Family Card</h3><p>परिवार के सदस्यों का record.</p><button class="secondary" onclick="showToast('Family Card module open होगा')">Open</button></div>
-  <div class="card"><div class="icon orange">💼</div><h3>Job Card</h3><p>Job-card registration workflow.</p><button class="secondary" onclick="showToast('Job Card module open होगा')">Open</button></div>
-  <div class="card"><div class="icon purple">📊</div><h3>Reports</h3><p>Role के अनुसार reports.</p><button class="secondary" onclick="openLogin('admin')">Open</button></div>
- </div>
-</section>
-
-<section class="section" id="gallery"><div class="sectionHead"><small>GALLERY</small><h2>Healthcare Network</h2></div>
- <div class="gallery"><div class="galleryBox">🏥</div><div class="galleryBox">🩺</div><div class="galleryBox">👨‍⚕️</div></div>
-</section>
-
-<section class="section alt" id="contact"><div class="sectionHead"><small>CONTACT</small><h2>Head Office</h2><p>New Delhi Metro Station, Tughlaqabad, Delhi – 110044<br>☎ +91 98765 43210 &nbsp; ✉ support@sewanyahealthcare.com</p><button class="primary" onclick="showToast('Contact details copied')">Contact Us</button></div></section>
-
-<footer class="footer"><div class="footerGrid">
- <div><h3>Sewanya Healthcare</h3><p>Better Health • Brighter Future</p></div>
- <div><h3>Head Office</h3><p>New Delhi Metro Station,<br>Tughlaqabad, Delhi – 110044</p></div>
- <div><h3>Quick Links</h3><p><a href="#home">Home</a><br><a href="#about">About</a><br><a href="#services">Services</a><br><a href="#contact">Contact</a></p></div>
- <div><h3>Contact</h3><p>+91 98765 43210<br>support@sewanyahealthcare.com</p></div>
- </div><div class="copy">© 2026 Sewanya Healthcare. All Rights Reserved.</div></footer>
-</div>
-
-<!-- Login modal: same-page login, so GitHub Pages never requests a missing login.html -->
-<div class="overlay" id="loginOverlay">
- <div class="modal">
-  <button class="close" onclick="closeLogin()">×</button>
-  <h2 id="loginTitle">Login</h2><p id="loginDesc">Enter your ID and password.</p>
-  <div class="field"><label>User ID</label><input id="loginId" autocomplete="off" placeholder="Enter ID"></div>
-  <div class="field"><label>Password</label><input id="loginPwd" type="password" placeholder="Enter password"></div>
-  <label style="font-size:13px"><input type="checkbox" id="showPwd"> Password दिखाएँ</label>
-  <div class="error" id="loginError">Invalid ID or password.</div>
-  <button class="primary" style="width:100%;margin-top:14px" onclick="doLogin()">LOGIN</button>
-  <p style="font-size:12px">Demo Admin: <b>Spn1234</b> / <b>Spn242001</b></p>
- </div>
-</div>
-
-<!-- Register modal -->
-<div class="overlay" id="registerOverlay"><div class="modal">
- <button class="close" onclick="closeRegister()">×</button><h2>Join Sewanya Healthcare</h2><p>Demo registration form.</p>
- <div class="field"><label>Name</label><input id="regName"></div><div class="field"><label>Mobile</label><input id="regMobile"></div>
- <div class="field"><label>District</label><select id="regDistrict"><option>Shahjahanpur</option><option>Bareilly</option><option>Lucknow</option><option>Kanpur Nagar</option></select></div>
- <button class="primary" style="width:100%" onclick="registerDemo()">Submit</button>
-</div></div>
-
-<!-- Dashboard -->
-<div id="dashboard" class="dashboard hide">
- <div class="dashTop"><div class="dashBrand">🌿 Sewanya Healthcare <span id="dashRole"></span></div><button class="logout" onclick="logout()">Logout</button></div>
- <div class="dashBody">
-  <div class="welcome"><div>✓ Active Account</div><h1>Welcome, <span id="dashUser">User</span></h1><p id="dashText"></p>
-   <div class="stats"><div class="stat"><small>TEAM / FO</small><strong id="s1">0</strong></div><div class="stat"><small>CUSTOMERS</small><strong id="s2">0</strong></div><div class="stat"><small>TODAY</small><strong id="s3">0</strong></div><div class="stat"><small>WALLET</small><strong id="s4">₹0</strong></div></div>
+<section class="content">
+  <div class="box" id="about">
+    <div class="about-visual" id="gallery">
+      <div class="big">🏥 👩‍⚕️ 👨‍👩‍👧 🌾</div>
+    </div>
+    <div class="about-copy">
+      <div class="eyebrow">ABOUT US</div>
+      <h2>Sewanya Healthcare</h2>
+      <p>हर परिवार तक स्वास्थ्य, सुरक्षा और बेहतर सेवाओं को आसान डिजिटल प्लेटफॉर्म के माध्यम से पहुंचाने की दिशा में एक प्रयास।</p>
+    </div>
   </div>
-  <div class="dashGrid" id="dashActions"></div>
-  <div class="panel hide" id="healthPanel">
-   <h3>Health Card Generate</h3>
-   <div class="formGrid">
-    <div class="field"><label>नाम</label><input id="hcName" value="मो. फरहान"></div><div class="field"><label>मोबाइल</label><input id="hcMobile" value="98XXXXXX10"></div>
-    <div class="field"><label>आधार (masked)</label><input id="hcAadhaar" value="XXXX-XXXX-1234"></div><div class="field"><label>जन्म तिथि</label><input id="hcDob" value="12-08-1998"></div>
-    <div class="field"><label>District</label><select id="hcDistrict"><option>Shahjahanpur</option><option>Bareilly</option><option>Lucknow</option><option>Kanpur Nagar</option></select></div>
-    <div class="field"><label>Block</label><select id="hcBlock"><option>Tilhar</option><option>Jalalabad</option><option>Powayan</option><option>Shahjahanpur</option></select></div>
-    <div class="field"><label>Gram Panchayat</label><input id="hcGp" value="Namuna"></div><div class="field"><label>FO Name</label><input id="hcFo" value="Field Officer"></div>
-    <div class="field full"><label>पता</label><input id="hcAddress" value="ग्राम - नमूना, पोस्ट - नमूना"></div>
-   </div>
-   <button class="primary" onclick="generateCard()">Generate Card</button>
-   <div id="cardResult"></div>
+
+  <div class="box" id="services">
+    <div class="services">
+      <div class="eyebrow">SERVICES</div><h2>Our Services</h2>
+      <div class="services-grid">
+        <div class="service"><div class="service-icon">♥</div><b>Health Card</b><small>स्वास्थ्य सुरक्षा कार्ड</small><span class="arrow">→</span></div>
+        <div class="service"><div class="service-icon">▣</div><b>Job Card</b><small>रोजगार और विकास</small><span class="arrow">→</span></div>
+        <div class="service"><div class="service-icon">♟</div><b>Family Card</b><small>परिवार की सुरक्षा</small><span class="arrow">→</span></div>
+        <div class="service"><div class="service-icon">▥</div><b>Welfare Schemes</b><small>सरकारी योजनाएं</small><span class="arrow">→</span></div>
+      </div>
+    </div>
   </div>
-  <div class="panel hide" id="genericPanel"><h3 id="panelTitle">Module</h3><div id="panelContent"></div></div>
- </div>
-</div>
+
+  <div class="box updates-box">
+    <div class="updates">
+      <div class="updates-head"><h2>Latest Updates</h2><a href="#">View All →</a></div>
+      <div class="update"><span class="dot">●</span><span>नई योजना में पंजीकरण शुरू</span><span class="date">25 Apr 2025</span></div>
+      <div class="update"><span class="dot">●</span><span>स्वास्थ्य शिविर की तिथि जारी</span><span class="date">20 Apr 2025</span></div>
+      <div class="update"><span class="dot">●</span><span>DM / BM / FO नियुक्ति प्रक्रिया</span><span class="date">15 Apr 2025</span></div>
+      <div class="update"><span class="dot">●</span><span>Job Card के लिए नया पोर्टल</span><span class="date">10 Apr 2025</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <b>👨‍👩‍👧 &nbsp; Sewanya Healthcare – आपके स्वास्थ्य, सुरक्षा और समृद्धि के लिए समर्पित</b>
+  <button onclick="openLogin()">Login Now →</button>
+</section>
+</main>
+
+<footer class="footer" id="contact">
+  <div class="footer-grid">
+    <div><img class="footer-logo" src="sewanya-logo.jpg" alt="Sewanya Healthcare"></div>
+    <div><h3>📍 Head Office</h3><p>New Delhi Metro Station,<br>Tughlaqabad, Delhi – 110044</p></div>
+    <div><h3>Quick Links</h3><ul><li><a href="#home">→ Home</a></li><li><a href="#about">→ About Us</a></li><li><a href="#services">→ Services</a></li><li><a href="#contact">→ Contact</a></li></ul></div>
+    <div><h3>Contact Us</h3><p>☎ +91 98765 43210<br>✉ support@sewanyahealthcare.com<br>🌐 Sewanya Healthcare</p></div>
+  </div>
+  <div class="copyright">© 2026 Sewanya Healthcare. All Rights Reserved. &nbsp; | &nbsp; Head Office: New Delhi Metro Station, Tughlaqabad, Delhi – 110044 &nbsp; | &nbsp; Better Health • Brighter Future</div>
+</footer>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const LOGO = "data:image/jpeg;base64,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";
-document.getElementById("logoImg").src = LOGO || "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230879b8'/><text x='50' y='62' text-anchor='middle' font-size='35' fill='white'>S</text></svg>");
+const navbar=document.getElementById('navbar');
+const mobileMenu=document.getElementById('mobileMenu');
+const loginArea=document.getElementById('loginArea');
+const loginButton=document.getElementById('loginButton');
+const toast=document.getElementById('toast');
 
-const accounts={
- admin:{label:"Admin",id:"Spn1234",pass:"Spn242001",name:"Admin",text:"पूरे Sewanya Healthcare portal का management.",stats:["50","500","25","₹50,000"]},
- dm:{label:"District Manager",id:"DM001",pass:"1234",name:"District Manager",text:"अपने district के BM, FO और customer activity manage करें.",stats:["12","150","8","₹10,000"]},
- bm:{label:"Block Manager",id:"BM001",pass:"1234",name:"Block Manager",text:"अपने block के FO और Gram Panchayat work manage करें.",stats:["5","25","2","₹1,700"]},
- fo:{label:"Field Officer",id:"FO001",pass:"1234",name:"Field Officer",text:"Customer registration और Health Card generate करें.",stats:["1","25","5","₹250"]},
- customer:{label:"Customer",id:"CUST001",pass:"1234",name:"Customer",text:"अपना profile और family services देखें.",stats:["0","1","0","₹0"]}
-};
-let selectedRole="admin";
+mobileMenu.addEventListener('click',()=>navbar.classList.toggle('mobile-open'));
+loginButton.addEventListener('click',(e)=>{e.stopPropagation();loginArea.classList.toggle('open')});
+document.addEventListener('click',e=>{if(!loginArea.contains(e.target))loginArea.classList.remove('open')});
 
-function showToast(t){const x=document.getElementById("toast");x.textContent=t;x.style.display="block";setTimeout(()=>x.style.display="none",1800)}
-function openRegister(){document.getElementById("registerOverlay").classList.add("show")}
-function closeRegister(){document.getElementById("registerOverlay").classList.remove("show")}
-function registerDemo(){if(!document.getElementById("regName").value){showToast("Name भरें");return}closeRegister();showToast("Registration demo submit हो गया")}
-function openLogin(role){selectedRole=role||"admin";const a=accounts[selectedRole];document.getElementById("loginTitle").textContent=a.label+" Login";document.getElementById("loginDesc").textContent=a.label+" account में login करें.";document.getElementById("loginId").value="";document.getElementById("loginPwd").value="";document.getElementById("loginError").style.display="none";document.getElementById("loginOverlay").classList.add("show")}
-function closeLogin(){document.getElementById("loginOverlay").classList.remove("show")}
-document.getElementById("loginButton").onclick=e=>{e.stopPropagation();document.getElementById("loginMenu").classList.toggle("open")}
-document.querySelectorAll("[data-role]").forEach(b=>b.onclick=()=>{document.getElementById("loginMenu").classList.remove("open");openLogin(b.dataset.role)})
-document.getElementById("mobileBtn").onclick=()=>{document.querySelector(".nav").style.display=document.querySelector(".nav").style.display==="flex"?"none":"flex"}
-document.getElementById("showPwd").onchange=e=>document.getElementById("loginPwd").type=e.target.checked?"text":"password";
+document.querySelectorAll('[data-login]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const role=a.dataset.login;
+    loginArea.classList.remove('open');
+    if(role==='admin') window.location.href='login.html?role=admin';
+    else if(role==='dm') window.location.href='login.html?role=dm';
+    else if(role==='bm') window.location.href='login.html?role=bm';
+    else if(role==='fo') window.location.href='login.html?role=fo';
+    else window.location.href='login.html?role=customer';
+  });
+});
 
-function doLogin(){
- const a=accounts[selectedRole],id=document.getElementById("loginId").value.trim(),pw=document.getElementById("loginPwd").value;
- if(id!==a.id||pw!==a.pass){document.getElementById("loginError").style.display="block";return}
- closeLogin();document.getElementById("publicSite").classList.add("hide");document.getElementById("dashboard").classList.remove("hide");
- document.getElementById("dashRole").textContent="• "+a.label;document.getElementById("dashUser").textContent=a.name;document.getElementById("dashText").textContent=a.text;
- ["s1","s2","s3","s4"].forEach((id,i)=>document.getElementById(id).textContent=a.stats[i]);
- buildActions(selectedRole);
- window.scrollTo(0,0);
+function openLogin(){
+  loginArea.classList.add('open');
+  loginButton.focus();
 }
-function logout(){document.getElementById("dashboard").classList.add("hide");document.getElementById("publicSite").classList.remove("hide");window.scrollTo(0,0)}
-function buildActions(role){
- const el=document.getElementById("dashActions");el.innerHTML="";
- const common=[["👤","Profile","profile"],["📊","Reports","reports"],["⚙️","Settings","settings"]];
- let list=[];
- if(role==="admin") list=[["👨‍💼","DM Approval","dm"],["🏢","BM List","bm"],["🏠","FO List","fo"],["🗺️","UP Districts / Blocks","up"],...common];
- if(role==="dm") list=[["🏢","BM Management","bm"],["🏠","FO List","fo"],["📍","Block Data","block"],...common];
- if(role==="bm") list=[["🏠","FO Management","fo"],["📍","Gram Panchayat","gp"],["🪪","Health Cards","health"],...common];
- if(role==="fo") list=[["🪪","Health Card Generate","health"],["👨‍👩‍👧","Customer Registration","customer"],["📋","Family / Job Card","cards"],...common];
- if(role==="customer") list=[["🪪","My Health Card","health"],["👨‍👩‍👧","My Family","family"],...common];
- list.forEach(x=>{const d=document.createElement("div");d.className="dashAction";d.innerHTML="<div style='font-size:28px'>"+x[0]+"</div><h3>"+x[1]+"</h3><button>Open</button>";d.querySelector("button").onclick=()=>openModule(x[2]);el.appendChild(d)})
-}
-function openModule(type){
- const hp=document.getElementById("healthPanel"),gp=document.getElementById("genericPanel");hp.classList.add("hide");gp.classList.add("hide");
- if(type==="health"){hp.classList.remove("hide");hp.scrollIntoView({behavior:"smooth"});return}
- gp.classList.remove("hide");const title=document.getElementById("panelTitle"),c=document.getElementById("panelContent");
- const map={dm:["DM Approval","Pending DM requests: 0<br><br><button class='primary' onclick=\"showToast('No pending requests')\">Refresh</button>"],bm:["BM Management","BM records यहाँ दिखाई देंगे।<br><button class='primary' onclick=\"showToast('BM form opened')\">Add BM</button>"],fo:["FO Management","FO records और assigned area यहाँ दिखाई देंगे।"],up:["UP Districts / Blocks","उत्तर प्रदेश के district और block data यहाँ manage होंगे।"],block:["Block Data","Assigned block का data यहाँ दिखेगा।"],gp:["Gram Panchayat","Assigned Gram Panchayat list यहाँ दिखेगी।"],customer:["Customer Registration","<div class='field'><label>Name</label><input id='quickName'></div><button class='primary' onclick=\"showToast('Customer saved')\">Save Customer</button>"],cards:["Family / Job Card","Family Card और Job Card options यहाँ होंगे।"],family:["My Family","Family members का data यहाँ दिखेगा।"],profile:["Profile","Account profile और contact details यहाँ manage होंगे।"],reports:["Reports","Daily / monthly reports यहाँ दिखेंगी।"],settings:["Settings","Account settings यहाँ होंगी।"]};
- title.textContent=map[type]?.[0]||"Module";c.innerHTML=map[type]?.[1]||"Module opened";gp.scrollIntoView({behavior:"smooth"})
-}
-function generateCard(){
- const n=document.getElementById("hcName").value||"Demo Member",m=document.getElementById("hcMobile").value||"98XXXXXX10",a=document.getElementById("hcAadhaar").value||"XXXX-XXXX-1234",dob=document.getElementById("hcDob").value||"12-08-1998",d=document.getElementById("hcDistrict").value,b=document.getElementById("hcBlock").value,g=document.getElementById("hcGp").value,fo=document.getElementById("hcFo").value,address=document.getElementById("hcAddress").value;
- const card="SHC"+new Date().getFullYear()+"000123";
- document.getElementById("cardResult").innerHTML=`<div class="healthCard" id="printCard">
-  <div class="hcTop"><img class="hcLogo" src="${LOGO}"><div class="hcBrand">Sewanya<br><span>Healthcare</span></div><div class="hcTitle">Health Card</div></div>
-  <div class="hcMain"><div class="hcPhoto">👤</div><div class="hcDetails"><div><b>नाम</b>: ${n}</div><div><b>मोबाइल</b>: ${m}</div><div><b>आधार</b>: ${a}</div><div><b>जन्म तिथि</b>: ${dob}</div><div><b>पता</b>: ${address}</div></div><div class="hcQr">QR<br>${card}</div></div>
-  <div class="hcMeta"><div><b>District</b><strong>${d}</strong></div><div><b>Block</b><strong>${b}</strong></div><div><b>Gram Panchayat</b><strong>${g}</strong></div></div>
-  <div class="hcBottom"><span>आपका स्वास्थ्य • हमारा संकल्प</span><strong>FO: ${fo}</strong></div>
- </div><div class="noPrint" style="text-align:center"><button class="primary" onclick="window.print()">🖨 Print / Save PDF</button></div>`;
- showToast("Health Card generate हो गया")
-}
-window.addEventListener("click",e=>{if(!e.target.closest(".loginDrop"))document.getElementById("loginMenu").classList.remove("open")});
+window.addEventListener('scroll',()=>{
+  const links=document.querySelectorAll('.navlinks a');
+  let current='home';
+  ['about','services','gallery','contact'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && window.scrollY>=el.offsetTop-150) current=id;
+  });
+  links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+current));
+});
 </script>
 </body>
 </html>
